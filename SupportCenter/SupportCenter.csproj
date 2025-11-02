@@ -8,4 +8,21 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="Image\Main.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.10" />
+    <PackageReference Include="System.DirectoryServices" Version="9.0.10" />
+    <PackageReference Include="System.DirectoryServices.AccountManagement" Version="9.0.10" />
+    <PackageReference Include="System.Management" Version="9.0.10" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Image\Main.jpg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+
 </Project>

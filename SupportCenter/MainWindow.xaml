@@ -5,8 +5,89 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SupportCenter"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Центр поддержки пользователя" Height="298" Width="688" Loaded="Window_Loaded" ResizeMode="NoResize">
+    <Window.Resources>
+        <ResourceDictionary Source="/Styles/Style.xaml"></ResourceDictionary>
+    </Window.Resources>
     <Grid>
+        <Image Source="/Image/Main.jpg" StretchDirection="UpOnly" Stretch="Fill"/>
+        <Grid Background="#EF3C3636" Opacity="1">
+            <TextBlock Margin="13,0,0,200" TextWrapping="Wrap" VerticalAlignment="Bottom" Text="Имя компьютера:" FontSize="18" Foreground="White" FontFamily="Yu Gothic UI Semibold" HorizontalAlignment="Left" Width="156">
+                <TextBlock.Effect>
+                    <DropShadowEffect/>
+                </TextBlock.Effect>
+            </TextBlock>
+            <TextBlock HorizontalAlignment="Left" Margin="91,0,0,164" TextWrapping="Wrap" VerticalAlignment="Bottom" FontSize="18" Foreground="White" FontFamily="Yu Gothic UI Semibold" Text="IP адрес:">
+                <TextBlock.Effect>
+                    <DropShadowEffect/>
+                </TextBlock.Effect>
+            </TextBlock>
+            <TextBlock HorizontalAlignment="Left" Margin="30,0,0,129" TextWrapping="Wrap" VerticalAlignment="Bottom" FontSize="18" Foreground="White" FontFamily="Yu Gothic UI Semibold" Text="Учетная запись:">
+                <TextBlock.Effect>
+                    <DropShadowEffect/>
+                </TextBlock.Effect>
+            </TextBlock>
+            <TextBlock HorizontalAlignment="Left" Margin="124,0,0,93" TextWrapping="Wrap" VerticalAlignment="Bottom" FontSize="16" Foreground="White" FontFamily="Yu Gothic UI Semibold" Text="ФИО:">
+                <TextBlock.Effect>
+                    <DropShadowEffect/>
+                </TextBlock.Effect>
+            </TextBlock>
+            <Grid Margin="174,0,0,196" Background="#FF292929" Height="31" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="315">
+                <Grid.Effect>
+                    <DropShadowEffect/>
+                </Grid.Effect>
+                <TextBlock x:Name="namePcTextBlock" HorizontalAlignment="Center" TextWrapping="Wrap" Text="123562-6543" VerticalAlignment="Center" Width="295" FontSize="18" FontFamily="Yu Gothic UI Semibold" Foreground="White"/>
+            </Grid>
+            <Grid Margin="174,0,0,160" Background="#FF292929" Height="31" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="315">
+                <Grid.Effect>
+                    <DropShadowEffect/>
+                </Grid.Effect>
+                <TextBlock x:Name="ipAdressTextBlock" HorizontalAlignment="Center" TextWrapping="Wrap" Text="192.168.1.1" VerticalAlignment="Center" Width="295" FontSize="18" FontFamily="Yu Gothic UI Semibold" Foreground="White"/>
+            </Grid>
+            <Grid Margin="174,0,0,124" Background="#FF292929" HorizontalAlignment="Left" Width="315" Height="31" VerticalAlignment="Bottom">
+                <Grid.Effect>
+                    <DropShadowEffect/>
+                </Grid.Effect>
+                <TextBlock x:Name="userNameAdTextBlock" HorizontalAlignment="Center" TextWrapping="Wrap" Text="YurchenkoIV" VerticalAlignment="Center" Width="295" FontSize="18" FontFamily="Yu Gothic UI Semibold" Foreground="White"/>
+            </Grid>
+            <Grid Margin="174,0,0,88" Background="#FF292929" Height="31" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="315">
+                <Grid.Effect>
+                    <DropShadowEffect/>
+                </Grid.Effect>
+                <TextBlock x:Name="nameAdTextBlock" HorizontalAlignment="Center" TextWrapping="Wrap" Text="Юрченко Илья Вадимович" VerticalAlignment="Center" Width="295" FontSize="18" FontFamily="Yu Gothic UI Semibold" Foreground="White"/>
+            </Grid>
+            <Button Style="{StaticResource ButtonMenuStyle}" HorizontalAlignment="Left" Margin="497,0,0,196" VerticalAlignment="Bottom" Height="31" Width="159" Cursor="Hand">
+                <Button.Effect>
+                    <DropShadowEffect/>
+                </Button.Effect>
+                <TextBlock TextWrapping="Wrap" TextAlignment="Center" Text="Заявка на установку ПО"/>
+            </Button>
+            <Grid/>
+            <Button Style="{StaticResource ButtonMenuStyle}" HorizontalAlignment="Left" Margin="497,0,0,160" VerticalAlignment="Bottom" Height="31" Width="159" Cursor="Hand">
+                <Button.Effect>
+                    <DropShadowEffect/>
+                </Button.Effect>
+                <TextBlock TextWrapping="Wrap" TextAlignment="Center" Text="Заявка на добавление ПО"/>
+            </Button>
+            <Button Style="{StaticResource ButtonMenuStyle}" HorizontalAlignment="Left" Margin="497,0,0,113" VerticalAlignment="Bottom" Height="41" Width="159" Cursor="Hand">
+                <Button.Effect>
+                    <DropShadowEffect/>
+                </Button.Effect>
+                <TextBlock TextWrapping="Wrap" TextAlignment="Center" Text="Заявка на получение доступа к сетевой папке"/>
+            </Button>
+            <Button Style="{StaticResource ButtonMenuStyle}" HorizontalAlignment="Left" Margin="497,0,0,67" VerticalAlignment="Bottom" Height="41" Width="159" Cursor="Hand">
+                <Button.Effect>
+                    <DropShadowEffect/>
+                </Button.Effect>
+                <TextBlock TextWrapping="Wrap" TextAlignment="Center" Text="Обращение по другим вопросам"/>
+            </Button>
+            <Button Style="{StaticResource ButtonMenuStyle}" HorizontalAlignment="Left" Margin="497,0,0,32" VerticalAlignment="Bottom" Height="30" Width="159" Cursor="Hand">
+                <Button.Effect>
+                    <DropShadowEffect/>
+                </Button.Effect>
+                <TextBlock TextWrapping="Wrap" TextAlignment="Center" Text="Панель администратора"/>
+            </Button>
+        </Grid>
 
     </Grid>
 </Window>
