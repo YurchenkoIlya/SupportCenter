@@ -1,0 +1,37 @@
+﻿<Window x:Class="SupportCenter.AppealForm"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SupportCenter"
+        mc:Ignorable="d"
+        Title="Обращения" Height="682" Width="1081">
+    <Window.Resources>
+        <ResourceDictionary Source="/Styles/Style.xaml"></ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <Image Source="/Image/Main.jpg" StretchDirection="UpOnly" Stretch="Fill"/>
+        <Grid Background="#EF3C3636" Opacity="1">
+            <StackPanel Margin="0,5,0,0" Height="50" Background="#C53C3636" Orientation="Horizontal" Opacity="1" VerticalAlignment="Top" HorizontalAlignment="Left" Width="1081">
+                <Button x:Name="cancelButton" Style="{StaticResource ButtonMenuStyle}" Margin="10,0,0,0" Height="50" Width="50" Cursor="Hand" Click="cancelButton_Click">
+                    <Button.Effect>
+                        <DropShadowEffect/>
+                    </Button.Effect>
+                    <TextBlock TextWrapping="Wrap" TextAlignment="Center" Text="--"/>
+                </Button>
+                <Button Style="{StaticResource ButtonMenuStyle}" Margin="10,0,0,0" Height="50" Width="192" Cursor="Hand">
+                    <Button.Effect>
+                        <DropShadowEffect/>
+                    </Button.Effect>
+                    <TextBlock TextWrapping="Wrap" TextAlignment="Center" Text="Заявки на установку программного обеспечения"/>
+                </Button>
+                <Button Style="{StaticResource ButtonMenuStyle}" Height="50" Margin="5,0,0,0" Width="224" Cursor="Hand">
+                    <Button.Effect>
+                        <DropShadowEffect/>
+                    </Button.Effect>
+                    <TextBlock TextWrapping="Wrap" TextAlignment="Center" Text="Заявки на предоставления доступа к сетевым папкам"/>
+                </Button>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>

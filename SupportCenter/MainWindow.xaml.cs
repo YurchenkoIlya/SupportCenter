@@ -65,5 +65,12 @@ namespace SupportCenter
             }
             ipAdressTextBlock.Text = Convert.ToString(localIP);
         }
+
+        private void appealButton_Click(object sender, RoutedEventArgs e)
+        {
+            AppealForm appealForm = new AppealForm();
+            this.Close();
+            appealForm.Show();
+        }
     }
 }
