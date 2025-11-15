@@ -5,83 +5,105 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SupportCenter"
         mc:Ignorable="d"
-        Title="Центр поддержки пользователя" Height="298" Width="688" Loaded="Window_Loaded" ResizeMode="NoResize">
+        Title="Центр поддержки пользователя" Height="298" Width="706" Loaded="Window_Loaded" ResizeMode="NoResize">
     <Window.Resources>
         <ResourceDictionary Source="/Styles/Style.xaml"></ResourceDictionary>
     </Window.Resources>
-    <Grid>
-        <Image Source="/Image/Main.jpg" StretchDirection="UpOnly" Stretch="Fill"/>
-        <Grid Background="#EF3C3636" Opacity="1">
-            <TextBlock Margin="13,0,0,200" TextWrapping="Wrap" VerticalAlignment="Bottom" Text="Имя компьютера:" FontSize="18" Foreground="White" FontFamily="Yu Gothic UI Semibold" HorizontalAlignment="Left" Width="156">
+    <Grid Height="282" VerticalAlignment="Center" HorizontalAlignment="Left" Width="706">
+        <Image Source="/Image/Main.jpg" StretchDirection="UpOnly" Stretch="Fill" Height="282" VerticalAlignment="Center" HorizontalAlignment="Left" Width="706"/>
+        <Grid Background="#EF3C3636" Opacity="1" HorizontalAlignment="Center" Width="706" Height="282" VerticalAlignment="Bottom">
+            <TextBlock Margin="13,0,0,179" TextWrapping="Wrap" VerticalAlignment="Bottom" Text="Имя компьютера:" FontSize="18" Foreground="White" FontFamily="Yu Gothic UI Semibold" HorizontalAlignment="Left" Width="156">
                 <TextBlock.Effect>
                     <DropShadowEffect/>
                 </TextBlock.Effect>
             </TextBlock>
-            <TextBlock HorizontalAlignment="Left" Margin="91,0,0,164" TextWrapping="Wrap" VerticalAlignment="Bottom" FontSize="18" Foreground="White" FontFamily="Yu Gothic UI Semibold" Text="IP адрес:">
+            <TextBlock HorizontalAlignment="Left" Margin="91,0,0,143" TextWrapping="Wrap" VerticalAlignment="Bottom" FontSize="18" Foreground="White" FontFamily="Yu Gothic UI Semibold" Text="IP адрес:">
                 <TextBlock.Effect>
                     <DropShadowEffect/>
                 </TextBlock.Effect>
             </TextBlock>
-            <TextBlock HorizontalAlignment="Left" Margin="30,0,0,129" TextWrapping="Wrap" VerticalAlignment="Bottom" FontSize="18" Foreground="White" FontFamily="Yu Gothic UI Semibold" Text="Учетная запись:">
+            <TextBlock HorizontalAlignment="Left" Margin="30,152,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="18" Foreground="White" FontFamily="Yu Gothic UI Semibold" Text="Учетная запись:">
                 <TextBlock.Effect>
                     <DropShadowEffect/>
                 </TextBlock.Effect>
             </TextBlock>
-            <TextBlock HorizontalAlignment="Left" Margin="124,0,0,93" TextWrapping="Wrap" VerticalAlignment="Bottom" FontSize="16" Foreground="White" FontFamily="Yu Gothic UI Semibold" Text="ФИО:">
+            <TextBlock HorizontalAlignment="Left" Margin="124,0,0,72" TextWrapping="Wrap" VerticalAlignment="Bottom" FontSize="16" Foreground="White" FontFamily="Yu Gothic UI Semibold" Text="ФИО:">
                 <TextBlock.Effect>
                     <DropShadowEffect/>
                 </TextBlock.Effect>
             </TextBlock>
-            <Grid Margin="174,0,0,196" Background="#FF292929" Height="31" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="315">
+            <Grid Margin="174,0,0,175" Background="#FF292929" Height="31" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="315">
+                <TextBlock x:Name="namePcTextBlock" HorizontalAlignment="Left" TextWrapping="Wrap" Text="123562-6543" VerticalAlignment="Center" Width="270" FontSize="18" FontFamily="Yu Gothic UI Semibold" Foreground="White" Margin="10,0,0,0"/>
+                <Button Style="{StaticResource ButtonCopyStyle}" HorizontalAlignment="Left" Margin="285,0,0,0" VerticalAlignment="Center" Height="30" Width="30" Cursor="Hand">
+                    <Image Height="20" Source="/Image/icons8-copy-50.png" Stretch="Fill" Width="20"/>
+                </Button>
                 <Grid.Effect>
                     <DropShadowEffect/>
                 </Grid.Effect>
-                <TextBlock x:Name="namePcTextBlock" HorizontalAlignment="Center" TextWrapping="Wrap" Text="123562-6543" VerticalAlignment="Center" Width="295" FontSize="18" FontFamily="Yu Gothic UI Semibold" Foreground="White"/>
             </Grid>
-            <Grid Margin="174,0,0,160" Background="#FF292929" Height="31" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="315">
+            <Grid Margin="174,0,0,139" Background="#FF292929" Height="31" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="315">
                 <Grid.Effect>
                     <DropShadowEffect/>
                 </Grid.Effect>
-                <TextBlock x:Name="ipAdressTextBlock" HorizontalAlignment="Center" TextWrapping="Wrap" Text="192.168.1.1" VerticalAlignment="Center" Width="295" FontSize="18" FontFamily="Yu Gothic UI Semibold" Foreground="White"/>
+                <TextBlock x:Name="ipAdressTextBlock" HorizontalAlignment="Left" TextWrapping="Wrap" Text="192.168.1.1" VerticalAlignment="Center" Width="270" FontSize="18" FontFamily="Yu Gothic UI Semibold" Foreground="White" Margin="10,0,0,0"/>
+                <Button Style="{StaticResource ButtonCopyStyle}" HorizontalAlignment="Left" Margin="285,0,0,0" VerticalAlignment="Center" Height="30" Width="30" Cursor="Hand">
+                    <Image Height="20" Source="/Image/icons8-copy-50.png" Stretch="Fill" Width="20"/>
+                </Button>
             </Grid>
-            <Grid Margin="174,0,0,124" Background="#FF292929" HorizontalAlignment="Left" Width="315" Height="31" VerticalAlignment="Bottom">
+            <Grid Margin="174,0,0,103" Background="#FF292929" HorizontalAlignment="Left" Width="315" Height="31" VerticalAlignment="Bottom">
                 <Grid.Effect>
                     <DropShadowEffect/>
                 </Grid.Effect>
-                <TextBlock x:Name="userNameAdTextBlock" HorizontalAlignment="Center" TextWrapping="Wrap" Text="YurchenkoIV" VerticalAlignment="Center" Width="295" FontSize="18" FontFamily="Yu Gothic UI Semibold" Foreground="White"/>
+                <TextBlock x:Name="userNameAdTextBlock" HorizontalAlignment="Left" TextWrapping="Wrap" Text="YurchenkoIV" VerticalAlignment="Center" Width="270" FontSize="18" FontFamily="Yu Gothic UI Semibold" Foreground="White" Margin="10,0,0,0"/>
+                <Button Style="{StaticResource ButtonCopyStyle}" HorizontalAlignment="Left" Margin="285,0,0,0" VerticalAlignment="Center" Height="30" Width="30" Cursor="Hand">
+                    <Image Height="20" Source="/Image/icons8-copy-50.png" Stretch="Fill" Width="20"/>
+                </Button>
             </Grid>
-            <Grid Margin="174,0,0,88" Background="#FF292929" Height="31" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="315">
+            <Grid Margin="174,0,0,67" Background="#FF292929" Height="31" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="315">
                 <Grid.Effect>
                     <DropShadowEffect/>
                 </Grid.Effect>
-                <TextBlock x:Name="nameAdTextBlock" HorizontalAlignment="Center" TextWrapping="Wrap" Text="Юрченко Илья Вадимович" VerticalAlignment="Center" Width="295" FontSize="18" FontFamily="Yu Gothic UI Semibold" Foreground="White"/>
+                <TextBlock x:Name="nameAdTextBlock" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Юрченко Илья Вадимович" VerticalAlignment="Center" Width="270" FontSize="18" FontFamily="Yu Gothic UI Semibold" Foreground="White" Margin="10,0,0,0"/>
+                <Button Style="{StaticResource ButtonCopyStyle}" HorizontalAlignment="Left" Margin="285,0,0,0" VerticalAlignment="Center" Height="30" Width="30" Cursor="Hand">
+                    <Image Height="20" Source="/Image/icons8-copy-50.png" Stretch="Fill" Width="20"/>
+                </Button>
             </Grid>
-            <Button x:Name="appealButton" Style="{StaticResource ButtonMenuStyle}" HorizontalAlignment="Left" Margin="497,0,0,196" VerticalAlignment="Bottom" Height="31" Width="159" Cursor="Hand" Click="appealButton_Click">
+            <Button x:Name="appealButton" Style="{StaticResource ButtonMenuStyle}" HorizontalAlignment="Left" Margin="497,0,0,175" VerticalAlignment="Bottom" Height="31" Width="182" Cursor="Hand" Click="appealButton_Click">
                 <Button.Effect>
                     <DropShadowEffect/>
                 </Button.Effect>
                 <TextBlock TextWrapping="Wrap" TextAlignment="Center" Text="Обращения"/>
             </Button>
             <Grid/>
-            <Button Style="{StaticResource ButtonMenuStyle}" HorizontalAlignment="Left" Margin="497,0,0,69" VerticalAlignment="Bottom" Height="30" Width="159" Cursor="Hand">
+            <Button Style="{StaticResource ButtonMenuStyle}" HorizontalAlignment="Left" Margin="497,0,0,48" VerticalAlignment="Bottom" Height="30" Width="182" Cursor="Hand">
                 <Button.Effect>
                     <DropShadowEffect/>
                 </Button.Effect>
                 <TextBlock TextWrapping="Wrap" TextAlignment="Center" Text="Панель администратора"/>
             </Button>
-            <Button Style="{StaticResource ButtonMenuStyle}" HorizontalAlignment="Left" Margin="497,0,0,151" VerticalAlignment="Bottom" Height="40" Width="159" Cursor="Hand">
+            <Button Style="{StaticResource ButtonMenuStyle}" HorizontalAlignment="Left" Margin="497,112,0,0" VerticalAlignment="Top" Height="40" Width="182" Cursor="Hand">
                 <Button.Effect>
                     <DropShadowEffect/>
                 </Button.Effect>
                 <TextBlock TextWrapping="Wrap" TextAlignment="Center" Text="Инструменты для решения частых проблем"/>
             </Button>
-            <Button Style="{StaticResource ButtonMenuStyle}" HorizontalAlignment="Left" Margin="497,0,0,104" VerticalAlignment="Bottom" Height="42" Width="159" Cursor="Hand">
+            <Button Style="{StaticResource ButtonMenuStyle}" HorizontalAlignment="Left" Margin="497,0,0,83" VerticalAlignment="Bottom" Height="42" Width="182" Cursor="Hand">
                 <Button.Effect>
                     <DropShadowEffect/>
                 </Button.Effect>
                 <TextBlock TextWrapping="Wrap" TextAlignment="Center" Text="Регламенты оказания технической поддержки"/>
             </Button>
-        </Grid>
+            <Grid x:Name="connectStatusGrid" Margin="12,0,0,242" Background="#FF02631E" Height="20" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="20">
+                <Grid.Effect>
+                    <DropShadowEffect/>
+                </Grid.Effect>
+            </Grid>
+            <TextBlock x:Name="connectStatusText" HorizontalAlignment="Left" Margin="40,0,0,243" TextWrapping="Wrap" Text="Сетевое соединение исправно" VerticalAlignment="Bottom" Foreground="White" FontSize="14">
+                <TextBlock.Effect>
+                    <DropShadowEffect/>
+                </TextBlock.Effect>
+            </TextBlock>
 
+        </Grid>
     </Grid>
 </Window>

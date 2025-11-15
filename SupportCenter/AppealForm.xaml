@@ -5,33 +5,61 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SupportCenter"
         mc:Ignorable="d"
-        Title="Обращения" Height="682" Width="1081">
+        Title="Обращения" Height="716" Width="1160">
     <Window.Resources>
         <ResourceDictionary Source="/Styles/Style.xaml"></ResourceDictionary>
     </Window.Resources>
     <Grid>
         <Image Source="/Image/Main.jpg" StretchDirection="UpOnly" Stretch="Fill"/>
         <Grid Background="#EF3C3636" Opacity="1">
-            <StackPanel Margin="0,5,0,0" Height="50" Background="#C53C3636" Orientation="Horizontal" Opacity="1" VerticalAlignment="Top" HorizontalAlignment="Left" Width="1081">
+            <StackPanel Margin="0,5,0,0" Background="#C53C3636" Orientation="Horizontal" Opacity="1" HorizontalAlignment="Left" Width="1081" Height="50" VerticalAlignment="Top">
                 <Button x:Name="cancelButton" Style="{StaticResource ButtonMenuStyle}" Margin="10,0,0,0" Height="50" Width="50" Cursor="Hand" Click="cancelButton_Click">
                     <Button.Effect>
                         <DropShadowEffect/>
                     </Button.Effect>
-                    <TextBlock TextWrapping="Wrap" TextAlignment="Center" Text="--"/>
+                    <Image Height="40" Source="/Image/icons8-home-50.png" Stretch="Fill" Width="40"/>
                 </Button>
-                <Button Style="{StaticResource ButtonMenuStyle}" Margin="10,0,0,0" Height="50" Width="192" Cursor="Hand">
+                <Button x:Name="buttonProgram" Style="{StaticResource ButtonMenuStyle}" Margin="10,0,0,0" Height="50" Width="192" Cursor="Hand" Click="buttonProgram_Click">
                     <Button.Effect>
                         <DropShadowEffect/>
                     </Button.Effect>
                     <TextBlock TextWrapping="Wrap" TextAlignment="Center" Text="Заявки на установку программного обеспечения"/>
                 </Button>
-                <Button Style="{StaticResource ButtonMenuStyle}" Height="50" Margin="5,0,0,0" Width="224" Cursor="Hand">
+                <Button x:Name="buttonFolder" Style="{StaticResource ButtonMenuStyle}" Height="50" Margin="5,0,0,0" Width="224" Cursor="Hand" Click="buttonFolder_Click">
                     <Button.Effect>
                         <DropShadowEffect/>
                     </Button.Effect>
                     <TextBlock TextWrapping="Wrap" TextAlignment="Center" Text="Заявки на предоставления доступа к сетевым папкам"/>
                 </Button>
+                <Button Style="{StaticResource ButtonMenuStyle}" Margin="5,0,0,0" Height="50" Width="191" Cursor="Hand">
+                    <Button.Effect>
+                        <DropShadowEffect/>
+                    </Button.Effect>
+                    <TextBlock TextWrapping="Wrap" TextAlignment="Center" Text="Заявки на настройку принтера"/>
+                </Button>
+                <Button Style="{StaticResource ButtonMenuStyle}" Margin="5,0,0,0" Height="50" Width="191" Cursor="Hand">
+                    <Button.Effect>
+                        <DropShadowEffect/>
+                    </Button.Effect>
+                    <TextBlock TextWrapping="Wrap" TextAlignment="Center" Text="Заявки на настройку принтера"/>
+                </Button>
             </StackPanel>
+            <TabControl x:Name="workAreaControl" Margin="10,55,0,10" HorizontalAlignment="Left" Width="1126" BorderBrush="{x:Null}" Background="{x:Null}">
+                <TabItem Header="ПО">
+                    <Grid Background="#FF525252" Height="584" Margin="12,0,0,0">
+                        <TextBlock HorizontalAlignment="Left" Margin="295,239,0,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top"/>
+                        <DataGrid d:ItemsSource="{d:SampleData ItemCount=5}" Margin="10,39,10,10"/>
+
+                    </Grid>
+                    
+                </TabItem>
+                <TabItem Header="TabItem">
+                    <Grid Background="#FFE5E5E5">
+                        <TextBlock HorizontalAlignment="Left" Margin="115,151,0,0" TextWrapping="Wrap" Text="2" VerticalAlignment="Top"/>
+
+                    </Grid>
+                </TabItem>
+            </TabControl>
         </Grid>
     </Grid>
 </Window>

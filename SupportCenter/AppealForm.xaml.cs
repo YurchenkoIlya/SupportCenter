@@ -30,5 +30,15 @@ namespace SupportCenter
             mainWindow.Show();  
             this.Close();
         }
+
+        private void buttonProgram_Click(object sender, RoutedEventArgs e)
+        {
+            workAreaControl.SelectedIndex = 0;
+        }
+
+        private void buttonFolder_Click(object sender, RoutedEventArgs e)
+        {
+            workAreaControl.SelectedIndex = 1;
+        }
     }
 }

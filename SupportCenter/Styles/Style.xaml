@@ -53,7 +53,7 @@
             </Trigger>
         </Style.Triggers>
     </Style>
-    <!-- Стиль кнопки -->
+    <!-- Стиль кнопки меню -->
     <Style x:Key="ButtonMenuStyle"   
     BasedOn="{StaticResource {x:Type Button}}"    
     TargetType="{x:Type Button}">
@@ -76,9 +76,32 @@
             </Trigger>
         </Style.Triggers>
     </Style>
+    <!-- Стиль кнопки копирования -->
+    <Style x:Key="ButtonCopyStyle"   
+ BasedOn="{StaticResource {x:Type Button}}"    
+ TargetType="{x:Type Button}">
+        <Setter Property="Background" Value="{x:Null}"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="FontFamily" Value="Yu Gothic UI Semibold"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Background="{TemplateBinding Background}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="#FF424242"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
 
-    
-    
+
+
     <Style    
      TargetType="DataGridColumnHeader">
         <Setter Property="Background" Value="#FF828282"/>

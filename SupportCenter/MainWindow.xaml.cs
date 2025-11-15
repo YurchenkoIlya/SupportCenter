@@ -1,4 +1,5 @@
-﻿using System.DirectoryServices.AccountManagement;
+﻿using SupportCenter.Classes;
+using System.DirectoryServices.AccountManagement;
 using System.Management;
 using System.Net;
 using System.Security.Principal;
@@ -25,15 +26,39 @@ namespace SupportCenter
         {
             InitializeComponent();
         }
-
-        private void Window_Loaded(object sender, RoutedEventArgs e)
+        public void loadForm()
         {
+            dbConnect db_connect = new dbConnect();
             
+            db_connect.openConnection();
+            try
+            {
+
+                MessageBox.Show("123");
+                connectStatusText.Text = "Сетевое соединение отсуствует";
+                connectStatusGrid.Background = Brushes.Red;
+            }
+            catch
+            {
+
+
+                connectStatusText.Text = "Сетевое соединение отсуствует";
+                connectStatusGrid.Background = Brushes.Green;
+                
+            }
+            finally
+            {
+
+
+            }
+
+
+
             // Получаем доменный логин
-            string userAd = WindowsIdentity.GetCurrent().Name;           
+            string userAd = WindowsIdentity.GetCurrent().Name;
             userAd = userAd.Replace(@"ZAVOD\", "");
             userNameAdTextBlock.Text = userAd;
-      
+
             // Полкчаем доменное ФИО
             try
             {
@@ -45,13 +70,13 @@ namespace SupportCenter
             catch
             {
                 nameAdTextBlock.Text = "Компьютер не в домене";
-            }
+            }0
             // Получаем оменное имя ПК
             ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT Name FROM Win32_ComputerSystem");
             ManagementObjectCollection collection = searcher.Get();
             string computerName = (string)collection.Cast<ManagementBaseObject>().First()["Name"];
             namePcTextBlock.Text = computerName;
-            
+
             // Получаем ИП адрес компьютера
             IPHostEntry host;
             string localIP = "?";
@@ -64,6 +89,17 @@ namespace SupportCenter
                 }
             }
             ipAdressTextBlock.Text = Convert.ToString(localIP);
+
+        }
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            loadForm();
+
+           
+        
+
+
+      
         }
 
         private void appealButton_Click(object sender, RoutedEventArgs e)
