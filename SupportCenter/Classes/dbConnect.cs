@@ -11,7 +11,7 @@ namespace SupportCenter.Classes
 {
     internal class dbConnect
     {
-        NpgsqlConnection db_connect = new NpgsqlConnection("Host=localhost;Port=5432;Username=postgres;Password=010203456;Database=supportdb");
+        NpgsqlConnection db_connect = new NpgsqlConnection("Host=localhost;Port=5432;Username=postgres;Password=010203456;Database=supportCenter");
 
         public void openConnection()
         {
@@ -23,13 +23,12 @@ namespace SupportCenter.Classes
                 try
                 {
                     db_connect.Open();
-  
 
                 }
                 catch (Exception ex)
                 {
-
-                    MessageBox.Show("123");
+                    MessageBox.Show("Нестабильное сетевое соединение.");
+                 
                 }
             }
 

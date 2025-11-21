@@ -1,4 +1,8 @@
-﻿using SupportCenter.Classes;
+﻿using Npgsql;
+using NpgsqlTypes;
+using SupportCenter.Classes;
+using System.Data;
+using System.Data.Common;
 using System.DirectoryServices.AccountManagement;
 using System.Management;
 using System.Net;
@@ -28,37 +32,13 @@ namespace SupportCenter
         }
         public void loadForm()
         {
-            dbConnect db_connect = new dbConnect();
-            
-            db_connect.openConnection();
-            try
-            {
-
-                MessageBox.Show("123");
-                connectStatusText.Text = "Сетевое соединение отсуствует";
-                connectStatusGrid.Background = Brushes.Red;
-            }
-            catch
-            {
-
-
-                connectStatusText.Text = "Сетевое соединение отсуствует";
-                connectStatusGrid.Background = Brushes.Green;
-                
-            }
-            finally
-            {
-
-
-            }
-
 
 
             // Получаем доменный логин
             string userAd = WindowsIdentity.GetCurrent().Name;
             userAd = userAd.Replace(@"ZAVOD\", "");
-            userNameAdTextBlock.Text = userAd;
-
+            // userNameAdTextBlock.Text = userAd;
+            userNameAdTextBlock.Text = "IvanovAV";
             // Полкчаем доменное ФИО
             try
             {
@@ -69,8 +49,8 @@ namespace SupportCenter
             }
             catch
             {
-                nameAdTextBlock.Text = "Компьютер не в домене";
-            }0
+                nameAdTextBlock.Text = "Юрченко Илья Вадимович"; // заглушка
+            }
             // Получаем оменное имя ПК
             ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT Name FROM Win32_ComputerSystem");
             ManagementObjectCollection collection = searcher.Get();
@@ -89,6 +69,96 @@ namespace SupportCenter
                 }
             }
             ipAdressTextBlock.Text = Convert.ToString(localIP);
+
+
+            dbConnect db_connect = new dbConnect();
+            db_connect.openConnection();
+            try
+            {
+
+
+                connectStatusText.Text = "Сетевое соединение исправно";
+                connectStatusGrid.Background = Brushes.Green;
+              
+                checkUser();
+
+
+
+            }
+            catch (Exception ex)
+            {
+                connectStatusText.Text = "Сетевое соединение отсутствует";
+                connectStatusGrid.Background = Brushes.Red;
+
+            }
+
+
+
+        }
+        public void checkUser()
+        {        
+
+            string loginAd = userNameAdTextBlock.Text;
+            
+
+            dbConnect db_connect = new dbConnect();
+            db_connect.openConnection();
+            DataTable table = new DataTable();
+            NpgsqlDataAdapter adapter = new NpgsqlDataAdapter();
+            NpgsqlCommand command = new NpgsqlCommand("Select * from main.users where login_user= @aL ", db_connect.GetConnection());
+            command.Parameters.Add("@aL", NpgsqlDbType.Text).Value = loginAd;
+            NpgsqlDataReader reader = command.ExecuteReader();
+            adapter.SelectCommand = command;
+
+            int rowcount = 0;
+            int role = 0;
+
+            while (reader.Read())
+            {
+
+                rowcount++;
+                role = Convert.ToInt32(reader[2]);
+                
+
+            }
+            reader.Close();
+
+            if (rowcount > 0)
+            {
+                
+                Session.CurrentUserLogin = loginAd;
+                if (role == 0) adminButton.Visibility = Visibility.Hidden;
+
+            }          
+            else
+            {
+                createUser(loginAd);
+                
+
+            }
+            
+
+
+            db_connect.closeConnection();
+
+
+
+        }
+        public void createUser(string login)
+        {
+            string userName = nameAdTextBlock.Text;
+
+            dbConnect db_connect = new dbConnect();
+            db_connect.openConnection();
+            NpgsqlDataAdapter adapter = new NpgsqlDataAdapter();
+            NpgsqlCommand command = new NpgsqlCommand("INSERT INTO main.users (login_user,user_role,user_name) VALUES (@aL,@uR,@uN)", db_connect.GetConnection());
+            command.Parameters.Add("@aL", NpgsqlDbType.Text).Value = login;
+            command.Parameters.Add("@uR", NpgsqlDbType.Integer).Value = 0;
+            command.Parameters.Add("@uN", NpgsqlDbType.Text).Value = userName;
+            adapter.SelectCommand = command;
+            command.ExecuteReader();
+            db_connect.closeConnection();
+            MessageBox.Show("ПОЛЬЗОВАТЕЛЬ ЗАРЕГИСТРИРОВАН.");
 
         }
         private void Window_Loaded(object sender, RoutedEventArgs e)
