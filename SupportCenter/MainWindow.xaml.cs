@@ -38,7 +38,7 @@ namespace SupportCenter
             string userAd = WindowsIdentity.GetCurrent().Name;
             userAd = userAd.Replace(@"ZAVOD\", "");
             // userNameAdTextBlock.Text = userAd;
-            userNameAdTextBlock.Text = "IvanovAV";
+            userNameAdTextBlock.Text = "IvanovAA";
             // Полкчаем доменное ФИО
             try
             {
