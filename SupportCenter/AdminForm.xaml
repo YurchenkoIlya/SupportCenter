@@ -5,8 +5,124 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SupportCenter"
         mc:Ignorable="d"
-        Title="AdminForm" Height="450" Width="800">
+        Title="AdminForm" Height="593" Width="1183">
     <Window.Resources>
         <ResourceDictionary Source="/Styles/Style.xaml"></ResourceDictionary>
     </Window.Resources>
+    <Grid>
+        <Image Source="/Image/Main.jpg" StretchDirection="UpOnly" Stretch="Fill"/>
+        <Grid Background="#EF3C3636" Opacity="1"   >
+            <StackPanel Background="#C53C3636" Orientation="Vertical" Opacity="1" HorizontalAlignment="Left" Width="222" VerticalAlignment="Top" Height="558" Margin="10,10,0,0">
+                <Button x:Name="cancelButton" Style="{StaticResource ButtonMenuStyle}" Margin="0,5,0,0" Height="42"  Cursor="Hand" Click="cancelButton_Click">
+                    <Button.Effect>
+                        <DropShadowEffect/>
+                    </Button.Effect>
+                    <Grid Height="42" Width="222">
+                        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Главная" VerticalAlignment="Center" FontSize="16" Margin="45,0,0,0"/>
+                        <Image Margin="10,9,187,8" Source="/Image/icons8-home-50.png" Width="25" Height="25" Stretch="Fill" Cursor=""/>
+
+                    </Grid>
+                </Button>
+                <Button x:Name="usersButton" Style="{StaticResource ButtonMenuStyle}" Height="42" Margin="0,5,0,0"  Cursor="Hand" Click="usersButton_Click">
+                    <Button.Effect>
+                        <DropShadowEffect/>
+                    </Button.Effect>
+                    <Grid Height="42" Width="222">
+                        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Пользователи" VerticalAlignment="Center" FontSize="16" Margin="45,0,0,0"/>
+                        <Image Margin="10,8,187,8" Width="25" Height="25" Source="/Image/icons8-user-50.png" Stretch="Fill" Cursor=""/>
+                    </Grid>
+                </Button>
+                <Button x:Name="folderButton" Style="{StaticResource ButtonMenuStyle}" Height="42"  Cursor="Hand" Margin="0,5,0,0" Click="folderButton_Click">
+                    <Button.Effect>
+                        <DropShadowEffect/>
+                    </Button.Effect>
+                    <Button x:Name="foldersButton" Style="{StaticResource ButtonMenuStyle}" Height="42"  Cursor="Hand" Click="foldersButton_Click">
+                        <Button.Effect>
+                            <DropShadowEffect/>
+                        </Button.Effect>
+                        <Grid Height="42" Width="222">
+                            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Сетевые папки" VerticalAlignment="Center" FontSize="16" Margin="45,0,0,0"/>
+                            <Image Margin="10,8,187,8" Width="25" Height="25" Source="/Image/icons8-folder-50.png" Stretch="Fill" Cursor=""/>
+                        </Grid>
+                    </Button>
+                </Button>
+                <Button x:Name="cancelButton_Копировать2" Style="{StaticResource ButtonMenuStyle}" Height="42"  Cursor="Hand" Margin="0,5,0,0" Click="cancelButton_Click">
+                    <Button.Effect>
+                        <DropShadowEffect/>
+                    </Button.Effect>
+                    <Button x:Name="usersButton_Копировать1" Style="{StaticResource ButtonMenuStyle}" Height="42"  Cursor="Hand" Click="usersButton_Click">
+                        <Button.Effect>
+                            <DropShadowEffect/>
+                        </Button.Effect>
+                        <Grid Height="42" Width="222">
+                            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Программы" VerticalAlignment="Center" FontSize="16" Margin="45,0,0,0"/>
+                            <Image Margin="10,8,187,8" Height="25" Width="25" Source="/Image/icons8-program-50.png" Stretch="Fill" Cursor=""/>
+                        </Grid>
+                    </Button>
+                </Button>
+                <Button x:Name="cancelButton_Копировать3" Style="{StaticResource ButtonMenuStyle}" Height="42"  Cursor="Hand" Margin="0,5,0,0" Click="cancelButton_Click">
+                    <Button.Effect>
+                        <DropShadowEffect/>
+                    </Button.Effect>
+                    <Button x:Name="usersButton_Копировать2" Style="{StaticResource ButtonMenuStyle}" Height="42"  Cursor="Hand" Click="usersButton_Click">
+                        <Button.Effect>
+                            <DropShadowEffect/>
+                        </Button.Effect>
+                        <Grid Height="42" Width="222">
+                            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="История" VerticalAlignment="Center" FontSize="16" Margin="40,0,0,0"/>
+                        </Grid>
+                    </Button>
+                </Button>
+                <Button x:Name="cancelButton_Копировать4" Style="{StaticResource ButtonMenuStyle}" Height="42"  Cursor="Hand" Margin="0,5,0,0" Click="cancelButton_Click">
+                    <Button.Effect>
+                        <DropShadowEffect/>
+                    </Button.Effect>
+                    <Button x:Name="usersButton_Копировать3" Style="{StaticResource ButtonMenuStyle}" Height="42"  Cursor="Hand" Click="usersButton_Click">
+                        <Button.Effect>
+                            <DropShadowEffect/>
+                        </Button.Effect>
+                        <Grid Height="42" Width="222">
+                            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Рабочие места" VerticalAlignment="Center" FontSize="16" Margin="40,0,0,0"/>
+                        </Grid>
+                    </Button>
+                </Button>
+            </StackPanel>
+            <TabControl x:Name="workTabControl" Margin="237,-57,0,0" Background="{x:Null}" BorderBrush="{x:Null}" HorizontalAlignment="Left" Width="934" Height="601" VerticalAlignment="Top">
+                <TabItem Header="Пользователи" Background="{x:Null}" BorderBrush="{x:Null}">
+                    <Grid HorizontalAlignment="Center" Width="928" Height="567">
+                        <DataGrid MinColumnWidth="10" IsReadOnly="True" ColumnWidth="*" x:Name="usersDataGrid" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,71,0,0" HorizontalAlignment="Center" Width="908" Height="518" VerticalAlignment="Top"/>
+                        <Button x:Name="redactUserButton" Style="{StaticResource ButtonMenuStyle}"  Cursor="Hand" Margin="10,44,0,0" Height="22" VerticalAlignment="Top" HorizontalAlignment="Left" Width="195" Click="redactUser_Click">
+                            <Button.Effect>
+                                <DropShadowEffect/>
+                            </Button.Effect>
+                            <Grid>
+                                <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="Редактировать учетную запись" VerticalAlignment="Center"/>
+                            </Grid>
+                        </Button>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="Сетевые папки" Background="{x:Null}" BorderBrush="{x:Null}" Margin="-2,-2,-2,0">
+                    <Grid HorizontalAlignment="Center" Width="928" Height="567">
+                        <DataGrid MinColumnWidth="10" IsReadOnly="True" ColumnWidth="*" x:Name="folderDataGrid" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,71,0,0" HorizontalAlignment="Center" Width="908" Height="518" VerticalAlignment="Top" AutoGeneratedColumns="folderDataGrid_AutoGeneratedColumns"/>
+                        <Button x:Name="createFolderButton" Style="{StaticResource ButtonMenuStyle}"  Cursor="Hand" Margin="10,44,0,0" Height="22" VerticalAlignment="Top" HorizontalAlignment="Left" Width="151" Click="createFolderButton_Click">
+                            <Button.Effect>
+                                <DropShadowEffect/>
+                            </Button.Effect>
+                            <Grid>
+                                <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="Создать сетевую папку" VerticalAlignment="Center"/>
+                            </Grid>
+                        </Button>
+                        <Button x:Name="redactUserButton1_Копировать" Style="{StaticResource ButtonMenuStyle}"  Cursor="Hand" Margin="166,44,0,0" Height="22" VerticalAlignment="Top" HorizontalAlignment="Left" Width="183" Click="redactUser_Click">
+                            <Button.Effect>
+                                <DropShadowEffect/>
+                            </Button.Effect>
+                            <Grid>
+                                <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="Редактировать сетевую папку" VerticalAlignment="Center"/>
+                            </Grid>
+                        </Button>
+                    </Grid>
+                </TabItem>
+            </TabControl>
+        </Grid>
+    </Grid>
 </Window>

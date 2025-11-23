@@ -37,8 +37,8 @@ namespace SupportCenter
             // Получаем доменный логин
             string userAd = WindowsIdentity.GetCurrent().Name;
             userAd = userAd.Replace(@"ZAVOD\", "");
-            // userNameAdTextBlock.Text = userAd;
-            userNameAdTextBlock.Text = "IvanovAA";
+             userNameAdTextBlock.Text = userAd;
+           // userNameAdTextBlock.Text = "IvanovAA";
             // Полкчаем доменное ФИО
             try
             {
@@ -49,7 +49,7 @@ namespace SupportCenter
             }
             catch
             {
-                nameAdTextBlock.Text = "Юрченко Илья Вадимович"; // заглушка
+               // nameAdTextBlock.Text = "Юрченко Илья Вадимович"; // заглушка
             }
             // Получаем оменное имя ПК
             ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT Name FROM Win32_ComputerSystem");
@@ -151,10 +151,11 @@ namespace SupportCenter
             dbConnect db_connect = new dbConnect();
             db_connect.openConnection();
             NpgsqlDataAdapter adapter = new NpgsqlDataAdapter();
-            NpgsqlCommand command = new NpgsqlCommand("INSERT INTO main.users (login_user,user_role,user_name) VALUES (@aL,@uR,@uN)", db_connect.GetConnection());
+            NpgsqlCommand command = new NpgsqlCommand("INSERT INTO main.users (login_user,user_role,user_name,activity) VALUES (@aL,@uR,@uN,uA)", db_connect.GetConnection());
             command.Parameters.Add("@aL", NpgsqlDbType.Text).Value = login;
             command.Parameters.Add("@uR", NpgsqlDbType.Integer).Value = 0;
             command.Parameters.Add("@uN", NpgsqlDbType.Text).Value = userName;
+            command.Parameters.Add("@uA", NpgsqlDbType.Integer).Value = 1;
             adapter.SelectCommand = command;
             command.ExecuteReader();
             db_connect.closeConnection();
@@ -177,6 +178,13 @@ namespace SupportCenter
             AppealForm appealForm = new AppealForm();
             this.Close();
             appealForm.Show();
+        }
+
+        private void adminButton_Click(object sender, RoutedEventArgs e)
+        {
+            AdminForm adminForm = new AdminForm();
+            this.Close();
+            adminForm.Show();
         }
     }
 }

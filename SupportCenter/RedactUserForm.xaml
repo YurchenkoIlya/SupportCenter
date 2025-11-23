@@ -1,0 +1,54 @@
+﻿<Window x:Class="SupportCenter.RedactUserForm"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SupportCenter"
+        mc:Ignorable="d"
+        Title="Редактирование пользователя" Height="234" Width="394" ResizeMode="NoResize" Topmost="True">
+    <Window.Resources>
+        <ResourceDictionary Source="/Styles/Style.xaml"></ResourceDictionary>
+    </Window.Resources>
+    <Grid  VerticalAlignment="Top" HorizontalAlignment="Center" >
+        <Image Source="/Image/Main.jpg" StretchDirection="UpOnly" Stretch="Fill"  VerticalAlignment="Center" HorizontalAlignment="Center" Width="706"/>
+        <Grid Background="#EF3C3636" Opacity="1" >
+            <Grid>
+                <TextBlock x:Name="idUserTextBlock" HorizontalAlignment="Left" Margin="288,25,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Foreground="White" FontFamily="Yu Gothic UI Semibold" Text="ID">
+                    <TextBlock.Effect>
+                        <DropShadowEffect/>
+                    </TextBlock.Effect>
+                </TextBlock>
+                <TextBlock HorizontalAlignment="Left" Margin="47,25,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Foreground="White" FontFamily="Yu Gothic UI Semibold" Text="Идентификатор пользователя :">
+                    <TextBlock.Effect>
+                        <DropShadowEffect/>
+                    </TextBlock.Effect>
+                </TextBlock>
+                <TextBlock HorizontalAlignment="Left" Margin="47,47,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Foreground="White" FontFamily="Yu Gothic UI Semibold" Text="Логин пользователя :" Height="24">
+                    <TextBlock.Effect>
+                        <DropShadowEffect/>
+                    </TextBlock.Effect>
+                </TextBlock>
+                <TextBlock x:Name="loginUserTextblock" HorizontalAlignment="Left" Margin="214,48,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Foreground="White" FontFamily="Yu Gothic UI Semibold" Text="ЛОГИН">
+                    <TextBlock.Effect>
+                        <DropShadowEffect/>
+                    </TextBlock.Effect>
+                </TextBlock>
+                <TextBlock HorizontalAlignment="Left" Margin="47,79,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Foreground="White" FontFamily="Yu Gothic UI Semibold" Text="Роль доступа :">
+                    <TextBlock.Effect>
+                        <DropShadowEffect/>
+                    </TextBlock.Effect>
+                </TextBlock>
+                <Button x:Name="acceptRedactButton" Style="{StaticResource ButtonMenuStyle}" HorizontalAlignment="Left" Margin="47,144,0,0" VerticalAlignment="Top" Height="25" Width="289" Cursor="Hand" Click="acceptRedactButton_Click">
+                    <Button.Effect>
+                        <DropShadowEffect/>
+                    </Button.Effect>
+                    <TextBlock TextWrapping="Wrap" TextAlignment="Center" Text="Сохранить настройки"/>
+                </Button>
+                <ComboBox x:Name="roleUserComboBox" HorizontalAlignment="Left" Margin="160,79,0,0" VerticalAlignment="Top" Width="159" IsSynchronizedWithCurrentItem="False" Height="25" FontSize="14">
+                </ComboBox>
+            </Grid>
+            <CheckBox x:Name="activityCheckBox" Content="Учетная запись включена" HorizontalAlignment="Left" Margin="47,118,0,0" VerticalAlignment="Top" Width="187" FontFamily="Yu Gothic UI Semibold" Foreground="White" IsChecked="False"/>
+
+        </Grid>
+    </Grid>
+</Window>

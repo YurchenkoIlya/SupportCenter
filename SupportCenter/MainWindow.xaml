@@ -75,7 +75,7 @@
                 <TextBlock TextWrapping="Wrap" TextAlignment="Center" Text="Обращения"/>
             </Button>
             <Grid/>
-            <Button x:Name="adminButton" Style="{StaticResource ButtonMenuStyle}" HorizontalAlignment="Left" Margin="497,0,0,48" VerticalAlignment="Bottom" Height="30" Width="182" Cursor="Hand">
+            <Button x:Name="adminButton" Style="{StaticResource ButtonMenuStyle}" HorizontalAlignment="Left" Margin="497,0,0,48" VerticalAlignment="Bottom" Height="30" Width="182" Cursor="Hand" Click="adminButton_Click">
                 <Button.Effect>
                     <DropShadowEffect/>
                 </Button.Effect>

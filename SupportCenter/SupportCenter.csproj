@@ -11,13 +11,17 @@
   <ItemGroup>
     <None Remove="Image\icons8-copy-50.png" />
     <None Remove="Image\icons8-copy-64.png" />
+    <None Remove="Image\icons8-folder-50.png" />
     <None Remove="Image\icons8-home-50.png" />
+    <None Remove="Image\icons8-program-50.png" />
+    <None Remove="Image\icons8-user-50.png" />
     <None Remove="Image\Main.jpg" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.10" />
     <PackageReference Include="Npgsql" Version="9.0.4" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="9.0.4" />
     <PackageReference Include="System.DirectoryServices" Version="9.0.10" />
     <PackageReference Include="System.DirectoryServices.AccountManagement" Version="9.0.10" />
     <PackageReference Include="System.Management" Version="9.0.10" />
@@ -30,7 +34,16 @@
     <Resource Include="Image\icons8-copy-64.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Image\icons8-folder-50.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Image\icons8-home-50.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\icons8-program-50.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\icons8-user-50.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Image\Main.jpg">
