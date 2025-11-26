@@ -70,7 +70,6 @@ namespace SupportCenter
             }
             ipAdressTextBlock.Text = Convert.ToString(localIP);
 
-
             dbConnect db_connect = new dbConnect();
             db_connect.openConnection();
             try
@@ -193,7 +192,7 @@ namespace SupportCenter
             dbConnect db_connect = new dbConnect();
             db_connect.openConnection();
             NpgsqlDataAdapter adapter = new NpgsqlDataAdapter();
-            NpgsqlCommand command = new NpgsqlCommand("INSERT INTO main.users (login_user,user_role,user_name,activity) VALUES (@aL,@uR,@uN,uA)", db_connect.GetConnection());
+            NpgsqlCommand command = new NpgsqlCommand("INSERT INTO main.users (login_user,user_role,user_name,activity) VALUES (@aL,@uR,@uN,@uA)", db_connect.GetConnection());
             command.Parameters.Add("@aL", NpgsqlDbType.Text).Value = login;
             command.Parameters.Add("@uR", NpgsqlDbType.Integer).Value = 0;
             command.Parameters.Add("@uN", NpgsqlDbType.Text).Value = userName;

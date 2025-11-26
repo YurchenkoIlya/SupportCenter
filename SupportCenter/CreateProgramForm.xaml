@@ -1,0 +1,54 @@
+﻿<Window x:Class="SupportCenter.CreateProgramForm"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SupportCenter"
+        mc:Ignorable="d"
+        Title="CreateProgramForm" Height="415" Width="560" Loaded="Window_Loaded">
+    <Window.Resources>
+        <ResourceDictionary Source="/Styles/Style.xaml"></ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <Image Source="/Image/Main.jpg" StretchDirection="UpOnly" Stretch="Fill"  VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <Grid Background="#EF3C3636" Opacity="1" >
+            <Grid>
+                <TextBlock HorizontalAlignment="Left" Margin="51,12,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Foreground="White" FontFamily="Yu Gothic UI Semibold" Text="Наименование программы:">
+                    <TextBlock.Effect>
+                        <DropShadowEffect/>
+                    </TextBlock.Effect>
+                </TextBlock>
+                <TextBox x:Name="nameFolder" Style="{StaticResource TextBoxStyle}" HorizontalAlignment="Left" Margin="267,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="271" Height="23" FontSize="16" FontFamily="Yu Gothic UI Semibold">
+                    <TextBox.Effect>
+                        <DropShadowEffect/>
+                    </TextBox.Effect>
+                </TextBox>
+                <TextBox x:Name="wayFolder" Style="{StaticResource TextBoxStyle}" HorizontalAlignment="Left" Margin="33,65,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="505" Height="49" FontSize="16" FontFamily="Yu Gothic UI Semibold">
+                    <TextBox.Effect>
+                        <DropShadowEffect/>
+                    </TextBox.Effect>
+                </TextBox>
+                <TextBlock  HorizontalAlignment="Left" Margin="51,39,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Foreground="White" FontFamily="Yu Gothic UI Semibold" Text="Путь к программе:">
+                    <TextBlock.Effect>
+                        <DropShadowEffect/>
+                    </TextBlock.Effect>
+                </TextBlock>
+                <DataGrid x:Name="selectResponsibleDataGrid" ColumnWidth="*" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="28,140,0,0" HorizontalAlignment="Left" Width="510" Height="218" VerticalAlignment="Top"/>
+                <TextBlock HorizontalAlignment="Left" Margin="33,114,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Foreground="White" FontFamily="Yu Gothic UI Semibold" Text="Ответственный за программу:">
+                    <TextBlock.Effect>
+                        <DropShadowEffect/>
+                    </TextBlock.Effect>
+                </TextBlock>
+                <Button x:Name="createProgramButton" Style="{StaticResource ButtonMenuStyle}"  Cursor="Hand" Margin="28,363,0,0" Height="26" VerticalAlignment="Top" HorizontalAlignment="Left" Width="510" Click="createProgramButton_Click">
+                    <Button.Effect>
+                        <DropShadowEffect/>
+                    </Button.Effect>
+                    <Grid>
+                        <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="Создать сетевую папку" VerticalAlignment="Center" FontSize="14"/>
+                    </Grid>
+                </Button>
+            </Grid>
+
+        </Grid>
+    </Grid>
+</Window>

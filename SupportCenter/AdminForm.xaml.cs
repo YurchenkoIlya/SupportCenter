@@ -211,6 +211,9 @@ namespace SupportCenter
             programDataGrid.Columns[2].Header = "ОТВЕСТВЕННЫЙ ЗА ПРОГРАММУ";
             programDataGrid.Columns[3].Header = "ПУТЬ К ПРОГРАММЕ";
             programDataGrid.Columns[0].Width = 50;
+            programDataGrid.Columns[1].Width = 100;
+            programDataGrid.Columns[2].Width = new DataGridLength(1, DataGridLengthUnitType.Star);
+
         }
 
         private void historyButton_Click(object sender, RoutedEventArgs e)
@@ -256,6 +259,13 @@ namespace SupportCenter
             historyDataGrid.Columns[0].Width = 50;
             historyDataGrid.Columns[1].Width = 120;
             historyDataGrid.Columns[2].Width = 80;
+        }
+
+        private void createProgram_Click(object sender, RoutedEventArgs e)
+        {
+            CreateProgramForm createProgram = new CreateProgramForm();
+            createProgram.ShowDialog();
+            
         }
     }
 }
