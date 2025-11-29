@@ -40,5 +40,6 @@ namespace SupportCenter
         {
             workAreaControl.SelectedIndex = 1;
         }
+     
     }
 }
