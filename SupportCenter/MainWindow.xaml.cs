@@ -227,5 +227,10 @@ namespace SupportCenter
             this.Close();
             adminForm.Show();
         }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            
+        }
     }
 }
