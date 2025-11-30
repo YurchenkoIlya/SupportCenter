@@ -41,6 +41,15 @@ namespace SupportCenter
 
         private void usersButton_Click(object sender, RoutedEventArgs e)
         {
+            loadUserDataGrid();
+            
+
+            
+            
+
+        }
+        public void loadUserDataGrid()
+        {
             workTabControl.SelectedIndex = 0;
 
             dbConnect db_connect = new dbConnect();
@@ -66,7 +75,7 @@ namespace SupportCenter
                 else activity = "Выключена";
 
 
-                    result.Add(new Users(Convert.ToInt32(reader[0]), Convert.ToString(reader[1]), roleUser, Convert.ToString(reader[3]), Convert.ToString(activity)));
+                result.Add(new Users(Convert.ToInt32(reader[0]), Convert.ToString(reader[1]), roleUser, Convert.ToString(reader[3]), Convert.ToString(activity)));
 
             }
             reader.Close();
@@ -78,13 +87,10 @@ namespace SupportCenter
             usersDataGrid.Columns[3].Header = "ФИО";
             usersDataGrid.Columns[4].Header = "СТАТУС УЧЕТНОЙ ЗАПИСИ";
             usersDataGrid.Columns[0].Width = 50;
-            
 
-            
-            
+
 
         }
-
        
 
         private void cancelButton_Копировать5_Click(object sender, RoutedEventArgs e)
@@ -125,7 +131,7 @@ namespace SupportCenter
 
             
             redactForm.ShowDialog();
-
+            loadUserDataGrid();
 
         }
 

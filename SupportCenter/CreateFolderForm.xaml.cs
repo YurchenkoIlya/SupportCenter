@@ -17,6 +17,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Xml.Linq;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace SupportCenter
 {
@@ -67,25 +68,69 @@ namespace SupportCenter
             selectResponsibleDataGrid.Columns[3].Header = "ФИО";
             selectResponsibleDataGrid.Columns[4].Visibility = Visibility.Collapsed;
             selectResponsibleDataGrid.Columns[0].Width = 50;
+
+            Application.Current.MainWindow = this;
+            Application.Current.MainWindow.Height = 170;
         }
 
         private void createFolderButton_Click(object sender, RoutedEventArgs e)
         {
+            if (string.IsNullOrEmpty(nameFolder.Text)) MessageBox.Show("Наименование папки не заполнено.");
+            else if(string.IsNullOrEmpty(wayFolder.Text)) MessageBox.Show("Путь к папке не заполнен.");
+            else if (string.IsNullOrEmpty(responsibleTextBox.Text)) MessageBox.Show("Не выбран ответственный за папку.");
+            else
+            {
+
+
+
+
+
+
+
+                RedactUserForm redactForm = new RedactUserForm();
+                Users? path = selectResponsibleDataGrid.SelectedItem as Users;
+
+                dbConnect db_connect = new dbConnect();
+                db_connect.openConnection();
+                NpgsqlDataAdapter adapter = new NpgsqlDataAdapter();
+                NpgsqlCommand command = new NpgsqlCommand("INSERT INTO main.folders (name_folder,responsible_user,way_folder) VALUES (@nameFolder,@responsible_user,@way_folder)", db_connect.GetConnection());
+                command.Parameters.Add("@nameFolder", NpgsqlDbType.Text).Value = nameFolder.Text;
+                command.Parameters.Add("@responsible_user", NpgsqlDbType.Bigint).Value = path.Id;
+                command.Parameters.Add("@way_folder", NpgsqlDbType.Text).Value = wayFolder.Text;
+                adapter.SelectCommand = command;
+                command.ExecuteReader();
+                db_connect.closeConnection();
+                MessageBox.Show("ПАПКА СОЗДАНА");
+
+            }
+        }
+
+        private void selectResponsible_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.MainWindow = this;
+            Application.Current.MainWindow.Height = 460;
+
+        }
+
+        private void selectResponsibleButton_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.MainWindow = this;
+            Application.Current.MainWindow.Height = 170;
 
             RedactUserForm redactForm = new RedactUserForm();
             Users? path = selectResponsibleDataGrid.SelectedItem as Users;
+            if (path != null) {
 
-            dbConnect db_connect = new dbConnect();
-            db_connect.openConnection();
-            NpgsqlDataAdapter adapter = new NpgsqlDataAdapter();
-            NpgsqlCommand command = new NpgsqlCommand("INSERT INTO main.folders (name_folder,responsible_user,way_folder) VALUES (@nameFolder,@responsible_user,@way_folder)", db_connect.GetConnection());
-            command.Parameters.Add("@nameFolder", NpgsqlDbType.Text).Value = nameFolder.Text;
-            command.Parameters.Add("@responsible_user", NpgsqlDbType.Bigint).Value = path.Id;
-            command.Parameters.Add("@way_folder", NpgsqlDbType.Text).Value = wayFolder.Text;
-            adapter.SelectCommand = command;
-            command.ExecuteReader();
-            db_connect.closeConnection();
-            MessageBox.Show("ПАПКА СОЗДАНА");
+                responsibleTextBox.Text = path.name;
+
+
+            }
+            else
+            {
+
+
+
+            }
         }
     }
 }

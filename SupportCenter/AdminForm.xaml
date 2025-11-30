@@ -55,27 +55,32 @@
                         <Image Margin="10,8,187,8" Height="25" Width="25" Source="/Image/icons8-program-50.png" Stretch="Fill" Cursor=""/>
                     </Grid>
                 </Button>
-
                 <Button x:Name="historyButton" Style="{StaticResource ButtonMenuStyle}" Margin="0,5,0,0" Height="42"  Cursor="Hand" Click="historyButton_Click">
                     <Button.Effect>
                         <DropShadowEffect/>
                     </Button.Effect>
                     <Grid Height="42" Width="222">
-                        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="История" VerticalAlignment="Center" FontSize="16" Margin="40,0,0,0"/>
+                        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="История" VerticalAlignment="Center" FontSize="16" Margin="45,0,0,0"/>
+                        <Image Margin="6,5,183,4" Source="/Image/icons8-log-64.png" Stretch="Fill" Cursor="" Height="33" Width="33"/>
                     </Grid>
                 </Button>
                 <Button x:Name="cancelButton_Копировать4" Style="{StaticResource ButtonMenuStyle}" Height="42"  Cursor="Hand" Margin="0,5,0,0" Click="cancelButton_Click">
                     <Button.Effect>
                         <DropShadowEffect/>
                     </Button.Effect>
-                    <Button x:Name="usersButton_Копировать3" Style="{StaticResource ButtonMenuStyle}" Height="42"  Cursor="Hand" Click="usersButton_Click">
-                        <Button.Effect>
-                            <DropShadowEffect/>
-                        </Button.Effect>
-                        <Grid Height="42" Width="222">
-                            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Рабочие места" VerticalAlignment="Center" FontSize="16" Margin="40,0,0,0"/>
-                        </Grid>
-                    </Button>
+                    <Grid Height="42" Width="222">
+                        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Рабочие места" VerticalAlignment="Center" FontSize="16" Margin="45,0,0,0"/>
+                        <Image Margin="10,8,187,8" Source="/Image/icons8-pc-50.png" Stretch="Fill" Cursor="" Width="25" Height="25"/>
+                    </Grid>
+                </Button>
+                <Button x:Name="historyButton_Копировать" Margin="0,5,0,0" Style="{StaticResource ButtonMenuStyle}" Height="42"  Cursor="Hand" Click="historyButton_Click">
+                    <Button.Effect>
+                        <DropShadowEffect/>
+                    </Button.Effect>
+                    <Grid Height="42" Width="222">
+                        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Отчеты" VerticalAlignment="Center" FontSize="16" Margin="45,0,0,0"/>
+                        <Image Margin="8,6,184,6" Source="/Image/icons8-report-50.png" Stretch="Fill" Cursor="" Height="30" Width="30"/>
+                    </Grid>
                 </Button>
             </StackPanel>
             <TabControl x:Name="workTabControl" Margin="237,-57,0,0" Background="{x:Null}" BorderBrush="{x:Null}" HorizontalAlignment="Left" Width="934" Height="601" VerticalAlignment="Top">
