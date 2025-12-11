@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SupportCenter"
         mc:Ignorable="d"
-        Title="CreateProgramForm" Height="415" Width="560" Loaded="Window_Loaded">
+        Title="CreateProgramForm" Height="415" Width="560">
     <Window.Resources>
         <ResourceDictionary Source="/Styles/Style.xaml"></ResourceDictionary>
     </Window.Resources>

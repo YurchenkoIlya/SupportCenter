@@ -47,45 +47,30 @@ namespace SupportCenter
             
 
         }
-        public void loadUserDataGrid()
+        private async void loadUserDataGrid()
         {
             workTabControl.SelectedIndex = 0;
 
-            dbConnect db_connect = new dbConnect();
-            DataTable table = new DataTable();
-            NpgsqlCommand command = new NpgsqlCommand("Select *  from main.users", db_connect.GetConnection());
-            db_connect.openConnection();
-            command.ExecuteNonQuery();
-            NpgsqlDataAdapter adapter = new NpgsqlDataAdapter(command);
-            NpgsqlDataReader reader = command.ExecuteReader();
-            List<Users> result = new List<Users>();
-
-            while (reader.Read())
+            try
             {
-                string roleUser = null;
-                string activity = null;
-
-
-                if (Convert.ToString(reader[2]) == "0")
-                    roleUser = "Пользователь";
-                else roleUser = "Администратор";
-                if (Convert.ToString(reader[4]) == "1")
-                    activity = "Включена";
-                else activity = "Выключена";
-
-
-                result.Add(new Users(Convert.ToInt32(reader[0]), Convert.ToString(reader[1]), roleUser, Convert.ToString(reader[3]), Convert.ToString(activity)));
-
+                var api = new UsersApiClient();
+                var users = await api.GetUsersAsync();
+                usersDataGrid.ItemsSource = users;
+               
+                usersDataGrid.Columns[0].Header = "ID";
+                usersDataGrid.Columns[1].Header = "ЛОГИН";
+                usersDataGrid.Columns[2].Header = "РОЛЬ";
+                usersDataGrid.Columns[3].Header = "ФИО";
+                usersDataGrid.Columns[4].Header = "СТАТУС УЧЕТНОЙ ЗАПИСИ";
+                usersDataGrid.Columns[0].Width = 50;
             }
-            reader.Close();
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ошибка при получении данных: " + ex.Message);
+            }
 
-            usersDataGrid.ItemsSource = result;
-            usersDataGrid.Columns[0].Header = "ID";
-            usersDataGrid.Columns[1].Header = "ЛОГИН";
-            usersDataGrid.Columns[2].Header = "РОЛЬ";
-            usersDataGrid.Columns[3].Header = "ФИО";
-            usersDataGrid.Columns[4].Header = "СТАТУС УЧЕТНОЙ ЗАПИСИ";
-            usersDataGrid.Columns[0].Width = 50;
+            // usersDataGrid.ItemsSource = result;
+           
 
 
 
@@ -99,37 +84,13 @@ namespace SupportCenter
 
         private void redactUser_Click(object sender, RoutedEventArgs e)
         {
-            RedactUserForm redactForm = new RedactUserForm();
-            Users? path = usersDataGrid.SelectedItem as Users;
-
-            if (path != null)
-            {
-
-                redactForm.idUserTextBlock.Text = Convert.ToString(path.Id);
-                redactForm.loginUserTextblock.Text = Convert.ToString(path.login);
-
-                redactForm.roleUserComboBox.Items.Add("Пользователь");
-                redactForm.roleUserComboBox.Items.Add("Администратор");
-                // redactForm.roleUserComboBox.SelectedIndex = 1;
-                if (path.role == "Пользователь") redactForm.roleUserComboBox.SelectedValue = "Пользователь";
-                else redactForm.roleUserComboBox.SelectedValue = "Администратор";
+            loadUserDataGrid();
 
 
 
 
 
-
-                if (path.activity == "Включена") redactForm.activityCheckBox.IsChecked = true;
-                else redactForm.activityCheckBox.IsChecked = false;
-
-
-
-            }
-
-
-
-            
-            redactForm.ShowDialog();
+           
             loadUserDataGrid();
 
         }

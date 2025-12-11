@@ -28,7 +28,7 @@ namespace SupportCenter
             InitializeComponent();
         }
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
+      /*  private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             dbConnect db_connect = new dbConnect();
             DataTable table = new DataTable();
@@ -65,7 +65,7 @@ namespace SupportCenter
             selectResponsibleDataGrid.Columns[3].Header = "ФИО";
             selectResponsibleDataGrid.Columns[4].Visibility = Visibility.Collapsed;
             selectResponsibleDataGrid.Columns[0].Width = 50;           
-        }
+        }*/
 
         private void createProgramButton_Click(object sender, RoutedEventArgs e)
         {
