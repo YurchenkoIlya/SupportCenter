@@ -69,7 +69,6 @@ namespace SupportCenter
                 MessageBox.Show("Ошибка при получении данных: " + ex.Message);
             }
 
-            // usersDataGrid.ItemsSource = result;
            
 
 
@@ -84,13 +83,38 @@ namespace SupportCenter
 
         private void redactUser_Click(object sender, RoutedEventArgs e)
         {
-            loadUserDataGrid();
+            
+            RedactUserForm redactForm = new RedactUserForm();
+            Users? path = usersDataGrid.SelectedItem as Users;
+
+            if (path != null)
+            {
+
+                redactForm.idUserTextBlock.Text = Convert.ToString(path.Id);
+                redactForm.loginUserTextblock.Text = Convert.ToString(path.login);
+
+                redactForm.roleUserComboBox.Items.Add("Пользователь");
+                redactForm.roleUserComboBox.Items.Add("Администратор");
+                // redactForm.roleUserComboBox.SelectedIndex = 1;
+                if (path.role == "Пользователь") redactForm.roleUserComboBox.SelectedValue = "Пользователь";
+                else redactForm.roleUserComboBox.SelectedValue = "Администратор";
 
 
 
 
 
-           
+
+                if (path.activity == "Включена") redactForm.activityCheckBox.IsChecked = true;
+                else redactForm.activityCheckBox.IsChecked = false;
+
+
+
+            }
+            
+
+
+
+            redactForm.ShowDialog();
             loadUserDataGrid();
 
         }

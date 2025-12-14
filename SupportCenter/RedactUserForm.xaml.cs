@@ -33,30 +33,33 @@ namespace SupportCenter
 
         }
 
-        private void acceptRedactButton_Click(object sender, RoutedEventArgs e)
+        private async void acceptRedactButton_Click(object sender, RoutedEventArgs e)
         {
             int role = 0;
             int activity = 0;
 
-            if (roleUserComboBox.SelectedItem == "Пользователь") role = 0;
-            else role = 1;
+            if (roleUserComboBox.SelectedItem?.ToString() == "Пользователь")
+                role = 0;
+            else
+                role = 1;
 
-            if(activityCheckBox.IsChecked == true) activity = 1;
-            else activity = 0;
+            if (activityCheckBox.IsChecked == true)
+                activity = 1;
+            else
+                activity = 0;
 
+            var dto = new EditUserDto
+            {
+                Id = Convert.ToInt32(idUserTextBlock.Text),
+                role = role == 0 ? "Пользователь" : "Администратор",
+                ActivityFlag = activity == 1
+            };
 
-                dbConnect db_connect = new dbConnect();
-            NpgsqlDataAdapter adapter = new NpgsqlDataAdapter();
-            db_connect.openConnection();
-            NpgsqlCommand command = new NpgsqlCommand("UPDATE main.users SET user_role=@role,activity=@activity where user_id=@id", db_connect.GetConnection());
-            command.Parameters.Add("@id", NpgsqlDbType.Bigint).Value = Convert.ToInt32(idUserTextBlock.Text);          
-            command.Parameters.Add("@role", NpgsqlDbType.Bigint).Value = role;
-            command.Parameters.Add("@activity", NpgsqlDbType.Bigint).Value = activity;
+            var api = new UserApiRedact();
+            string result = await api.UpdateUserAsync(dto);
 
-            adapter.SelectCommand = command;
-            command.ExecuteReader();
-            MessageBox.Show("Пользователь отредактирован");
-            db_connect.closeConnection();
+            MessageBox.Show(result, "Информация", MessageBoxButton.OK, MessageBoxImage.Information);
+
             this.Close();
         }
     }
