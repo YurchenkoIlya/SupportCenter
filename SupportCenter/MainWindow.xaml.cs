@@ -104,7 +104,7 @@ namespace SupportCenter
         }
         public void readLog()
         {
-            DateTime currentDateTime = DateTime.Now;
+          /*  DateTime currentDateTime = DateTime.Now;
 
 
 
@@ -132,7 +132,7 @@ namespace SupportCenter
             db_connect.closeConnection();
 
 
-
+            */
 
         }
         

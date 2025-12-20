@@ -5,39 +5,52 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SupportCenter"
         mc:Ignorable="d"
-        Title="CreateAppealProgramForm" Height="450" Width="800">
+        Title="CreateAppealProgramForm" Height="285" Width="723">
     <Window.Resources>
         <ResourceDictionary Source="/Styles/Style.xaml"></ResourceDictionary>
     </Window.Resources>
     <Grid>
-        <Image Source="/Image/Main.jpg" StretchDirection="UpOnly" Stretch="Fill"/>
-        <Grid Background="#EF3C3636" Opacity="1" Height="434" Width="800" HorizontalAlignment="Left" >
-            <Grid Height="434" HorizontalAlignment="Center" Width="800" VerticalAlignment="Top">
-                <TextBlock HorizontalAlignment="Center" Margin="0,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Foreground="White" FontFamily="Yu Gothic UI Semibold" Text="Создание обращения">
-                    <TextBlock.Effect>
-                        <DropShadowEffect/>
-                    </TextBlock.Effect>
-                </TextBlock>
-                <Button x:Name="acceptRedactButton" Style="{StaticResource ButtonMenuStyle}" HorizontalAlignment="Left" Margin="584,362,0,0" VerticalAlignment="Top" Height="25" Width="192" Cursor="Hand">
-                    <Button.Effect>
-                        <DropShadowEffect/>
-                    </Button.Effect>
-                    <TextBlock TextWrapping="Wrap" TextAlignment="Center" Text="Создать"/>
-                </Button>
-                <ComboBox x:Name="roleUserComboBox" HorizontalAlignment="Left" Margin="319,41,0,0" VerticalAlignment="Top" Width="422" IsSynchronizedWithCurrentItem="False" Height="25" FontSize="14">
-                </ComboBox>
-                <TextBlock HorizontalAlignment="Left" Margin="10,43,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Foreground="White" FontFamily="Yu Gothic UI Semibold" Text="Требуемое программное обечпечение: ">
-                    <TextBlock.Effect>
-                        <DropShadowEffect/>
-                    </TextBlock.Effect>
-                </TextBlock>
-                <TextBlock HorizontalAlignment="Left" Margin="10,69,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Foreground="White" FontFamily="Yu Gothic UI Semibold" Text="Согласующие лица: ">
-                    <TextBlock.Effect>
-                        <DropShadowEffect/>
-                    </TextBlock.Effect>
-                </TextBlock>
-            </Grid>
-
+        <Image Source="/Image/Main.jpg" StretchDirection="UpOnly" Stretch="Fill" Height="269" VerticalAlignment="Center" HorizontalAlignment="Center" Width="723"/>
+        <Grid Background="#EF3C3636" Opacity="1" Width="723" HorizontalAlignment="Center" Height="269" VerticalAlignment="Top" Cursor="" >
+            <TextBlock HorizontalAlignment="Center" Margin="0,15,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Foreground="White" FontFamily="Yu Gothic UI Semibold" Text="Создание обращения">
+                <TextBlock.Effect>
+                    <DropShadowEffect/>
+                </TextBlock.Effect>
+            </TextBlock>
+            <Button x:Name="acceptRedactButton" Style="{StaticResource ButtonMenuStyle}" HorizontalAlignment="Left" Margin="27,205,0,0" VerticalAlignment="Top" Height="26" Width="680" Cursor="Hand">
+                <Button.Effect>
+                    <DropShadowEffect/>
+                </Button.Effect>
+                <TextBlock TextWrapping="Wrap" TextAlignment="Center" Text="Создать"/>
+            </Button>
+            <TextBlock HorizontalAlignment="Left" Margin="27,55,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Foreground="White" FontFamily="Yu Gothic UI Semibold" Text="Требуемое программное обечпечение: ">
+                <TextBlock.Effect>
+                    <DropShadowEffect/>
+                </TextBlock.Effect>
+            </TextBlock>
+            <TextBox Style="{StaticResource TextBoxStyle}" HorizontalAlignment="Left" Margin="336,54,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="243" Height="24" FontSize="16" FontFamily="Yu Gothic UI Semibold">
+                <TextBox.Effect>
+                    <DropShadowEffect/>
+                </TextBox.Effect>
+            </TextBox>
+            <Button x:Name="acceptRedactButton_Копировать" Style="{StaticResource ButtonMenuStyle}" HorizontalAlignment="Left" Margin="584,55,0,0" VerticalAlignment="Top" Height="24" Width="117" Cursor="Hand">
+                <Button.Effect>
+                    <DropShadowEffect/>
+                </Button.Effect>
+                <TextBlock TextWrapping="Wrap" TextAlignment="Center" Text="Выбрать"/>
+            </Button>
+            <TextBox Style="{StaticResource TextBoxStyle}" HorizontalAlignment="Left" Margin="27,125,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="680" Height="75" FontSize="16" FontFamily="Yu Gothic UI Semibold">
+                <TextBox.Effect>
+                    <DropShadowEffect/>
+                </TextBox.Effect>
+            </TextBox>
+            <TextBlock HorizontalAlignment="Left" Margin="27,93,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Foreground="White" FontFamily="Yu Gothic UI Semibold" Text="Комментарий к обращению (обоснование, для чего требуется) : ">
+                <TextBlock.Effect>
+                    <DropShadowEffect/>
+                </TextBlock.Effect>
+            </TextBlock>
         </Grid>
+
+
     </Grid>
 </Window>

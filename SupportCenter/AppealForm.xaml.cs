@@ -43,12 +43,6 @@ namespace SupportCenter
         {
             workAreaControl.SelectedIndex = 1;
         }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            CreateAppealProgramForm createAppealProgramForm = new CreateAppealProgramForm();
-            createAppealProgramForm.ShowDialog();
-        }
         public void loadAppealProgram()
         {
 
@@ -59,6 +53,7 @@ namespace SupportCenter
                         "p.name_program, " +
                         "u.pc_name, " +
                         "u.ip_pc, " +
+                        "user_applicant.user_name AS applicant_user," +
                         "oib_user.user_name AS oib_user_name, " +
                         "u.oib_status_responsible, " +
                         "oit_user.user_name AS oit_user_name, " +
@@ -69,8 +64,8 @@ namespace SupportCenter
                         "LEFT JOIN main.users oib_user ON u.oib_responsible = oib_user.user_id " +
                         "LEFT JOIN main.users oit_user ON u.oit_responsible = oit_user.user_id " +
                         "LEFT JOIN main.users otp_user ON u.otp_executor = otp_user.user_id " +
-                        "LEFT JOIN main.program p ON u.id_program = p.id_program",
-            db_connect.GetConnection());
+                        "LEFT JOIN main.users user_applicant ON u.applicant = user_applicant.user_id " +
+                        "LEFT JOIN main.program p ON u.id_program = p.id_program", db_connect.GetConnection());
             db_connect.openConnection();
             command.ExecuteNonQuery();
             NpgsqlDataAdapter adapter = new NpgsqlDataAdapter(command);
@@ -83,22 +78,22 @@ namespace SupportCenter
                 string oitStatus = null;
                 string otpStatus = null;
 
-                if (Convert.ToString(reader[5]) == "0")
+               if (Convert.ToString(reader[6]) == "0")
                 {
                     oibStatus = " Не согласовано";
                 }
-                if (Convert.ToString(reader[7]) == "0")
+                if (Convert.ToString(reader[8]) == "0")
                 {
                     oitStatus = "Не согласовано";
                 }
-                if (Convert.ToString(reader[9]) == "0")
+                if (Convert.ToString(reader[10]) == "0")
                 {
                     otpStatus = "Не в работе";
                 }
 
 
-                result.Add(new appealProgram(Convert.ToInt32(reader[0]), Convert.ToString(reader[1]), Convert.ToString(reader[2]), Convert.ToString(reader[3]), 
-                    Convert.ToString(reader[4]), oibStatus, Convert.ToString(reader[6]), oibStatus, Convert.ToString(reader[8]), oibStatus));
+                result.Add(new appealProgram(Convert.ToInt32(reader[0]), Convert.ToString(reader[1]), Convert.ToString(reader[2]), Convert.ToString(reader[3]), Convert.ToString(reader[4]), 
+                    Convert.ToString(reader[5]), oibStatus, Convert.ToString(reader[7]), oibStatus, Convert.ToString(reader[9]), oibStatus));
 
             }
             reader.Close();
@@ -110,7 +105,8 @@ namespace SupportCenter
 
         private void appealProgramCreate_Click(object sender, RoutedEventArgs e)
         {
-
+            CreateAppealProgramForm createAppealProgramForm = new CreateAppealProgramForm();
+            createAppealProgramForm.ShowDialog();
         }
 
         private void appealProgramShow_Click(object sender, RoutedEventArgs e)
@@ -124,12 +120,13 @@ namespace SupportCenter
             appealProgramDataGrid.Columns[1].Header = "ПРОГРАММА";
             appealProgramDataGrid.Columns[2].Header = "КОМПЬЮТЕР";
             appealProgramDataGrid.Columns[3].Header = "IP АДРЕС";
-            appealProgramDataGrid.Columns[4].Header = "СОГЛАСУБЮЩИЙ ОИБ";
-            appealProgramDataGrid.Columns[5].Header = "СТАТУС";
-            appealProgramDataGrid.Columns[6].Header = "СОГЛАСУЮЩИЙ ОИТ";
-            appealProgramDataGrid.Columns[7].Header = "СТАТУС";
-            appealProgramDataGrid.Columns[8].Header = "ИСПОЛНИТЕЛЬ ОТП";
-            appealProgramDataGrid.Columns[9].Header = "ЭТАП ВЫПОЛНЕНИЯ";
+            appealProgramDataGrid.Columns[4].Header = "ИЦИЦИАТОР";
+            appealProgramDataGrid.Columns[5].Header = "СОГЛАСУБЮЩИЙ ОИБ";
+            appealProgramDataGrid.Columns[6].Header = "СТАТУС";
+            appealProgramDataGrid.Columns[7].Header = "СОГЛАСУЮЩИЙ ОИТ";
+            appealProgramDataGrid.Columns[8].Header = "СТАТУС";
+            appealProgramDataGrid.Columns[9].Header = "ИСПОЛНИТЕЛЬ ОТП";
+            appealProgramDataGrid.Columns[10].Header = "ЭТАП ВЫПОЛНЕНИЯ";
             appealProgramDataGrid.Columns[0].Width = 35;
         }
     }
