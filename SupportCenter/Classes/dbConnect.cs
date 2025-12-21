@@ -11,7 +11,7 @@ namespace SupportCenter.Classes
 {
     internal class dbConnect
     {
-        NpgsqlConnection db_connect = new NpgsqlConnection("Host=localhost;Port=5432;Username=postgres;Password=010203456;Database=supportcenter");
+        NpgsqlConnection db_connect = new NpgsqlConnection("Host=localhost;Port=5432;Username=postgres;Password=010203456;Database=supportCenter");
 
         public void openConnection()
         {
