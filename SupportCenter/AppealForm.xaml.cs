@@ -93,7 +93,7 @@ namespace SupportCenter
 
 
                 result.Add(new appealProgram(Convert.ToInt32(reader[0]), Convert.ToString(reader[1]), Convert.ToString(reader[2]), Convert.ToString(reader[3]), Convert.ToString(reader[4]), 
-                    Convert.ToString(reader[5]), oibStatus, Convert.ToString(reader[7]), oibStatus, Convert.ToString(reader[9]), oibStatus));
+                    Convert.ToString(reader[5]), oibStatus, Convert.ToString(reader[7]), oitStatus, Convert.ToString(reader[9]), otpStatus));
 
             }
             reader.Close();

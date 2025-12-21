@@ -18,6 +18,6 @@ public class UsersApiClient
 
     public async Task<List<Users>> GetUsersAsync()
     {
-        return await _http.GetFromJsonAsync<List<Users>>("api/users");
+        return await _http.GetFromJsonAsync<List<Users>>("api/users/get");
     }
 }

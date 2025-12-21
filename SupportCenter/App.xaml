@@ -4,6 +4,7 @@
              xmlns:local="clr-namespace:SupportCenter"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        
     </Application.Resources>
+    
 </Application>

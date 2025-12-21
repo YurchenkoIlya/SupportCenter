@@ -22,7 +22,7 @@ public class UserApiRedact
         var json = JsonSerializer.Serialize(dto);
         var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-        var response = await _client.PutAsync("api/usersredact/update", content);
+        var response = await _client.PutAsync("api/users/update", content);
 
         if (!response.IsSuccessStatusCode)
         {
