@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Npgsql;
+using NpgsqlTypes;
 using WebApplication1.Dto;
 
 namespace WebApplication1.Controllers;
@@ -15,7 +16,7 @@ public class UsersController : ControllerBase
         _config = config;
     }
 
-    [HttpGet]
+    [HttpGet("get")]
     public async Task<IEnumerable<UserDto>> GetUsers()
     {
         var users = new List<UserDto>();
@@ -36,7 +37,7 @@ public class UsersController : ControllerBase
             users.Add(new UserDto
             {
                 Id = reader.GetInt32(0),
-                Login = reader.GetString(1), // вместо UserName
+                Login = reader.GetString(1),
                 Role = roleUser,
                 Name = reader.GetString(3),
                 Activity = activity
@@ -44,5 +45,41 @@ public class UsersController : ControllerBase
         }
 
         return users;
+
+    }
+
+    [HttpPut("update")]
+    public async Task<IActionResult> UpdateUser([FromBody] EditUserDto dto)
+    {
+        // Логика преобразования — 1 в 1 как в WPF
+        var connStr = _config.GetConnectionString("DefaultConnection");
+        int role = dto.Role == "Пользователь" ? 0 : 1;
+        int activity = dto.ActivityFlag ? 1 : 0;
+
+        await using var conn = new NpgsqlConnection(connStr);
+        await conn.OpenAsync();
+
+        const string sql = @"
+            UPDATE main.users
+            SET user_role = @role,
+                activity = @activity
+            WHERE user_id = @id;
+        ";
+
+        await using var cmd = new NpgsqlCommand(sql, conn);
+
+        cmd.Parameters.Add("@id", NpgsqlDbType.Bigint).Value = dto.Id;
+        cmd.Parameters.Add("@role", NpgsqlDbType.Bigint).Value = role;
+        cmd.Parameters.Add("@activity", NpgsqlDbType.Bigint).Value = activity;
+
+        int rows = await cmd.ExecuteNonQueryAsync();
+
+        if (rows == 0)
+            return NotFound("Пользователь с таким ID не найден");
+        {
+            Console.WriteLine($"Пользователь с ID {dto.Id} успешно отредактирован. Role={role}, Activity={activity}");
+            return Ok("Пользователь отредактирован");
+
+        }
     }
 }
