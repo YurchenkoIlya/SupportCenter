@@ -104,7 +104,7 @@ namespace SupportCenter
         }
         public void readLog()
         {
-            DateTime currentDateTime = DateTime.Now;
+          /*  DateTime currentDateTime = DateTime.Now;
 
 
 
@@ -132,7 +132,7 @@ namespace SupportCenter
             db_connect.closeConnection();
 
 
-
+            */
 
         }
         
@@ -231,6 +231,30 @@ namespace SupportCenter
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             
+        }
+
+        private void copyNamePcButton_Click(object sender, RoutedEventArgs e)
+        {
+            Clipboard.SetData(DataFormats.Text, namePcTextBlock.Text);
+            MessageBox.Show("Скопировано");
+        }
+
+        private void copyIpPcButton_Click(object sender, RoutedEventArgs e)
+        {
+            Clipboard.SetData(DataFormats.Text, ipAdressTextBlock.Text);
+            MessageBox.Show("Скопировано");
+        }
+
+        private void copyNameAdButton_Click(object sender, RoutedEventArgs e)
+        {
+            Clipboard.SetData(DataFormats.Text, userNameAdTextBlock.Text);
+            MessageBox.Show("Скопировано");
+        }
+
+        private void copyFioButton_Click(object sender, RoutedEventArgs e)
+        {
+            Clipboard.SetData(DataFormats.Text, nameAdTextBlock.Text);
+            MessageBox.Show("Скопировано");
         }
     }
 }

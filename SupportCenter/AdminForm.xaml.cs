@@ -91,7 +91,7 @@ namespace SupportCenter
             {
 
                 redactForm.idUserTextBlock.Text = Convert.ToString(path.Id);
-                redactForm.loginUserTextblock.Text = Convert.ToString(path.login);
+                redactForm.loginUserTextblock.Text = Convert.ToString(path.Login);
 
                 redactForm.roleUserComboBox.Items.Add("Пользователь");
                 redactForm.roleUserComboBox.Items.Add("Администратор");

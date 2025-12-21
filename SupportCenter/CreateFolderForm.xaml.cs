@@ -33,49 +33,16 @@ namespace SupportCenter
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-         /*   dbConnect db_connect = new dbConnect();
-            DataTable table = new DataTable();
-            NpgsqlCommand command = new NpgsqlCommand("Select *  from main.users", db_connect.GetConnection());
-            db_connect.openConnection();
-            command.ExecuteNonQuery();
-            NpgsqlDataAdapter adapter = new NpgsqlDataAdapter(command);
-            NpgsqlDataReader reader = command.ExecuteReader();
-            List<Users> result = new List<Users>();
 
-            while (reader.Read())
-            {
-                string roleUser = null;
-                string activity = null;
-
-
-                if (Convert.ToString(reader[2]) == "0")
-                    roleUser = "Пользователь";
-                else roleUser = "Администратор";
-                if (Convert.ToString(reader[4]) == "1")
-                    activity = "Включена";
-                else activity = "Выключена";
-
-
-                result.Add(new Users(Convert.ToInt32(reader[0]), Convert.ToString(reader[1]), roleUser, Convert.ToString(reader[3]), Convert.ToString(activity)));
-
-            }
-            reader.Close();
-
-            selectResponsibleDataGrid.ItemsSource = result;
-            selectResponsibleDataGrid.Columns[0].Header = "ID";
-            selectResponsibleDataGrid.Columns[1].Header = "ЛОГИН";
-            selectResponsibleDataGrid.Columns[2].Visibility = Visibility.Collapsed;
-            selectResponsibleDataGrid.Columns[3].Header = "ФИО";
-            selectResponsibleDataGrid.Columns[4].Visibility = Visibility.Collapsed;
-            selectResponsibleDataGrid.Columns[0].Width = 50;
 
             Application.Current.MainWindow = this;
-            Application.Current.MainWindow.Height = 170;*/
+            Application.Current.MainWindow.Height = 170;
+
         }
 
         private void createFolderButton_Click(object sender, RoutedEventArgs e)
         {
-          /*  if (string.IsNullOrEmpty(nameFolder.Text)) MessageBox.Show("Наименование папки не заполнено.");
+            if (string.IsNullOrEmpty(nameFolder.Text)) MessageBox.Show("Наименование папки не заполнено.");
             else if(string.IsNullOrEmpty(wayFolder.Text)) MessageBox.Show("Путь к папке не заполнен.");
             else if (string.IsNullOrEmpty(responsibleTextBox.Text)) MessageBox.Show("Не выбран ответственный за папку.");
             else
@@ -102,19 +69,36 @@ namespace SupportCenter
                 db_connect.closeConnection();
                 MessageBox.Show("ПАПКА СОЗДАНА");
           
-            }*/
+            }
         }
 
-        private void selectResponsible_Click(object sender, RoutedEventArgs e)
+        private async void selectResponsible_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var api = new UsersApiClient();
+                var users = await api.GetUsersAsync();
+                selectResponsibleDataGrid.ItemsSource = users;
+
+                selectResponsibleDataGrid.Columns[0].Header = "ID";
+                selectResponsibleDataGrid.Columns[1].Header = "ЛОГИН";
+                selectResponsibleDataGrid.Columns[2].Visibility = Visibility.Collapsed;
+                selectResponsibleDataGrid.Columns[3].Header = "ФИО";
+                selectResponsibleDataGrid.Columns[4].Visibility = Visibility.Collapsed;
+                selectResponsibleDataGrid.Columns[0].Width = 50;
+
+                Application.Current.MainWindow = this;
+                Application.Current.MainWindow.Height = 460;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ошибка при получении данных: " + ex.Message);
+            }
+        }
+
+        private async void selectResponsibleButton_Click(object sender, RoutedEventArgs e)
         {
             Application.Current.MainWindow = this;
-            Application.Current.MainWindow.Height = 460;
-
-        }
-
-        private void selectResponsibleButton_Click(object sender, RoutedEventArgs e)
-        {
-         /*   Application.Current.MainWindow = this;
             Application.Current.MainWindow.Height = 170;
 
             RedactUserForm redactForm = new RedactUserForm();
@@ -128,9 +112,9 @@ namespace SupportCenter
             else
             {
 
+                MessageBox.Show("Пользователь не выбран00");
 
-
-            }*/
+            }
         }
     }
 }
