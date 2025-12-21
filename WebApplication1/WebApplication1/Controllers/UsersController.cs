@@ -47,7 +47,6 @@ public class UsersController : ControllerBase
         return users;
 
     }
-
     [HttpPut("update")]
     public async Task<IActionResult> UpdateUser([FromBody] EditUserDto dto)
     {
@@ -82,4 +81,4 @@ public class UsersController : ControllerBase
 
         }
     }
-}
+    }

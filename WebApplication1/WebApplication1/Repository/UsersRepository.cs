@@ -1,4 +1,4 @@
-﻿using Npgsql;
+﻿/*using Npgsql;
 using WebApplication1.Dto;
 
 namespace WebApplication1.Repository;
@@ -40,4 +40,4 @@ public class UsersRepository
 
         return users;
     }
-}
+}*/

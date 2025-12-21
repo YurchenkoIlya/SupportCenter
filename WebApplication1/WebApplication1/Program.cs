@@ -1,9 +1,9 @@
 
 
-using WebApplication1.Repository;
+//using WebApplication1.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddSingleton<UsersRepository>();
+//builder.Services.AddSingleton<UsersRepository>();
 // Add services to the container.
 
 builder.Services.AddControllers();
