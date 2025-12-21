@@ -1,4 +1,5 @@
 ﻿using Npgsql;
+using SupportCenter.Api;
 using SupportCenter.Classes;
 using System;
 using System.Collections.Generic;
@@ -166,31 +167,22 @@ namespace SupportCenter
             createFolderForm.ShowDialog();
         }
 
-        private void programButton_Click(object sender, RoutedEventArgs e)
+        private async void programButton_Click(object sender, RoutedEventArgs e)
         {
             workTabControl.SelectedIndex = 2;
 
-            dbConnect db_connect = new dbConnect();
-            DataTable table = new DataTable();
-            NpgsqlCommand command = new NpgsqlCommand
-                ("Select u.id_program,u.name_program,o.user_name,u.way_program " +
-                "from main.program u " +
-                "LEFT JOIN main.users o " +
-                "ON u.responsible_program = o.user_id", db_connect.GetConnection());
-            db_connect.openConnection();
-            command.ExecuteNonQuery();
-            NpgsqlDataAdapter adapter = new NpgsqlDataAdapter(command);
-            NpgsqlDataReader reader = command.ExecuteReader();
-            List<programResponsible> result = new List<programResponsible>();
-
-            while (reader.Read())
+            try
             {
+                var api = new ProgramApiGet();
+                var program = await api.GetProgramAsync();
+                programDataGrid.ItemsSource = program;
 
-                result.Add(new programResponsible(Convert.ToInt32(reader[0]), Convert.ToString(reader[1]), Convert.ToString(reader[2]), Convert.ToString(reader[3])));
-
+               
             }
-            reader.Close();
-            programDataGrid.ItemsSource = result;
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ошибка при получении данных: " + ex.Message);
+            }
 
         }
 

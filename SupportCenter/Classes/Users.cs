@@ -14,6 +14,6 @@ namespace SupportCenter.Classes
         public string name { get; set; }
         public string activity { get; set; }
 
-        public Users() { } // JSON
+       
     }
 }
