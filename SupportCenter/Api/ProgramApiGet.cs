@@ -1,14 +1,18 @@
 ﻿using SupportCenter.Classes;
-using System.Collections.Generic;
+using System;
 using System.Net.Http;
 using System.Net.Http.Json;
+using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
-public class UsersApiClient
+namespace SupportCenter.Api;
+public class ProgramApiGet
 {
+
     private readonly HttpClient _client;
 
-    public UsersApiClient()
+    public ProgramApiGet()
     {
         _client = new HttpClient
         {
@@ -16,9 +20,8 @@ public class UsersApiClient
         };
     }
 
-    public async Task<List<Users>> GetUsersAsync()
+    public async Task<List<ProgramDto>> GetProgramAsync()
     {
-        return await _client.GetFromJsonAsync<List<Users>>("api/users/get");
+        return await _client.GetFromJsonAsync<List<ProgramDto>>("api/program/get");
     }
-
 }
