@@ -51,7 +51,7 @@
                     <DropShadowEffect/>
                 </TextBox.Effect>
             </TextBox>
-            <TextBlock HorizontalAlignment="Left" Margin="28,134,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Foreground="White" FontFamily="Yu Gothic UI Semibold" Text="Выбор оьтветственного для сетевой папки:">
+            <TextBlock HorizontalAlignment="Left" Margin="28,134,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Foreground="White" FontFamily="Yu Gothic UI Semibold" Text="Выбор ответственного для сетевой папки:">
                 <TextBlock.Effect>
                     <DropShadowEffect/>
                 </TextBlock.Effect>

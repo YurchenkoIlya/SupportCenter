@@ -77,8 +77,9 @@ namespace SupportCenter
                 string oibStatus = null;
                 string oitStatus = null;
                 string otpStatus = null;
+                string otpExecutor = null;
 
-               if (Convert.ToString(reader[6]) == "0")
+                if (Convert.ToString(reader[6]) == "0")
                 {
                     oibStatus = " Не согласовано";
                 }
@@ -90,10 +91,16 @@ namespace SupportCenter
                 {
                     otpStatus = "Не в работе";
                 }
+                if (Convert.ToString(reader[9]) == "")
+                {
+                    otpExecutor = "Нет исполнителя";
+                }
+                else otpExecutor = Convert.ToString(reader[9]);
 
 
-                result.Add(new appealProgram(Convert.ToInt32(reader[0]), Convert.ToString(reader[1]), Convert.ToString(reader[2]), Convert.ToString(reader[3]), Convert.ToString(reader[4]), 
-                    Convert.ToString(reader[5]), oibStatus, Convert.ToString(reader[7]), oitStatus, Convert.ToString(reader[9]), otpStatus));
+
+                    result.Add(new appealProgram(Convert.ToInt32(reader[0]), Convert.ToString(reader[1]), Convert.ToString(reader[2]), Convert.ToString(reader[3]), Convert.ToString(reader[4]),
+                        Convert.ToString(reader[5]), oibStatus, Convert.ToString(reader[7]), oitStatus, otpExecutor, otpStatus));
 
             }
             reader.Close();
@@ -128,6 +135,12 @@ namespace SupportCenter
             appealProgramDataGrid.Columns[9].Header = "ИСПОЛНИТЕЛЬ ОТП";
             appealProgramDataGrid.Columns[10].Header = "ЭТАП ВЫПОЛНЕНИЯ";
             appealProgramDataGrid.Columns[0].Width = 35;
+        }
+
+        private void appealProgramView_Click(object sender, RoutedEventArgs e)
+        {
+            ViewAppealProgramForm viewAppealProgramForm = new ViewAppealProgramForm();
+            viewAppealProgramForm.ShowDialog();
         }
     }
 }

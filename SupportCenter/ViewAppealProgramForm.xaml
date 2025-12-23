@@ -5,8 +5,116 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SupportCenter"
         mc:Ignorable="d"
-        Title="ViewAppealProgramForm" Height="450" Width="800">
+        Title="ViewAppealProgramForm" Height="450" Width="907">
+    <Window.Resources>
+        <ResourceDictionary Source="/Styles/Style.xaml"></ResourceDictionary>
+    </Window.Resources>
     <Grid>
-        
+        <Image Source="/Image/Main.jpg" StretchDirection="UpOnly" Stretch="Fill"/>
+        <Grid Background="#EF3C3636" Opacity="1" >
+            <TextBlock HorizontalAlignment="Left" Margin="27,21,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Foreground="White" FontFamily="Yu Gothic UI Semibold" Text="Заявка на установку программы N">
+                <TextBlock.Effect>
+                    <DropShadowEffect/>
+                </TextBlock.Effect>
+            </TextBlock>
+            <Button x:Name="acceptRedactButton" Style="{StaticResource ButtonMenuStyle}" HorizontalAlignment="Left" Margin="27,368,0,0" VerticalAlignment="Top" Height="26" Width="397" Cursor="Hand">
+                <Button.Effect>
+                    <DropShadowEffect/>
+                </Button.Effect>
+                <TextBlock TextWrapping="Wrap" TextAlignment="Center" Text="Записать"/>
+            </Button>
+            <TextBox Style="{StaticResource TextBoxStyle}" HorizontalAlignment="Left" Margin="180,66,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="244" Height="24" FontSize="16" FontFamily="Yu Gothic UI Semibold">
+                <TextBox.Effect>
+                    <DropShadowEffect/>
+                </TextBox.Effect>
+            </TextBox>
+            <TextBlock HorizontalAlignment="Left" Margin="55,67,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Foreground="White" FontFamily="Yu Gothic UI Semibold" Text="Требуемое ПО:">
+                <TextBlock.Effect>
+                    <DropShadowEffect/>
+                </TextBlock.Effect>
+            </TextBlock>
+            <TextBlock HorizontalAlignment="Left" Margin="35,102,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Foreground="White" FontFamily="Yu Gothic UI Semibold" Text="Имя компьютера:">
+                <TextBlock.Effect>
+                    <DropShadowEffect/>
+                </TextBlock.Effect>
+            </TextBlock>
+            <TextBox Style="{StaticResource TextBoxStyle}" HorizontalAlignment="Left" Margin="180,101,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="244" Height="24" FontSize="16" FontFamily="Yu Gothic UI Semibold">
+                <TextBox.Effect>
+                    <DropShadowEffect/>
+                </TextBox.Effect>
+            </TextBox>
+            <TextBlock HorizontalAlignment="Left" Margin="95,138,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Foreground="White" FontFamily="Yu Gothic UI Semibold" Text="ИП адрес:">
+                <TextBlock.Effect>
+                    <DropShadowEffect/>
+                </TextBlock.Effect>
+            </TextBlock>
+            <TextBox Style="{StaticResource TextBoxStyle}" HorizontalAlignment="Left" Margin="180,137,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="244" Height="24" FontSize="16" FontFamily="Yu Gothic UI Semibold">
+                <TextBox.Effect>
+                    <DropShadowEffect/>
+                </TextBox.Effect>
+            </TextBox>
+            <TextBlock HorizontalAlignment="Left" Margin="81,175,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Foreground="White" FontFamily="Yu Gothic UI Semibold" Text="Инициатор:">
+                <TextBlock.Effect>
+                    <DropShadowEffect/>
+                </TextBlock.Effect>
+            </TextBlock>
+            <TextBox Style="{StaticResource TextBoxStyle}" HorizontalAlignment="Left" Margin="180,174,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="244" Height="24" FontSize="16" FontFamily="Yu Gothic UI Semibold">
+                <TextBox.Effect>
+                    <DropShadowEffect/>
+                </TextBox.Effect>
+            </TextBox>
+            <TextBox Style="{StaticResource TextBoxStyle}" HorizontalAlignment="Left" Margin="27,247,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="397" Height="82" FontSize="16" FontFamily="Yu Gothic UI Semibold">
+                <TextBox.Effect>
+                    <DropShadowEffect/>
+                </TextBox.Effect>
+            </TextBox>
+            <TextBlock HorizontalAlignment="Left" Margin="27,221,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Foreground="White" FontFamily="Yu Gothic UI Semibold" Text="Комментарий по заявке:">
+                <TextBlock.Effect>
+                    <DropShadowEffect/>
+                </TextBlock.Effect>
+            </TextBlock>
+            <TextBlock HorizontalAlignment="Left" Margin="454,21,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Foreground="White" FontFamily="Yu Gothic UI Semibold" Text="Согласования:">
+                <TextBlock.Effect>
+                    <DropShadowEffect/>
+                </TextBlock.Effect>
+            </TextBlock>
+            <ComboBox x:Name="roleUserComboBox" HorizontalAlignment="Left" Margin="454,113,0,0" VerticalAlignment="Top" Width="218" IsSynchronizedWithCurrentItem="False" Height="25" FontSize="14">
+                <ComboBox.Effect>
+                    <DropShadowEffect/>
+                </ComboBox.Effect>
+            </ComboBox>
+            <TextBlock HorizontalAlignment="Left" Margin="454,56,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Foreground="White" FontFamily="Yu Gothic UI Semibold" Text="Отдел информационной безопасности:" Width="436">
+                <TextBlock.Effect>
+                    <DropShadowEffect/>
+                </TextBlock.Effect>
+            </TextBlock>
+            <TextBlock HorizontalAlignment="Left" Margin="454,149,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Foreground="White" FontFamily="Yu Gothic UI Semibold" Text="Отдел информационных технологий:" Width="436" IsEnabled="False">
+                <TextBlock.Effect>
+                    <DropShadowEffect/>
+                </TextBlock.Effect>
+            </TextBlock>
+            <TextBlock HorizontalAlignment="Left" Margin="454,85,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Foreground="White" FontFamily="Yu Gothic UI Semibold" Text="Ерахтин Артем Максимович">
+                <TextBlock.Effect>
+                    <DropShadowEffect/>
+                </TextBlock.Effect>
+            </TextBlock>
+            <ComboBox x:Name="roleUserComboBox_Копировать" HorizontalAlignment="Left" Margin="454,200,0,0" VerticalAlignment="Top" Width="218" IsSynchronizedWithCurrentItem="False" Height="25" FontSize="14">
+                <ComboBox.Effect>
+                    <DropShadowEffect/>
+                </ComboBox.Effect>
+            </ComboBox>
+            <TextBlock HorizontalAlignment="Left" Margin="454,174,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Foreground="White" FontFamily="Yu Gothic UI Semibold" Text="Пасынков Сергей Андреевич">
+                <TextBlock.Effect>
+                    <DropShadowEffect/>
+                </TextBlock.Effect>
+            </TextBlock>
+            <TextBlock HorizontalAlignment="Left" Margin="454,247,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Foreground="White" FontFamily="Yu Gothic UI Semibold" Text="Исполнитель Отдела технической поддержки:">
+                <TextBlock.Effect>
+                    <DropShadowEffect/>
+                </TextBlock.Effect>
+            </TextBlock>
+        </Grid>
+
+
     </Grid>
 </Window>

@@ -87,14 +87,44 @@
                 <TabItem Header="Пользователи" Background="{x:Null}" BorderBrush="{x:Null}">
                     <Grid HorizontalAlignment="Center" Width="928" Height="567">
                         <DataGrid MinColumnWidth="10" IsReadOnly="True" ColumnWidth="*" x:Name="usersDataGrid" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,71,0,0" HorizontalAlignment="Center" Width="908" Height="518" VerticalAlignment="Top"/>
-                        <Button x:Name="redactUserButton" Style="{StaticResource ButtonMenuStyle}"  Cursor="Hand" Margin="10,44,0,0" Height="22" VerticalAlignment="Top" HorizontalAlignment="Left" Width="195" Click="redactUser_Click">
+                        <Button x:Name="redactUserButton" Style="{StaticResource ButtonMenuStyle}"  Cursor="Hand" Margin="10,44,0,0" Height="22" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96" Click="redactUser_Click">
                             <Button.Effect>
                                 <DropShadowEffect/>
                             </Button.Effect>
                             <Grid>
-                                <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="Редактировать учетную запись" VerticalAlignment="Center"/>
+                                <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="Редактировать" VerticalAlignment="Center"/>
                             </Grid>
                         </Button>
+                        <ComboBox x:Name="roleUserComboBox" HorizontalAlignment="Left" Margin="154,44,0,0" VerticalAlignment="Top" Width="145" IsSynchronizedWithCurrentItem="False" Height="22">
+                            <ComboBox.Effect>
+                                <DropShadowEffect/>
+                            </ComboBox.Effect>
+                        </ComboBox>
+                        <TextBlock HorizontalAlignment="Left" Margin="119,47,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="White" FontFamily="Yu Gothic UI Semibold" Text="Роль:">
+                            <TextBlock.Effect>
+                                <DropShadowEffect/>
+                            </TextBlock.Effect>
+                        </TextBlock>
+                        <TextBlock HorizontalAlignment="Left" Margin="312,47,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="White" FontFamily="Yu Gothic UI Semibold" Text="Активность:">
+                            <TextBlock.Effect>
+                                <DropShadowEffect/>
+                            </TextBlock.Effect>
+                        </TextBlock>
+                        <ComboBox x:Name="roleUserComboBox_Копировать1" HorizontalAlignment="Left" Margin="385,44,0,0" VerticalAlignment="Top" Width="166" IsSynchronizedWithCurrentItem="False" Height="22" FontSize="14">
+                            <ComboBox.Effect>
+                                <DropShadowEffect/>
+                            </ComboBox.Effect>
+                        </ComboBox>
+                        <TextBlock HorizontalAlignment="Left" Margin="562,47,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="White" FontFamily="Yu Gothic UI Semibold" Text="ФИО">
+                            <TextBlock.Effect>
+                                <DropShadowEffect/>
+                            </TextBlock.Effect>
+                        </TextBlock>
+                        <TextBox Style="{StaticResource TextBoxStyle}" HorizontalAlignment="Left" Margin="595,44,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="262" Height="22" FontSize="16" FontFamily="Yu Gothic UI Semibold">
+                            <TextBox.Effect>
+                                <DropShadowEffect/>
+                            </TextBox.Effect>
+                        </TextBox>
                     </Grid>
                 </TabItem>
                 <TabItem Header="Сетевые папки" Background="{x:Null}" BorderBrush="{x:Null}" Margin="-2,-2,-2,0">
