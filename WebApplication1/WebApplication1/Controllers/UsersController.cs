@@ -47,7 +47,7 @@ public class UsersController : ControllerBase
         return users;
 
     }
-    [HttpPut("update")]
+    [HttpPut("put")]
     public async Task<IActionResult> UpdateUser([FromBody] EditUserDto dto)
     {
         // Логика преобразования — 1 в 1 как в WPF

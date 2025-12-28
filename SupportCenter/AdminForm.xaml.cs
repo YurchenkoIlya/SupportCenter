@@ -56,15 +56,46 @@ namespace SupportCenter
             {
                 var api = new UsersApiClient();
                 var users = await api.GetUsersAsync();
-                usersDataGrid.ItemsSource = users;
+
+
+                var queryResult = users.AsQueryable();
+
                
-                usersDataGrid.Columns[0].Header = "ID";
-                usersDataGrid.Columns[1].Header = "ЛОГИН";
-                usersDataGrid.Columns[2].Header = "РОЛЬ";
-                usersDataGrid.Columns[3].Header = "ФИО";
-                usersDataGrid.Columns[4].Header = "СТАТУС УЧЕТНОЙ ЗАПИСИ";
-                usersDataGrid.Columns[0].Width = 50;
+                if (activityCheckBox.IsChecked == true)
+                    queryResult = queryResult.Where(u => u.activity == "Включена");
+                if (fioFilterTextbox.Text != "")
+                    queryResult = queryResult.Where(u =>
+                 (u.name != null && u.name.IndexOf(fioFilterTextbox.Text, StringComparison.OrdinalIgnoreCase) >= 0));
+                if (roleFilterComboBox.Text != "Все роли")
+                    queryResult = queryResult.Where(u => u.role == roleFilterComboBox.Text);
+             
+
+
+                usersDataGrid.ItemsSource = queryResult;
+
+                _ = Dispatcher.BeginInvoke(new Action(() =>
+                {
+                    
+                    if (usersDataGrid.Columns.Count >= 5)
+                    {
+
+                        usersDataGrid.Columns[0].Header = "ID";
+                        usersDataGrid.Columns[1].Header = "ЛОГИН";
+                        usersDataGrid.Columns[2].Header = "РОЛЬ";
+                        usersDataGrid.Columns[3].Header = "ФИО";
+                        usersDataGrid.Columns[4].Header = "СТАТУС УЧЕТНОЙ ЗАПИСИ";
+                        usersDataGrid.Columns[0].Width = 50;
+
+                    }
+                }), System.Windows.Threading.DispatcherPriority.Background);
+
+
+
+
+
             }
+
+
             catch (Exception ex)
             {
                 MessageBox.Show("Ошибка при получении данных: " + ex.Message);
@@ -120,35 +151,41 @@ namespace SupportCenter
 
         }
 
-        private void folderButton_Click(object sender, RoutedEventArgs e)
-        {
-            workTabControl.SelectedIndex = 1;
-        }
-
         private void foldersButton_Click(object sender, RoutedEventArgs e)
         {
-            dbConnect db_connect = new dbConnect();
-            DataTable table = new DataTable();
-            NpgsqlCommand command = new NpgsqlCommand
-                ("Select u.id,u.name_folder,o.user_name,u.way_folder " +
-                "from main.folders u " +
-                "LEFT JOIN main.users o " +
-                "ON u.responsible_user = o.user_id", db_connect.GetConnection());
-            db_connect.openConnection();
-            command.ExecuteNonQuery();
-            NpgsqlDataAdapter adapter = new NpgsqlDataAdapter(command);
-            NpgsqlDataReader reader = command.ExecuteReader();
-            List<folderResponsible> result = new List<folderResponsible>();
+            workTabControl.SelectedIndex = 1;
+            loadFolder();
+           
+          
 
-            while (reader.Read())
+        }
+        public async void loadFolder()
+        {
+
+            workTabControl.SelectedIndex = 1;
+            
+
+            try
             {
+                var api = new FolderApiGet();
+                var folder = await api.GetFolderAsync();
 
-                result.Add(new folderResponsible(Convert.ToInt32(reader[0]), Convert.ToString(reader[1]), Convert.ToString(reader[2]), Convert.ToString(reader[3])));
+                var queryResult = folder.AsQueryable();
+
+                if (nameFilterTextBox.Text != "")
+                    queryResult = queryResult.Where(u =>
+                 (u.nameFolder != null && u.nameFolder.IndexOf(nameFilterTextBox.Text, StringComparison.OrdinalIgnoreCase) >= 0));
+                if (responsibleFilterTextBox.Text != "")
+                    queryResult = queryResult.Where(u =>
+                 (u.responsibleUser != null && u.responsibleUser.IndexOf(responsibleFilterTextBox.Text, StringComparison.OrdinalIgnoreCase) >= 0));
+
+                folderDataGrid.ItemsSource = queryResult;
 
             }
-            reader.Close();
-            folderDataGrid.ItemsSource = result;
-          
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ошибка при получении данных: " + ex.Message);
+            }
 
         }
 
@@ -158,6 +195,7 @@ namespace SupportCenter
             folderDataGrid.Columns[1].Header = "НАИМЕНОВАНИЕ ПАПКИ";
             folderDataGrid.Columns[2].Header = "ОТВЕСТВЕННЫЙ ЗА ПАПКУ";
             folderDataGrid.Columns[3].Header = "ПУТЬ К ПАПКЕ";
+            folderDataGrid.Columns[4].Header = "ГРУППА ДОСТУПА AD";
             folderDataGrid.Columns[0].Width = 50;
         }
 
@@ -165,6 +203,7 @@ namespace SupportCenter
         {
             CreateFolderForm createFolderForm = new CreateFolderForm();
             createFolderForm.ShowDialog();
+            loadFolder();
         }
 
         private async void programButton_Click(object sender, RoutedEventArgs e)
@@ -247,7 +286,38 @@ namespace SupportCenter
         {
             CreateProgramForm createProgram = new CreateProgramForm();
             createProgram.ShowDialog();
+           
             
+        }
+
+        private void activityCheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            loadUserDataGrid();
+        }
+
+        private void activityCheckBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            loadUserDataGrid();
+        }
+
+        private void fioFilterTextbox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            loadUserDataGrid();
+        }
+
+        private void roleFilterComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            loadUserDataGrid();
+        }
+
+        private void nameFilterTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            loadFolder();
+        }
+
+        private void responsibleFilterTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            loadFolder();
         }
     }
 }

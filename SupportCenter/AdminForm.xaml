@@ -32,19 +32,15 @@
                         <Image Margin="10,8,187,8" Width="25" Height="25" Source="/Image/icons8-user-50.png" Stretch="Fill" Cursor=""/>
                     </Grid>
                 </Button>
-                <Button x:Name="folderButton" Style="{StaticResource ButtonMenuStyle}" Height="42"  Cursor="Hand" Margin="0,5,0,0" Click="folderButton_Click">
+
+                <Button x:Name="foldersButton" Style="{StaticResource ButtonMenuStyle}" Height="42"  Cursor="Hand" Click="foldersButton_Click" Margin="0,5,0,0">
                     <Button.Effect>
                         <DropShadowEffect/>
                     </Button.Effect>
-                    <Button x:Name="foldersButton" Style="{StaticResource ButtonMenuStyle}" Height="42"  Cursor="Hand" Click="foldersButton_Click">
-                        <Button.Effect>
-                            <DropShadowEffect/>
-                        </Button.Effect>
-                        <Grid Height="42" Width="222">
-                            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Сетевые папки" VerticalAlignment="Center" FontSize="16" Margin="45,0,0,0"/>
-                            <Image Margin="10,8,187,8" Width="25" Height="25" Source="/Image/icons8-folder-50.png" Stretch="Fill" Cursor=""/>
-                        </Grid>
-                    </Button>
+                    <Grid Height="42" Width="222">
+                        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Сетевые папки" VerticalAlignment="Center" FontSize="16" Margin="45,0,0,0"/>
+                        <Image Margin="10,8,187,8" Width="25" Height="25" Source="/Image/icons8-folder-50.png" Stretch="Fill" Cursor=""/>
+                    </Grid>
                 </Button>
                 <Button x:Name="programButton" Margin="0,5,0,0" Style="{StaticResource ButtonMenuStyle}" Height="42"  Cursor="Hand" Click="programButton_Click">
                     <Button.Effect>
@@ -95,57 +91,71 @@
                                 <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="Редактировать" VerticalAlignment="Center"/>
                             </Grid>
                         </Button>
-                        <ComboBox x:Name="roleUserComboBox" HorizontalAlignment="Left" Margin="154,44,0,0" VerticalAlignment="Top" Width="145" IsSynchronizedWithCurrentItem="False" Height="22">
+                        <ComboBox x:Name="roleFilterComboBox" HorizontalAlignment="Left" Margin="154,44,0,0" VerticalAlignment="Top" Width="145" IsSynchronizedWithCurrentItem="False" Height="22" SelectedIndex="0" SelectionChanged="roleFilterComboBox_SelectionChanged">
                             <ComboBox.Effect>
                                 <DropShadowEffect/>
                             </ComboBox.Effect>
+                            <ComboBoxItem>Все роли</ComboBoxItem>
+                            <ComboBoxItem>Пользователь</ComboBoxItem>
+                            <ComboBoxItem>Администратор</ComboBoxItem>
                         </ComboBox>
                         <TextBlock HorizontalAlignment="Left" Margin="119,47,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="White" FontFamily="Yu Gothic UI Semibold" Text="Роль:">
                             <TextBlock.Effect>
                                 <DropShadowEffect/>
                             </TextBlock.Effect>
                         </TextBlock>
-                        <TextBlock HorizontalAlignment="Left" Margin="312,47,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="White" FontFamily="Yu Gothic UI Semibold" Text="Активность:">
+                        <TextBlock HorizontalAlignment="Left" Margin="320,47,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="White" FontFamily="Yu Gothic UI Semibold" Text="ФИО:">
                             <TextBlock.Effect>
                                 <DropShadowEffect/>
                             </TextBlock.Effect>
                         </TextBlock>
-                        <ComboBox x:Name="roleUserComboBox_Копировать1" HorizontalAlignment="Left" Margin="385,44,0,0" VerticalAlignment="Top" Width="166" IsSynchronizedWithCurrentItem="False" Height="22" FontSize="14">
-                            <ComboBox.Effect>
-                                <DropShadowEffect/>
-                            </ComboBox.Effect>
-                        </ComboBox>
-                        <TextBlock HorizontalAlignment="Left" Margin="562,47,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="White" FontFamily="Yu Gothic UI Semibold" Text="ФИО">
-                            <TextBlock.Effect>
-                                <DropShadowEffect/>
-                            </TextBlock.Effect>
-                        </TextBlock>
-                        <TextBox Style="{StaticResource TextBoxStyle}" HorizontalAlignment="Left" Margin="595,44,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="262" Height="22" FontSize="16" FontFamily="Yu Gothic UI Semibold">
+                        <TextBox x:Name="fioFilterTextbox" Style="{StaticResource TextBoxStyle}" HorizontalAlignment="Left" Margin="353,44,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="262" Height="22" FontSize="14" FontFamily="Yu Gothic UI Semibold" TextChanged="fioFilterTextbox_TextChanged">
                             <TextBox.Effect>
                                 <DropShadowEffect/>
                             </TextBox.Effect>
                         </TextBox>
+                        <CheckBox x:Name="activityCheckBox" Content="Только включенные учетные записи" HorizontalAlignment="Left" Margin="632,48,0,0" VerticalAlignment="Top" FontFamily="Yu Gothic UI Semibold" Foreground="White" Checked="activityCheckBox_Checked" Unchecked="activityCheckBox_Unchecked"/>
                     </Grid>
                 </TabItem>
                 <TabItem Header="Сетевые папки" Background="{x:Null}" BorderBrush="{x:Null}" Margin="-2,-2,-2,0">
                     <Grid HorizontalAlignment="Center" Width="928" Height="567">
                         <DataGrid MinColumnWidth="10" IsReadOnly="True" ColumnWidth="*" x:Name="folderDataGrid" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,71,0,0" HorizontalAlignment="Center" Width="908" Height="518" VerticalAlignment="Top" AutoGeneratedColumns="folderDataGrid_AutoGeneratedColumns"/>
-                        <Button x:Name="createFolderButton" Style="{StaticResource ButtonMenuStyle}"  Cursor="Hand" Margin="10,44,0,0" Height="22" VerticalAlignment="Top" HorizontalAlignment="Left" Width="151" Click="createFolderButton_Click">
+                        <Button x:Name="createFolderButton" Style="{StaticResource ButtonMenuStyle}"  Cursor="Hand" Margin="10,44,0,0" Height="22" VerticalAlignment="Top" HorizontalAlignment="Left" Width="70" Click="createFolderButton_Click">
                             <Button.Effect>
                                 <DropShadowEffect/>
                             </Button.Effect>
                             <Grid>
-                                <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="Добавить сетевую папку" VerticalAlignment="Center"/>
+                                <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="Создать" VerticalAlignment="Center"/>
                             </Grid>
                         </Button>
-                        <Button x:Name="redactUserButton1_Копировать" Style="{StaticResource ButtonMenuStyle}"  Cursor="Hand" Margin="166,44,0,0" Height="22" VerticalAlignment="Top" HorizontalAlignment="Left" Width="183" Click="redactUser_Click">
+                        <Button x:Name="redactUserButton1_Копировать" Style="{StaticResource ButtonMenuStyle}"  Cursor="Hand" Margin="85,44,0,0" Height="22" VerticalAlignment="Top" HorizontalAlignment="Left" Width="106" Click="redactUser_Click">
                             <Button.Effect>
                                 <DropShadowEffect/>
                             </Button.Effect>
                             <Grid>
-                                <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="Редактировать сетевую папку" VerticalAlignment="Center"/>
+                                <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="Редактировать" VerticalAlignment="Center"/>
                             </Grid>
                         </Button>
+                        <TextBlock HorizontalAlignment="Left" Margin="203,47,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="White" FontFamily="Yu Gothic UI Semibold" Text="Наименование:">
+                            <TextBlock.Effect>
+                                <DropShadowEffect/>
+                            </TextBlock.Effect>
+                        </TextBlock>
+                        <TextBox x:Name="nameFilterTextBox" Style="{StaticResource TextBoxStyle}" HorizontalAlignment="Left" Margin="296,44,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="187" Height="22" FontSize="14" FontFamily="Yu Gothic UI Semibold" TextChanged="nameFilterTextBox_TextChanged">
+                            <TextBox.Effect>
+                                <DropShadowEffect/>
+                            </TextBox.Effect>
+                        </TextBox>
+                        <TextBlock HorizontalAlignment="Left" Margin="490,47,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="White" FontFamily="Yu Gothic UI Semibold" Text="Ответственный:">
+                            <TextBlock.Effect>
+                                <DropShadowEffect/>
+                            </TextBlock.Effect>
+                        </TextBlock>
+                        <TextBox x:Name="responsibleFilterTextBox" Style="{StaticResource TextBoxStyle}" HorizontalAlignment="Left" Margin="585,44,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="226" Height="22" FontSize="14" FontFamily="Yu Gothic UI Semibold" TextChanged="responsibleFilterTextBox_TextChanged">
+                            <TextBox.Effect>
+                                <DropShadowEffect/>
+                            </TextBox.Effect>
+                        </TextBox>
                     </Grid>
                 </TabItem>
                 <TabItem Header="Программы" Background="{x:Null}" BorderBrush="{x:Null}" Margin="-2,-2,-2,0">

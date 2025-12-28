@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SupportCenter.Classes
 {
-    class programResponsible
+    public class programResponsible
     {
         public programResponsible(int id_program, string name_program, string responsible_program, string way_program)
         {

@@ -36,7 +36,7 @@ namespace SupportCenter
 
 
             Application.Current.MainWindow = this;
-            Application.Current.MainWindow.Height = 170;
+            Application.Current.MainWindow.Height = 200;
 
         }
 
@@ -44,6 +44,7 @@ namespace SupportCenter
         {
             if (string.IsNullOrEmpty(nameFolder.Text)) MessageBox.Show("Наименование папки не заполнено.");
             else if(string.IsNullOrEmpty(wayFolder.Text)) MessageBox.Show("Путь к папке не заполнен.");
+            else if (string.IsNullOrEmpty(accessGroup.Text)) MessageBox.Show("Не указана группа доступа к папке.");
             else if (string.IsNullOrEmpty(responsibleTextBox.Text)) MessageBox.Show("Не выбран ответственный за папку.");
             else
             {
@@ -60,14 +61,16 @@ namespace SupportCenter
                 dbConnect db_connect = new dbConnect();
                 db_connect.openConnection();
                 NpgsqlDataAdapter adapter = new NpgsqlDataAdapter();
-                NpgsqlCommand command = new NpgsqlCommand("INSERT INTO main.folders (name_folder,responsible_user,way_folder) VALUES (@nameFolder,@responsible_user,@way_folder)", db_connect.GetConnection());
+                NpgsqlCommand command = new NpgsqlCommand("INSERT INTO main.folders (name_folder,responsible_user,way_folder,access_group) VALUES (@nameFolder,@responsible_user,@way_folder,@access_group)", db_connect.GetConnection());
                 command.Parameters.Add("@nameFolder", NpgsqlDbType.Text).Value = nameFolder.Text;
                 command.Parameters.Add("@responsible_user", NpgsqlDbType.Bigint).Value = path.Id;
                 command.Parameters.Add("@way_folder", NpgsqlDbType.Text).Value = wayFolder.Text;
+                command.Parameters.Add("@access_group", NpgsqlDbType.Text).Value = accessGroup.Text;
                 adapter.SelectCommand = command;
                 command.ExecuteReader();
                 db_connect.closeConnection();
                 MessageBox.Show("ПАПКА СОЗДАНА");
+                this.Close();
           
             }
         }
@@ -88,7 +91,7 @@ namespace SupportCenter
                 selectResponsibleDataGrid.Columns[0].Width = 50;
 
                 Application.Current.MainWindow = this;
-                Application.Current.MainWindow.Height = 460;
+                Application.Current.MainWindow.Height = 490;
             }
             catch (Exception ex)
             {
@@ -99,7 +102,7 @@ namespace SupportCenter
         private async void selectResponsibleButton_Click(object sender, RoutedEventArgs e)
         {
             Application.Current.MainWindow = this;
-            Application.Current.MainWindow.Height = 170;
+            Application.Current.MainWindow.Height = 200;
 
             RedactUserForm redactForm = new RedactUserForm();
             Users? path = selectResponsibleDataGrid.SelectedItem as Users;
