@@ -37,12 +37,6 @@
                     </Button.Effect>
                     <TextBlock TextWrapping="Wrap" TextAlignment="Center" Text="Заявки на настройку принтера"/>
                 </Button>
-                <Button Style="{StaticResource ButtonMenuStyle}" Margin="5,0,0,0" Height="50" Width="191" Cursor="Hand">
-                    <Button.Effect>
-                        <DropShadowEffect/>
-                    </Button.Effect>
-                    <TextBlock TextWrapping="Wrap" TextAlignment="Center" Text="Заявки на настройку принтера"/>
-                </Button>
             </StackPanel>
             <TabControl x:Name="workAreaControl" Margin="0,55,0,0" HorizontalAlignment="Center" Width="1290" BorderBrush="{x:Null}" Background="{x:Null}">
                 <TabItem Header="ПО">

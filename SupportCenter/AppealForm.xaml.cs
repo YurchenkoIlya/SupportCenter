@@ -79,18 +79,27 @@ namespace SupportCenter
                 string otpStatus = null;
                 string otpExecutor = null;
 
-                if (Convert.ToString(reader[6]) == "0")
+               
+                switch (Convert.ToString(reader[6]))
                 {
-                    oibStatus = " Не согласовано";
+                    case "0": oibStatus = "Не согласовано"; break;
+                    case "1": oibStatus = "Согласовано"; break;
+                    case "2": oibStatus = "Отказано"; break;
+
                 }
-                if (Convert.ToString(reader[8]) == "0")
+                switch (Convert.ToString(reader[8]))
                 {
-                    oitStatus = "Не согласовано";
+                    case "0": oitStatus = "Не согласовано"; break;
+                    case "1": oitStatus = "Согласовано"; break;
+                    case "2": oitStatus = "Отказано"; break;
+
                 }
+               
                 if (Convert.ToString(reader[10]) == "0")
                 {
                     otpStatus = "Не в работе";
                 }
+                
                 if (Convert.ToString(reader[9]) == "")
                 {
                     otpExecutor = "Нет исполнителя";
@@ -140,7 +149,40 @@ namespace SupportCenter
         private void appealProgramView_Click(object sender, RoutedEventArgs e)
         {
             ViewAppealProgramForm viewAppealProgramForm = new ViewAppealProgramForm();
+            
+
+
+            appealProgram? path = appealProgramDataGrid.SelectedItem as appealProgram;
+            viewAppealProgramForm.idAppeal.Text = Convert.ToString(path.idAppeal);
+            viewAppealProgramForm.nameProgram.Text = Convert.ToString(path.idProgram);
+            viewAppealProgramForm.ipPc.Text = Convert.ToString(path.ipPc);
+            viewAppealProgramForm.namePc.Text = Convert.ToString(path.pcName);
+            viewAppealProgramForm.applicantProgram.Text = Convert.ToString(path.applicant);         
+            viewAppealProgramForm.executorProgram.Text = Convert.ToString(path.otpExecutor);
+
+            switch (path.oibStatusResponsible){
+
+
+                case "Не согласовано": viewAppealProgramForm.oibStatusResponsble.SelectedIndex = 0; break;
+                case "Согласовано": viewAppealProgramForm.oibStatusResponsble.SelectedIndex = 1; break;
+                case "Отказано": viewAppealProgramForm.oibStatusResponsble.SelectedIndex = 2; break;
+
+            }
+            switch (path.oitStatusResponsible)
+            {
+
+
+                case "Не согласовано": viewAppealProgramForm.oitStatusResponsble.SelectedIndex = 0; break;
+                case "Согласовано": viewAppealProgramForm.oitStatusResponsble.SelectedIndex = 1; break;
+                case "Отказано": viewAppealProgramForm.oitStatusResponsble.SelectedIndex = 2; break;
+
+            }
+
+
+
             viewAppealProgramForm.ShowDialog();
+
+
         }
     }
 }

@@ -12,7 +12,7 @@
     <Grid>
         <Image Source="/Image/Main.jpg" StretchDirection="UpOnly" Stretch="Fill"/>
         <Grid Background="#EF3C3636" Opacity="1" >
-            <TextBlock HorizontalAlignment="Left" Margin="27,21,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Foreground="White" FontFamily="Yu Gothic UI Semibold" Text="Заявка на установку программы N">
+            <TextBlock HorizontalAlignment="Left" Margin="27,21,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Foreground="White" FontFamily="Yu Gothic UI Semibold" Text="Заявка на установку программы: №">
                 <TextBlock.Effect>
                     <DropShadowEffect/>
                 </TextBlock.Effect>
@@ -23,7 +23,7 @@
                 </Button.Effect>
                 <TextBlock TextWrapping="Wrap" TextAlignment="Center" Text="Записать"/>
             </Button>
-            <TextBox Style="{StaticResource TextBoxStyle}" HorizontalAlignment="Left" Margin="180,66,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="244" Height="24" FontSize="16" FontFamily="Yu Gothic UI Semibold">
+            <TextBox x:Name="nameProgram" Style="{StaticResource TextBoxStyle}" HorizontalAlignment="Left" Margin="180,66,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="244" Height="24" FontSize="16" FontFamily="Yu Gothic UI Semibold">
                 <TextBox.Effect>
                     <DropShadowEffect/>
                 </TextBox.Effect>
@@ -38,7 +38,7 @@
                     <DropShadowEffect/>
                 </TextBlock.Effect>
             </TextBlock>
-            <TextBox Style="{StaticResource TextBoxStyle}" HorizontalAlignment="Left" Margin="180,101,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="244" Height="24" FontSize="16" FontFamily="Yu Gothic UI Semibold">
+            <TextBox x:Name="namePc" Style="{StaticResource TextBoxStyle}" HorizontalAlignment="Left" Margin="180,101,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="244" Height="24" FontSize="16" FontFamily="Yu Gothic UI Semibold">
                 <TextBox.Effect>
                     <DropShadowEffect/>
                 </TextBox.Effect>
@@ -48,7 +48,7 @@
                     <DropShadowEffect/>
                 </TextBlock.Effect>
             </TextBlock>
-            <TextBox Style="{StaticResource TextBoxStyle}" HorizontalAlignment="Left" Margin="180,137,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="244" Height="24" FontSize="16" FontFamily="Yu Gothic UI Semibold">
+            <TextBox x:Name="ipPc" Style="{StaticResource TextBoxStyle}" HorizontalAlignment="Left" Margin="180,137,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="244" Height="24" FontSize="16" FontFamily="Yu Gothic UI Semibold">
                 <TextBox.Effect>
                     <DropShadowEffect/>
                 </TextBox.Effect>
@@ -58,7 +58,7 @@
                     <DropShadowEffect/>
                 </TextBlock.Effect>
             </TextBlock>
-            <TextBox Style="{StaticResource TextBoxStyle}" HorizontalAlignment="Left" Margin="180,174,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="244" Height="24" FontSize="16" FontFamily="Yu Gothic UI Semibold">
+            <TextBox x:Name="applicantProgram" Style="{StaticResource TextBoxStyle}" HorizontalAlignment="Left" Margin="180,174,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="244" Height="24" FontSize="16" FontFamily="Yu Gothic UI Semibold">
                 <TextBox.Effect>
                     <DropShadowEffect/>
                 </TextBox.Effect>
@@ -78,10 +78,13 @@
                     <DropShadowEffect/>
                 </TextBlock.Effect>
             </TextBlock>
-            <ComboBox x:Name="roleUserComboBox" HorizontalAlignment="Left" Margin="454,113,0,0" VerticalAlignment="Top" Width="218" IsSynchronizedWithCurrentItem="False" Height="25" FontSize="14">
+            <ComboBox x:Name="oibStatusResponsble" HorizontalAlignment="Left" Margin="454,113,0,0" VerticalAlignment="Top" Width="218" IsSynchronizedWithCurrentItem="False" Height="25" FontSize="14" SelectedIndex="0">
                 <ComboBox.Effect>
                     <DropShadowEffect/>
                 </ComboBox.Effect>
+                <ComboBoxItem>Не согласовано</ComboBoxItem>
+                <ComboBoxItem>Согласовано</ComboBoxItem>
+                <ComboBoxItem>Отказано</ComboBoxItem>
             </ComboBox>
             <TextBlock HorizontalAlignment="Left" Margin="454,56,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Foreground="White" FontFamily="Yu Gothic UI Semibold" Text="Отдел информационной безопасности:" Width="436">
                 <TextBlock.Effect>
@@ -93,17 +96,20 @@
                     <DropShadowEffect/>
                 </TextBlock.Effect>
             </TextBlock>
-            <TextBlock HorizontalAlignment="Left" Margin="454,85,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Foreground="White" FontFamily="Yu Gothic UI Semibold" Text="Ерахтин Артем Максимович">
+            <TextBlock x:Name="oibResponsible" HorizontalAlignment="Left" Margin="454,85,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Foreground="White" FontFamily="Yu Gothic UI Semibold" Text="Ерахтин Артем Максимович">
                 <TextBlock.Effect>
                     <DropShadowEffect/>
                 </TextBlock.Effect>
             </TextBlock>
-            <ComboBox x:Name="roleUserComboBox_Копировать" HorizontalAlignment="Left" Margin="454,200,0,0" VerticalAlignment="Top" Width="218" IsSynchronizedWithCurrentItem="False" Height="25" FontSize="14">
+            <ComboBox x:Name="oitStatusResponsble" HorizontalAlignment="Left" Margin="454,200,0,0" VerticalAlignment="Top" Width="218" IsSynchronizedWithCurrentItem="False" Height="25" FontSize="14" SelectedIndex="0">
                 <ComboBox.Effect>
                     <DropShadowEffect/>
                 </ComboBox.Effect>
+                <ComboBoxItem>Не согласовано</ComboBoxItem>
+                <ComboBoxItem>Согласовано</ComboBoxItem>
+                <ComboBoxItem>Отказано</ComboBoxItem>
             </ComboBox>
-            <TextBlock HorizontalAlignment="Left" Margin="454,174,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Foreground="White" FontFamily="Yu Gothic UI Semibold" Text="Пасынков Сергей Андреевич">
+            <TextBlock x:Name="oitResponsible" HorizontalAlignment="Left" Margin="454,174,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Foreground="White" FontFamily="Yu Gothic UI Semibold" Text="Пасынков Сергей Андреевич">
                 <TextBlock.Effect>
                     <DropShadowEffect/>
                 </TextBlock.Effect>
@@ -113,6 +119,28 @@
                     <DropShadowEffect/>
                 </TextBlock.Effect>
             </TextBlock>
+            <TextBlock x:Name="idAppeal" HorizontalAlignment="Left" Margin="304,21,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Foreground="White" FontFamily="Yu Gothic UI Semibold" Text="456123">
+                <TextBlock.Effect>
+                    <DropShadowEffect/>
+                </TextBlock.Effect>
+            </TextBlock>
+            <TextBlock x:Name="executorProgram" HorizontalAlignment="Left" Margin="454,277,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Foreground="White" FontFamily="Yu Gothic UI Semibold" Text="Комментарий по заявке:">
+                <TextBlock.Effect>
+                    <DropShadowEffect/>
+                </TextBlock.Effect>
+            </TextBlock>
+            <Button x:Name="acceptRedactButton_Копировать" Style="{StaticResource ButtonMenuStyle}" HorizontalAlignment="Left" Margin="677,113,0,0" VerticalAlignment="Top" Height="25" Width="121" Cursor="Hand">
+                <Button.Effect>
+                    <DropShadowEffect/>
+                </Button.Effect>
+                <TextBlock TextWrapping="Wrap" TextAlignment="Center" Text="Сохранить"/>
+            </Button>
+            <Button x:Name="acceptRedactButton_Копировать1" Style="{StaticResource ButtonMenuStyle}" HorizontalAlignment="Left" Margin="677,200,0,0" VerticalAlignment="Top" Height="25" Width="121" Cursor="Hand">
+                <Button.Effect>
+                    <DropShadowEffect/>
+                </Button.Effect>
+                <TextBlock TextWrapping="Wrap" TextAlignment="Center" Text="Сохранить"/>
+            </Button>
         </Grid>
 
 
