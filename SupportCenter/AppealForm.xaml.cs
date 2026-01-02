@@ -177,6 +177,11 @@ namespace SupportCenter
                 case "Отказано": viewAppealProgramForm.oitStatusResponsble.SelectedIndex = 2; break;
 
             }
+            if (path.otpExecutor != "Нет исполнителя") viewAppealProgramForm.executorProgram.Text = path.otpExecutor;
+
+
+
+
 
 
 

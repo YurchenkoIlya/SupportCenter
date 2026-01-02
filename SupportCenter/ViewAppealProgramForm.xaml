@@ -141,6 +141,20 @@
                 </Button.Effect>
                 <TextBlock TextWrapping="Wrap" TextAlignment="Center" Text="Сохранить"/>
             </Button>
+            <ComboBox x:Name="oitStatusResponsble_Копировать" HorizontalAlignment="Left" Margin="454,305,0,0" VerticalAlignment="Top" Width="218" IsSynchronizedWithCurrentItem="False" Height="25" FontSize="14" SelectedIndex="0">
+                <ComboBox.Effect>
+                    <DropShadowEffect/>
+                </ComboBox.Effect>
+                <ComboBoxItem Content="Не в работе"/>
+                <ComboBoxItem Content="В работе"/>
+                <ComboBoxItem Content="Отменено"/>
+            </ComboBox>
+            <Button x:Name="acceptRedactButton_Копировать2" Style="{StaticResource ButtonMenuStyle}" HorizontalAlignment="Left" Margin="677,306,0,0" VerticalAlignment="Top" Height="25" Width="121" Cursor="Hand">
+                <Button.Effect>
+                    <DropShadowEffect/>
+                </Button.Effect>
+                <TextBlock TextWrapping="Wrap" TextAlignment="Center" Text="Сохранить"/>
+            </Button>
         </Grid>
 
 
