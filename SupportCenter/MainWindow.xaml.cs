@@ -98,6 +98,19 @@ namespace SupportCenter
 
             }
 
+            sessionWrite();
+
+
+
+
+        }
+        public void sessionWrite()
+        {
+            
+            Session.CurrentUserLogin = userNameAdTextBlock.Text;
+            Session.CurrentUserName = nameAdTextBlock.Text;
+            Session.CurrentIp = ipAdressTextBlock.Text;
+            Session.CurrentPcName = namePcTextBlock.Text;
 
 
 
@@ -255,6 +268,19 @@ namespace SupportCenter
         {
             Clipboard.SetData(DataFormats.Text, nameAdTextBlock.Text);
             MessageBox.Show("Скопировано");
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show(
+             $"Логин: {Session.CurrentUserLogin}\n" +
+             $"Имя: {Session.CurrentUserName}\n" +
+             $"IP-адрес: {Session.CurrentIp}\n" +
+             $"Имя ПК: {Session.CurrentPcName}",
+             "Данные текущей сессии",
+    MessageBoxButton.OK,
+    MessageBoxImage.Information
+);
         }
     }
 }

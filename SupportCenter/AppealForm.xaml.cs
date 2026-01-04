@@ -148,44 +148,68 @@ namespace SupportCenter
 
         private void appealProgramView_Click(object sender, RoutedEventArgs e)
         {
-            ViewAppealProgramForm viewAppealProgramForm = new ViewAppealProgramForm();
+            
             
 
 
             appealProgram? path = appealProgramDataGrid.SelectedItem as appealProgram;
-            viewAppealProgramForm.idAppeal.Text = Convert.ToString(path.idAppeal);
-            viewAppealProgramForm.nameProgram.Text = Convert.ToString(path.idProgram);
-            viewAppealProgramForm.ipPc.Text = Convert.ToString(path.ipPc);
-            viewAppealProgramForm.namePc.Text = Convert.ToString(path.pcName);
-            viewAppealProgramForm.applicantProgram.Text = Convert.ToString(path.applicant);         
-            viewAppealProgramForm.executorProgram.Text = Convert.ToString(path.otpExecutor);
-
-            switch (path.oibStatusResponsible){
-
-
-                case "Не согласовано": viewAppealProgramForm.oibStatusResponsble.SelectedIndex = 0; break;
-                case "Согласовано": viewAppealProgramForm.oibStatusResponsble.SelectedIndex = 1; break;
-                case "Отказано": viewAppealProgramForm.oibStatusResponsble.SelectedIndex = 2; break;
-
-            }
-            switch (path.oitStatusResponsible)
+            if (path != null)
             {
+                ViewAppealProgramForm viewAppealProgramForm = new ViewAppealProgramForm();
 
 
-                case "Не согласовано": viewAppealProgramForm.oitStatusResponsble.SelectedIndex = 0; break;
-                case "Согласовано": viewAppealProgramForm.oitStatusResponsble.SelectedIndex = 1; break;
-                case "Отказано": viewAppealProgramForm.oitStatusResponsble.SelectedIndex = 2; break;
+                viewAppealProgramForm.idAppeal.Text = Convert.ToString(path.idAppeal);
+                viewAppealProgramForm.nameProgram.Text = Convert.ToString(path.idProgram);
+                viewAppealProgramForm.ipPc.Text = Convert.ToString(path.ipPc);
+                viewAppealProgramForm.namePc.Text = Convert.ToString(path.pcName);
+                viewAppealProgramForm.applicantProgram.Text = Convert.ToString(path.applicant);
+                viewAppealProgramForm.executorProgram.Text = Convert.ToString(path.otpExecutor);
 
+                switch (path.oibStatusResponsible)
+                {
+
+
+                    case "Не согласовано": viewAppealProgramForm.oibStatusResponsble.SelectedIndex = 0; break;
+                    case "Согласовано": viewAppealProgramForm.oibStatusResponsble.SelectedIndex = 1; break;
+                    case "Отказано": viewAppealProgramForm.oibStatusResponsble.SelectedIndex = 2; break;
+
+                }
+                switch (path.oitStatusResponsible)
+                {
+
+
+                    case "Не согласовано": viewAppealProgramForm.oitStatusResponsble.SelectedIndex = 0; break;
+                    case "Согласовано": viewAppealProgramForm.oitStatusResponsble.SelectedIndex = 1; break;
+                    case "Отказано": viewAppealProgramForm.oitStatusResponsble.SelectedIndex = 2; break;
+
+                }
+                if (path.otpExecutor != "Нет исполнителя") viewAppealProgramForm.executorProgram.Text = path.otpExecutor;
+
+                if (Session.CurrentUserName != viewAppealProgramForm.oitResponsible.Text)
+                {
+                    viewAppealProgramForm.oitStatusResponsble.IsEnabled = false;
+                    viewAppealProgramForm.acceptOitResponsible.Visibility = Visibility.Hidden;
+                }
+                if (Session.CurrentUserName != viewAppealProgramForm.oibResponsible.Text)
+                {
+                    viewAppealProgramForm.oibStatusResponsble.IsEnabled = false;
+                    viewAppealProgramForm.acceptOibResponsible.Visibility = Visibility.Hidden;
+                }
+                if (Session.CurrentUserName != viewAppealProgramForm.executorProgram.Text)
+                {
+                    viewAppealProgramForm.otpStatusResponsble.IsEnabled = false;
+                    viewAppealProgramForm.acceptOtpResponsible.Visibility = Visibility.Hidden;
+                }
+
+                viewAppealProgramForm.ShowDialog();
             }
-            if (path.otpExecutor != "Нет исполнителя") viewAppealProgramForm.executorProgram.Text = path.otpExecutor;
+            else
+            {
+                MessageBox.Show("Выберите обращение из списка");
+            }
 
 
-
-
-
-
-
-            viewAppealProgramForm.ShowDialog();
+                
 
 
         }
