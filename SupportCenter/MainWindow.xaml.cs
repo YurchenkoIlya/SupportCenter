@@ -112,6 +112,19 @@ namespace SupportCenter
             Session.CurrentIp = ipAdressTextBlock.Text;
             Session.CurrentPcName = namePcTextBlock.Text;
 
+        /*    Session.CurrentUserName = "Ерахтин Артем Максимович";
+            Session.CurrentUserName = "Пасынков Сергей Андреевич";*/
+
+            dbConnect db_connect = new dbConnect();
+            db_connect.openConnection();
+            DataTable table = new DataTable();
+            NpgsqlDataAdapter adapter = new NpgsqlDataAdapter();
+            NpgsqlCommand command = new NpgsqlCommand("Select user_role from main.users where login_user= @loginUser ", db_connect.GetConnection());
+            command.Parameters.Add("@loginUser", NpgsqlDbType.Text).Value = Session.CurrentUserLogin;
+            
+            var role = command.ExecuteScalar();
+            Session.Role = Convert.ToInt32(role);
+
 
 
         }
@@ -272,11 +285,16 @@ namespace SupportCenter
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            string role = null;
+
+            if (Session.Role == 1) role = "Администратор";
+            else role = "Пользователь";
             MessageBox.Show(
              $"Логин: {Session.CurrentUserLogin}\n" +
              $"Имя: {Session.CurrentUserName}\n" +
              $"IP-адрес: {Session.CurrentIp}\n" +
-             $"Имя ПК: {Session.CurrentPcName}",
+             $"Имя ПК: {Session.CurrentPcName}\n"+
+             $"Роль: {role}\n",
              "Данные текущей сессии",
     MessageBoxButton.OK,
     MessageBoxImage.Information

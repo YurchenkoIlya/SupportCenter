@@ -34,10 +34,6 @@ namespace SupportCenter
             this.Close();
         }
 
-        private void buttonProgram_Click(object sender, RoutedEventArgs e)
-        {
-            workAreaControl.SelectedIndex = 0;
-        }
 
         private void buttonFolder_Click(object sender, RoutedEventArgs e)
         {
@@ -94,11 +90,20 @@ namespace SupportCenter
                     case "2": oitStatus = "Отказано"; break;
 
                 }
-               
-                if (Convert.ToString(reader[10]) == "0")
+                switch (Convert.ToString(reader[10]))
+                {
+                    case "0": otpStatus = "Не в работе"; break;
+                    case "1": otpStatus = "В работе"; break;
+                    case "2": otpStatus = "Выполнено"; break;
+                    case "3": otpStatus = "Отменено"; break;
+
+                }
+
+
+           /*     if (Convert.ToString(reader[10]) == "0")
                 {
                     otpStatus = "Не в работе";
-                }
+                }*/
                 
                 if (Convert.ToString(reader[9]) == "")
                 {
@@ -127,6 +132,7 @@ namespace SupportCenter
 
         private void appealProgramShow_Click(object sender, RoutedEventArgs e)
         {
+            workAreaControl.SelectedIndex = 0;
             loadAppealProgram();
         }
 
@@ -184,6 +190,18 @@ namespace SupportCenter
 
                 }
                 if (path.otpExecutor != "Нет исполнителя") viewAppealProgramForm.executorProgram.Text = path.otpExecutor;
+               /* switch (path.otpExecutor)
+                {
+
+
+                    case "": viewAppealProgramForm.oitStatusResponsble.SelectedIndex = 0; break;
+                    case "В ра": viewAppealProgramForm.oitStatusResponsble.SelectedIndex = 1; break;
+                    case "Отказано": viewAppealProgramForm.oitStatusResponsble.SelectedIndex = 2; break;
+
+                }*/
+
+
+
 
                 if (Session.CurrentUserName != viewAppealProgramForm.oitResponsible.Text)
                 {
@@ -195,11 +213,14 @@ namespace SupportCenter
                     viewAppealProgramForm.oibStatusResponsble.IsEnabled = false;
                     viewAppealProgramForm.acceptOibResponsible.Visibility = Visibility.Hidden;
                 }
-                if (Session.CurrentUserName != viewAppealProgramForm.executorProgram.Text)
+                if (Session.CurrentUserName != viewAppealProgramForm.executorProgram.Text && viewAppealProgramForm.oibStatusResponsble.SelectedIndex != 1 && viewAppealProgramForm.oitStatusResponsble.SelectedIndex != 1)
+
                 {
                     viewAppealProgramForm.otpStatusResponsble.IsEnabled = false;
                     viewAppealProgramForm.acceptOtpResponsible.Visibility = Visibility.Hidden;
+                    
                 }
+                
 
                 viewAppealProgramForm.ShowDialog();
             }
@@ -212,6 +233,11 @@ namespace SupportCenter
                 
 
 
+        }
+
+        private void buttonPrinter_Click(object sender, RoutedEventArgs e)
+        {
+            workAreaControl.SelectedIndex = 2;
         }
     }
 }

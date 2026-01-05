@@ -81,7 +81,7 @@
                     <DropShadowEffect/>
                 </TextBlock.Effect>
             </TextBlock>
-            <TabControl x:Name="menuAppealProgram" Margin="454,50,159,46" Background="{x:Null}" BorderBrush="{x:Null}">
+            <TabControl x:Name="menuAppealProgram" Margin="454,50,159,47" Background="{x:Null}" BorderBrush="{x:Null}">
                 <TabControl.Effect>
                     <DropShadowEffect/>
                 </TabControl.Effect>
@@ -115,13 +115,13 @@
                                 <DropShadowEffect/>
                             </TextBlock.Effect>
                         </TextBlock>
-                        <Button x:Name="acceptOibResponsible" Style="{StaticResource ButtonMenuStyle}" HorizontalAlignment="Left" Margin="241,72,0,0" VerticalAlignment="Top" Height="25" Width="121" Cursor="Hand">
+                        <Button x:Name="acceptOibResponsible" Style="{StaticResource ButtonMenuStyle}" HorizontalAlignment="Left" Margin="241,72,0,0" VerticalAlignment="Top" Height="25" Width="121" Cursor="Hand" Click="acceptOibResponsible_Click">
                             <Button.Effect>
                                 <DropShadowEffect/>
                             </Button.Effect>
                             <TextBlock TextWrapping="Wrap" TextAlignment="Center" Text="Сохранить"/>
                         </Button>
-                        <Button x:Name="acceptOitResponsible" Style="{StaticResource ButtonMenuStyle}" HorizontalAlignment="Left" Margin="241,159,0,0" VerticalAlignment="Top" Height="25" Width="121" Cursor="Hand">
+                        <Button x:Name="acceptOitResponsible" Style="{StaticResource ButtonMenuStyle}" HorizontalAlignment="Left" Margin="241,159,0,0" VerticalAlignment="Top" Height="25" Width="121" Cursor="Hand" Click="acceptOitResponsible_Click">
                             <Button.Effect>
                                 <DropShadowEffect/>
                             </Button.Effect>
@@ -157,16 +157,49 @@
                             <ComboBoxItem Content="В работе"/>
                             <ComboBoxItem Content="Отменено"/>
                         </ComboBox>
-                        <Button x:Name="acceptOtpResponsible" Style="{StaticResource ButtonMenuStyle}" HorizontalAlignment="Left" Margin="235,72,0,0" VerticalAlignment="Top" Height="25" Width="121" Cursor="Hand">
+                        <Button x:Name="acceptOtpResponsible" Style="{StaticResource ButtonMenuStyle}" HorizontalAlignment="Left" Margin="235,72,0,0" VerticalAlignment="Top" Height="25" Width="121" Cursor="Hand" Click="acceptOtpResponsible_Click">
                             <Button.Effect>
                                 <DropShadowEffect/>
                             </Button.Effect>
                             <TextBlock TextWrapping="Wrap" TextAlignment="Center" Text="Сохранить"/>
                         </Button>
+                        <Button x:Name="acceptOtpResponsible_Копировать" Style="{StaticResource ButtonMenuStyle}" HorizontalAlignment="Left" Margin="12,102,0,0" VerticalAlignment="Top" Height="25" Width="121" Cursor="Hand" Click="acceptOtpResponsible_Click">
+                            <Button.Effect>
+                                <DropShadowEffect/>
+                            </Button.Effect>
+                            <TextBlock TextWrapping="Wrap" TextAlignment="Center" Text="Взять в работу"/>
+                        </Button>
                     </Grid>
                 </TabItem>
                 <TabItem Header="Переписка">
-                    <Grid Background="#FF3C3C3C"/>
+                    <Grid Background="#FF3C3C3C">
+                        <RichTextBox x:Name="messageRichtextbox" Margin="0,10,0,111" HorizontalAlignment="Center" Width="392">
+                            <FlowDocument>
+
+                            </FlowDocument>
+                        </RichTextBox>
+                        <TextBox x:Name="messageTextBlock" HorizontalAlignment="Center" Margin="0,234,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="392" RenderTransformOrigin="0.5,0.5" Height="38">
+                            <TextBox.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform AngleX="-2.868"/>
+                                    <RotateTransform/>
+                                    <TranslateTransform X="-0.45"/>
+                                </TransformGroup>
+                            </TextBox.RenderTransform>
+                        </TextBox>
+                        <Button x:Name="sendMessageButton" Style="{StaticResource ButtonMenuStyle}" HorizontalAlignment="Center" Margin="0,280,0,0" VerticalAlignment="Top" Height="26" Width="392" Cursor="Hand" Click="sendMessageButton_Click">
+                            <Button.Effect>
+                                <DropShadowEffect/>
+                            </Button.Effect>
+                            <TextBlock TextWrapping="Wrap" TextAlignment="Center" Text="Отправить"/>
+                        </Button>
+                        <TextBlock HorizontalAlignment="Left" Margin="10,210,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="14" Foreground="White" FontFamily="Yu Gothic UI Semibold" Text="Сообщение:">
+                            <TextBlock.Effect>
+                                <DropShadowEffect/>
+                            </TextBlock.Effect>
+                        </TextBlock>
+                    </Grid>
                 </TabItem>
                 <TabItem Header="История">
                     <Grid Background="#FF3C3C3C"/>
