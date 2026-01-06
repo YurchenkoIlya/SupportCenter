@@ -155,6 +155,7 @@
                             </ComboBox.Effect>
                             <ComboBoxItem Content="Не в работе"/>
                             <ComboBoxItem Content="В работе"/>
+                            <ComboBoxItem Content="Выполнено"/>
                             <ComboBoxItem Content="Отменено"/>
                         </ComboBox>
                         <Button x:Name="acceptOtpResponsible" Style="{StaticResource ButtonMenuStyle}" HorizontalAlignment="Left" Margin="235,72,0,0" VerticalAlignment="Top" Height="25" Width="121" Cursor="Hand" Click="acceptOtpResponsible_Click">
@@ -163,7 +164,7 @@
                             </Button.Effect>
                             <TextBlock TextWrapping="Wrap" TextAlignment="Center" Text="Сохранить"/>
                         </Button>
-                        <Button x:Name="acceptOtpResponsible_Копировать" Style="{StaticResource ButtonMenuStyle}" HorizontalAlignment="Left" Margin="12,102,0,0" VerticalAlignment="Top" Height="25" Width="121" Cursor="Hand" Click="acceptOtpResponsible_Click">
+                        <Button x:Name="giveAppeal" Style="{StaticResource ButtonMenuStyle}" HorizontalAlignment="Left" Margin="12,102,0,0" VerticalAlignment="Top" Height="25" Width="121" Cursor="Hand" Click="giveAppeal_Click">
                             <Button.Effect>
                                 <DropShadowEffect/>
                             </Button.Effect>
