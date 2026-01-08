@@ -328,5 +328,24 @@ namespace SupportCenter
         {
             loadFolder();
         }
+
+        private void redactFoldersButton_Click(object sender, RoutedEventArgs e)
+        {
+            folderResponsible? path = folderDataGrid.SelectedItem as folderResponsible;
+
+            if (path != null) {
+               
+                RedactFolderForm redactFolder = new RedactFolderForm();
+
+                redactFolder.idFolder.Text = Convert.ToString(path.Id);
+                redactFolder.nameFolder.Text = Convert.ToString(path.nameFolder);
+                redactFolder.accessGroup.Text = Convert.ToString(path.accessGroup);
+                redactFolder.wayFolder.Text = Convert.ToString(path.wayFolder);
+                redactFolder.responsibleTextBox.Text = Convert.ToString(path.responsibleUser);
+
+                redactFolder.ShowDialog();
+
+            }
+        }
     }
 }

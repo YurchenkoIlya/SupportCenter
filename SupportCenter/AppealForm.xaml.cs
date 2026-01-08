@@ -29,8 +29,8 @@ namespace SupportCenter
 
         private void cancelButton_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow mainWindow = new MainWindow();
-            mainWindow.Show();  
+            var mainWindow = new MainWindow();
+            mainWindow.Show();
             this.Close();
         }
 
@@ -44,7 +44,6 @@ namespace SupportCenter
         public void loadFolder()
         {
             dbConnect db_connect = new dbConnect();
-            DataTable table = new DataTable();
             NpgsqlCommand command = new NpgsqlCommand(
                         "SELECT u.id_appeal, " +            
                         "applicant.user_name AS applicant_username, " +

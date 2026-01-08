@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Npgsql;
 using NpgsqlTypes;
+using System.Security.Cryptography.X509Certificates;
 using WebApplication1.Dto;
 
 namespace WebApplication1.Controllers
@@ -34,7 +35,7 @@ namespace WebApplication1.Controllers
 
             while (await reader.ReadAsync())
             {
-               
+
 
                 folder.Add(new FolderDto
                 {
@@ -49,6 +50,66 @@ namespace WebApplication1.Controllers
 
             return folder;
 
+        }
+        [HttpPut("put")]
+        public async Task<IActionResult> UpdateFolder([FromBody] FolderDto dto)
+        {
+
+            var connStr = _config.GetConnectionString("DefaultConnection");
+
+
+            await using var conn = new NpgsqlConnection(connStr);
+            await conn.OpenAsync();
+
+            const string sql = @"
+            UPDATE main.folders
+            SET name_folder = @name_folder, 
+            responsible_user = @responsible_user,
+            way_folder = @way_folder,
+            access_group = @access_group
+            WHERE id = @id;
+        ";
+
+            await using var cmd = new NpgsqlCommand(sql, conn);
+
+            int responsibleUserId = await GetIdResponsibleAsync(dto.responsibleUser, conn);
+
+
+            cmd.Parameters.Add("@id", NpgsqlDbType.Integer).Value = dto.Id;
+            cmd.Parameters.Add("@name_folder", NpgsqlDbType.Text).Value = dto.nameFolder;
+            cmd.Parameters.Add("@responsible_user", NpgsqlDbType.Integer).Value = responsibleUserId;
+            cmd.Parameters.Add("@way_folder", NpgsqlDbType.Text).Value = dto.wayFolder;
+            cmd.Parameters.Add("@access_group", NpgsqlDbType.Text).Value = dto.accessGroup;
+
+            int rows = await cmd.ExecuteNonQueryAsync();
+
+            if (rows == 0)
+                return NotFound("Пользователь с таким ID не найден");
+            {
+                Console.WriteLine($"Пользователь с ID {dto.Id} успешно отредактирован. Role={dto.Id}, Activity={dto.nameFolder}");
+                return Ok("Пользователь отредактирован");
+
+            }
+
+        }
+        private async Task<int> GetIdResponsibleAsync(string userName, NpgsqlConnection conn)
+        {
+            const string sql = @"
+            SELECT user_id
+            FROM main.users
+            WHERE user_name = @name
+            LIMIT 1;
+    ";
+
+            await using var cmd = new NpgsqlCommand(sql, conn);
+            cmd.Parameters.AddWithValue("@name", userName);
+
+            var result = await cmd.ExecuteScalarAsync();
+
+            if (result == null)
+                throw new Exception("Пользователь не найден");
+
+            return Convert.ToInt32(result);
         }
     }
 }

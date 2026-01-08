@@ -128,7 +128,7 @@
                                 <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="Создать" VerticalAlignment="Center"/>
                             </Grid>
                         </Button>
-                        <Button x:Name="redactUserButton1_Копировать" Style="{StaticResource ButtonMenuStyle}"  Cursor="Hand" Margin="85,44,0,0" Height="22" VerticalAlignment="Top" HorizontalAlignment="Left" Width="106" Click="redactUser_Click">
+                        <Button x:Name="redactFoldersButton" Style="{StaticResource ButtonMenuStyle}"  Cursor="Hand" Margin="85,44,0,0" Height="22" VerticalAlignment="Top" HorizontalAlignment="Left" Width="106" Click="redactFoldersButton_Click">
                             <Button.Effect>
                                 <DropShadowEffect/>
                             </Button.Effect>

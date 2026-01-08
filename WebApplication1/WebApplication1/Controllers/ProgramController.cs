@@ -14,7 +14,7 @@ using WebApplication1.Dto;
         }
 
         [HttpGet("get")]
-        public async Task<IEnumerable<ProgramDto>> GetUsers()
+        public async Task<IEnumerable<ProgramDto>> GetProgram()
         {
             var programs = new List<ProgramDto>();
 

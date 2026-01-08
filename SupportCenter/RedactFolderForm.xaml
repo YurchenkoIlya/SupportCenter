@@ -5,50 +5,96 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SupportCenter"
         mc:Ignorable="d"
-        Title="RedactFolderForm" Height="400" Width="514">
+        Title="Релдактирование сетевой папки" Height="505" Width="612" Loaded="Window_Loaded">
     <Window.Resources>
         <ResourceDictionary Source="/Styles/Style.xaml"></ResourceDictionary>
     </Window.Resources>
-    <Grid>
-        <Image Source="/Image/Main.jpg" StretchDirection="UpOnly" Stretch="Fill"/>
+    <Grid HorizontalAlignment="Left" >
+        <Image Source="/Image/Main.jpg" Stretch="Fill"/>
         <Grid Background="#EF3C3636" Opacity="1" >
-
-            <TextBlock HorizontalAlignment="Left" Margin="49,11,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Foreground="White" FontFamily="Yu Gothic UI Semibold" Text="Наименование папки:">
+            <TextBlock HorizontalAlignment="Left" Margin="47,53,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Foreground="White" FontFamily="Yu Gothic UI Semibold" Text="Наименование папки:">
                 <TextBlock.Effect>
                     <DropShadowEffect/>
                 </TextBlock.Effect>
             </TextBlock>
-            <TextBox x:Name="nameFolder" Style="{StaticResource TextBoxStyle}" HorizontalAlignment="Left" Margin="221,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="271" Height="23" FontSize="16" FontFamily="Yu Gothic UI Semibold">
+            <TextBox x:Name="nameFolder" Style="{StaticResource TextBoxStyle}" HorizontalAlignment="Left" Margin="220,52,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="359" Height="23" FontSize="16" FontFamily="Yu Gothic UI Semibold">
                 <TextBox.Effect>
                     <DropShadowEffect/>
                 </TextBox.Effect>
             </TextBox>
-            <TextBlock HorizontalAlignment="Left" Margin="28,62,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Foreground="White" FontFamily="Yu Gothic UI Semibold" Text="Ответственный за папку:">
+            <TextBlock HorizontalAlignment="Left" Margin="27,137,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Foreground="White" FontFamily="Yu Gothic UI Semibold" Text="Ответственный за папку:">
                 <TextBlock.Effect>
                     <DropShadowEffect/>
                 </TextBlock.Effect>
             </TextBlock>
-            <TextBlock  HorizontalAlignment="Left" Margin="115,37,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Foreground="White" FontFamily="Yu Gothic UI Semibold" Text="Путь к папке:">
+            <TextBlock  HorizontalAlignment="Left" Margin="114,81,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Foreground="White" FontFamily="Yu Gothic UI Semibold" Text="Путь к папке:">
                 <TextBlock.Effect>
                     <DropShadowEffect/>
                 </TextBlock.Effect>
             </TextBlock>
-            <DataGrid x:Name="selectResponsibleDataGrid" ColumnWidth="*" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="10,88,0,0" HorizontalAlignment="Left" Width="482" Height="233" VerticalAlignment="Top"/>
-            <TextBox x:Name="wayFolder" Style="{StaticResource TextBoxStyle}" HorizontalAlignment="Left" Margin="221,38,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="271" Height="23" FontSize="16" FontFamily="Yu Gothic UI Semibold">
+            <DataGrid x:Name="selectResponsibleDataGrid" ColumnWidth="*" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="27,245,0,0" HorizontalAlignment="Left" Width="552" Height="191" VerticalAlignment="Top"/>
+            <TextBox x:Name="wayFolder" Style="{StaticResource TextBoxStyle}" HorizontalAlignment="Left" Margin="220,80,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="359" Height="23" FontSize="16" FontFamily="Arial Black">
                 <TextBox.Effect>
                     <DropShadowEffect/>
                 </TextBox.Effect>
             </TextBox>
-            <Button x:Name="createFolderButton" Style="{StaticResource ButtonMenuStyle}"  Cursor="Hand" Margin="10,326,0,0" Height="26" VerticalAlignment="Top" HorizontalAlignment="Left" Width="482">
+            <Button x:Name="selectResponsibleButton" Style="{StaticResource ButtonMenuStyle}"  Cursor="Hand" Margin="0,441,0,0" Height="26" VerticalAlignment="Top" HorizontalAlignment="Center" Width="556" Click="selectResponsibleButton_Click">
                 <Button.Effect>
                     <DropShadowEffect/>
                 </Button.Effect>
                 <Grid>
-                    <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="Создать сетевую папку" VerticalAlignment="Center" FontSize="14"/>
+                    <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="Выбрать" VerticalAlignment="Center" FontSize="14"/>
                 </Grid>
             </Button>
+            <TextBox x:Name="responsibleTextBox" IsReadOnly="True" Style="{StaticResource TextBoxStyle}" HorizontalAlignment="Left" Margin="220,136,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="359" Height="23" FontSize="16" FontFamily="Yu Gothic UI Semibold">
+                <TextBox.Effect>
+                    <DropShadowEffect/>
+                </TextBox.Effect>
+            </TextBox>
+            <TextBlock HorizontalAlignment="Left" Margin="27,214,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Foreground="White" FontFamily="Yu Gothic UI Semibold" Text="Выбор ответственного для сетевой папки:">
+                <TextBlock.Effect>
+                    <DropShadowEffect/>
+                </TextBlock.Effect>
+            </TextBlock>
+            <Button x:Name="selectResponsible" Style="{StaticResource ButtonMenuStyle}"  Cursor="Hand" Height="26" VerticalAlignment="Top" HorizontalAlignment="Left" Width="197" Margin="220,171,0,0" Click="selectResponsible_Click">
+                <Button.Effect>
+                    <DropShadowEffect/>
+                </Button.Effect>
+                <Grid>
+                    <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="Выбрать ответственного" VerticalAlignment="Center" FontSize="14"/>
+                </Grid>
+            </Button>
+            <Button x:Name="RedactFolderButton" Style="{StaticResource ButtonMenuStyle}"  Cursor="Hand" Height="26" VerticalAlignment="Top" HorizontalAlignment="Left" Width="157" Margin="422,171,0,0" Click="RedactFolderButton_Click">
+                <Button.Effect>
+                    <DropShadowEffect/>
+                </Button.Effect>
+                <Grid>
+                    <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="Сохранить" VerticalAlignment="Top" FontSize="14"/>
+                </Grid>
+            </Button>
+            <TextBox x:Name="accessGroup" Style="{StaticResource TextBoxStyle}" HorizontalAlignment="Left" Margin="220,108,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="359" Height="23" FontSize="16" FontFamily="Yu Gothic UI Semibold">
+                <TextBox.Effect>
+                    <DropShadowEffect/>
+                </TextBox.Effect>
+            </TextBox>
+            <TextBlock  HorizontalAlignment="Left" Margin="33,109,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Foreground="White" FontFamily="Yu Gothic UI Semibold" Text="Группа доступа к папке:">
+                <TextBlock.Effect>
+                    <DropShadowEffect/>
+                </TextBlock.Effect>
+            </TextBlock>
+            <TextBox x:Name="idFolder" Style="{StaticResource TextBoxStyle}" HorizontalAlignment="Left" Margin="220,29,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="359" Height="23" FontSize="16" FontFamily="Yu Gothic UI Semibold">
+                <TextBox.Effect>
+                    <DropShadowEffect/>
+                </TextBox.Effect>
+            </TextBox>
+            <TextBlock HorizontalAlignment="Left" Margin="81,30,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Foreground="White" FontFamily="Yu Gothic UI Semibold" Text="ID сетевой папки:">
+                <TextBlock.Effect>
+                    <DropShadowEffect/>
+                </TextBlock.Effect>
+            </TextBlock>
         </Grid>
 
     </Grid>
+
 
 </Window>

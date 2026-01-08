@@ -115,7 +115,7 @@ namespace SupportCenter
             else
             {
 
-                MessageBox.Show("Пользователь не выбран00");
+                MessageBox.Show("Пользователь не выбран.");
 
             }
         }

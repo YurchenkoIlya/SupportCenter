@@ -50,7 +50,7 @@ public class UsersController : ControllerBase
     [HttpPut("put")]
     public async Task<IActionResult> UpdateUser([FromBody] EditUserDto dto)
     {
-        // Логика преобразования — 1 в 1 как в WPF
+        
         var connStr = _config.GetConnectionString("DefaultConnection");
         int role = dto.Role == "Пользователь" ? 0 : 1;
         int activity = dto.ActivityFlag ? 1 : 0;
@@ -76,7 +76,7 @@ public class UsersController : ControllerBase
         if (rows == 0)
             return NotFound("Пользователь с таким ID не найден");
         {
-            Console.WriteLine($"Пользователь с ID {dto.Id} успешно отредактирован. Role={role}, Activity={activity}");
+            Console.WriteLine($"Пользователь с ID {dto.Id} успешно отредактирован. Роль ={role}, Активность ={activity}");
             return Ok("Пользователь отредактирован");
 
         }
