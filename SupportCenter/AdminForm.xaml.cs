@@ -206,7 +206,14 @@ namespace SupportCenter
             loadFolder();
         }
 
-        private async void programButton_Click(object sender, RoutedEventArgs e)
+        private void programButton_Click(object sender, RoutedEventArgs e)
+        {
+            workTabControl.SelectedIndex = 2;
+
+           loadProgram();
+
+        }
+        public async void loadProgram()
         {
             workTabControl.SelectedIndex = 2;
 
@@ -216,12 +223,13 @@ namespace SupportCenter
                 var program = await api.GetProgramAsync();
                 programDataGrid.ItemsSource = program;
 
-               
+
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Ошибка при получении данных: " + ex.Message);
             }
+
 
         }
 
@@ -229,10 +237,9 @@ namespace SupportCenter
         {
             programDataGrid.Columns[0].Header = "ID";
             programDataGrid.Columns[1].Header = "НАИМЕНОВАНИЕ ПРОГРАММЫ";
-            programDataGrid.Columns[2].Header = "ОТВЕСТВЕННЫЙ ЗА ПРОГРАММУ";
-            programDataGrid.Columns[3].Header = "ПУТЬ К ПРОГРАММЕ";
+            programDataGrid.Columns[2].Header = "ПУТЬ К ПРОГРАММЕ";
             programDataGrid.Columns[0].Width = 50;
-            programDataGrid.Columns[1].Width = 100;
+            programDataGrid.Columns[1].Width = 200;
             programDataGrid.Columns[2].Width = new DataGridLength(1, DataGridLengthUnitType.Star);
 
         }
@@ -286,6 +293,8 @@ namespace SupportCenter
         {
             CreateProgramForm createProgram = new CreateProgramForm();
             createProgram.ShowDialog();
+            loadProgram();
+           
            
             
         }

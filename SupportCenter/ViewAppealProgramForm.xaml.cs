@@ -1,23 +1,9 @@
 ﻿using Npgsql;
 using NpgsqlTypes;
 using SupportCenter.Classes;
-using System;
-using System.Collections.Generic;
 using System.Data;
-using System.IO;
-using System.Linq;
-using System.Net.NetworkInformation;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
-using System.Windows.Data;
 using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace SupportCenter
 {
@@ -54,7 +40,12 @@ namespace SupportCenter
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             loadForm();
-            
+
+            responsibleTabItem.Visibility = Visibility.Collapsed;
+            executorTabItem.Visibility = Visibility.Collapsed;
+            chatTabItem.Visibility = Visibility.Collapsed;
+            historyTabItem.Visibility = Visibility.Collapsed;
+
 
         }
         public void loadForm()
@@ -132,7 +123,7 @@ namespace SupportCenter
 
                 nameProgram.Text = Appeal.idProgram;
                 namePc.Text = Appeal.pcName;
-                ipPc.Text = Appeal.ipPc;               
+                ipPc.Text = Appeal.ipPc;
                 applicantProgram.Text = Appeal.applicant;
                 executorProgram.Text = Appeal.otpExecutor;
 
@@ -184,18 +175,18 @@ namespace SupportCenter
                         oibStatusResponsble.IsEnabled = false;
                         acceptOibResponsible.Visibility = Visibility.Hidden;
                     }
-                    
+
                 }
 
-                if (Session.CurrentUserName != executorProgram.Text || oibStatusResponsble.SelectedIndex != 1 || oitStatusResponsble.SelectedIndex != 1 )                  
+                if (Session.CurrentUserName != executorProgram.Text || oibStatusResponsble.SelectedIndex != 1 || oitStatusResponsble.SelectedIndex != 1)
                 {
                     otpStatusResponsble.IsEnabled = false;
                     acceptOtpResponsible.Visibility = Visibility.Hidden;
-                    
-                    
+
+
 
                 }
-               
+
 
 
             }
@@ -203,7 +194,7 @@ namespace SupportCenter
 
 
 
-            
+
 
 
 
@@ -280,7 +271,7 @@ namespace SupportCenter
             FlowDocument flowDoc = messageRichtextbox.Document;
 
             // Создаём новый параграф с текстом
-            Paragraph paragraph = new Paragraph(new Run("Yurchenkoiv: "+messageTextBlock.Text));
+            Paragraph paragraph = new Paragraph(new Run("Yurchenkoiv: " + messageTextBlock.Text));
             paragraph.Margin = new Thickness(0); // Убираем отступы между строками
 
             // Добавляем параграф в документ

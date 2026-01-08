@@ -5,46 +5,40 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SupportCenter"
         mc:Ignorable="d"
-        Title="CreateProgramForm" Height="415" Width="560">
+        Title="CreateProgramForm" Height="213" Width="622">
     <Window.Resources>
         <ResourceDictionary Source="/Styles/Style.xaml"></ResourceDictionary>
     </Window.Resources>
     <Grid>
-        <Image Source="/Image/Main.jpg" StretchDirection="UpOnly" Stretch="Fill"  VerticalAlignment="Center" HorizontalAlignment="Center"/>
-        <Grid Background="#EF3C3636" Opacity="1" >
+        <Image Source="/Image/Main.jpg" StretchDirection="UpOnly" Stretch="Fill"/>
+        <Grid Background="#EF3C3636" Opacity="1"  >
             <Grid>
-                <TextBlock HorizontalAlignment="Left" Margin="51,12,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Foreground="White" FontFamily="Yu Gothic UI Semibold" Text="Наименование программы:">
+                <TextBlock HorizontalAlignment="Left" Margin="33,23,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Foreground="White" FontFamily="Yu Gothic UI Semibold" Text="Наименование программы:">
                     <TextBlock.Effect>
                         <DropShadowEffect/>
                     </TextBlock.Effect>
                 </TextBlock>
-                <TextBox x:Name="nameFolder" Style="{StaticResource TextBoxStyle}" HorizontalAlignment="Left" Margin="267,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="271" Height="23" FontSize="16" FontFamily="Yu Gothic UI Semibold">
+                <TextBox x:Name="nameProgram" Style="{StaticResource TextBoxStyle}" HorizontalAlignment="Left" Margin="249,21,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="334" Height="23" FontSize="16" FontFamily="Yu Gothic UI Semibold">
                     <TextBox.Effect>
                         <DropShadowEffect/>
                     </TextBox.Effect>
                 </TextBox>
-                <TextBox x:Name="wayFolder" Style="{StaticResource TextBoxStyle}" HorizontalAlignment="Left" Margin="33,65,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="505" Height="49" FontSize="16" FontFamily="Yu Gothic UI Semibold">
+                <TextBox x:Name="wayProgram" Style="{StaticResource TextBoxStyle}" HorizontalAlignment="Left" Margin="33,75,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="550" Height="49" FontSize="16" FontFamily="Yu Gothic UI Semibold" Cursor="Hand">
                     <TextBox.Effect>
                         <DropShadowEffect/>
                     </TextBox.Effect>
                 </TextBox>
-                <TextBlock  HorizontalAlignment="Left" Margin="51,39,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Foreground="White" FontFamily="Yu Gothic UI Semibold" Text="Путь к программе:">
+                <TextBlock  HorizontalAlignment="Left" Margin="33,49,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Foreground="White" FontFamily="Yu Gothic UI Semibold" Text="Путь к программе:">
                     <TextBlock.Effect>
                         <DropShadowEffect/>
                     </TextBlock.Effect>
                 </TextBlock>
-                <DataGrid x:Name="selectResponsibleDataGrid" ColumnWidth="*" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="28,140,0,0" HorizontalAlignment="Left" Width="510" Height="218" VerticalAlignment="Top"/>
-                <TextBlock HorizontalAlignment="Left" Margin="33,114,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Foreground="White" FontFamily="Yu Gothic UI Semibold" Text="Ответственный за программу:">
-                    <TextBlock.Effect>
-                        <DropShadowEffect/>
-                    </TextBlock.Effect>
-                </TextBlock>
-                <Button x:Name="createProgramButton" Style="{StaticResource ButtonMenuStyle}"  Cursor="Hand" Margin="28,363,0,0" Height="26" VerticalAlignment="Top" HorizontalAlignment="Left" Width="510" Click="createProgramButton_Click">
+                <Button x:Name="createProgramButton" Style="{StaticResource ButtonMenuStyle}"  Cursor="Hand" Margin="33,129,0,0" Height="26" VerticalAlignment="Top" HorizontalAlignment="Left" Width="550" Click="createProgramButton_Click">
                     <Button.Effect>
                         <DropShadowEffect/>
                     </Button.Effect>
                     <Grid>
-                        <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="Создать сетевую папку" VerticalAlignment="Center" FontSize="14"/>
+                        <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="Добавить программу" VerticalAlignment="Center" FontSize="14"/>
                     </Grid>
                 </Button>
             </Grid>

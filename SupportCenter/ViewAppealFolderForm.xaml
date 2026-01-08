@@ -5,8 +5,182 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SupportCenter"
         mc:Ignorable="d"
-        Title="ViewAppealFolderForm" Height="450" Width="800">
+        Title="ViewAppealFolderForm" Height="450" Width="1016" Loaded="Window_Loaded">
+    <Window.Resources>
+        <ResourceDictionary Source="/Styles/Style.xaml"></ResourceDictionary>
+    </Window.Resources>
     <Grid>
-        
+        <Image Source="/Image/Main.jpg" StretchDirection="UpOnly" Stretch="Fill"/>
+        <Grid Background="#EF3C3636" Opacity="1" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <TextBlock HorizontalAlignment="Left" Margin="27,21,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Foreground="White" FontFamily="Yu Gothic UI Semibold" Text="Заявка на доступ к папке: №">
+                <TextBlock.Effect>
+                    <DropShadowEffect/>
+                </TextBlock.Effect>
+            </TextBlock>
+            <TextBox x:Name="nameFolder" Style="{StaticResource TextBoxStyle}" HorizontalAlignment="Left" Margin="180,66,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="244" Height="24" FontSize="16" FontFamily="Yu Gothic UI Semibold">
+                <TextBox.Effect>
+                    <DropShadowEffect/>
+                </TextBox.Effect>
+            </TextBox>
+            <TextBlock HorizontalAlignment="Left" Margin="35,67,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Foreground="White" FontFamily="Yu Gothic UI Semibold" Text="Требуемое папка:">
+                <TextBlock.Effect>
+                    <DropShadowEffect/>
+                </TextBlock.Effect>
+            </TextBlock>
+            <TextBlock HorizontalAlignment="Left" Margin="81,96,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Foreground="White" FontFamily="Yu Gothic UI Semibold" Text="Инициатор:">
+                <TextBlock.Effect>
+                    <DropShadowEffect/>
+                </TextBlock.Effect>
+            </TextBlock>
+            <TextBox x:Name="applicantFolder" Style="{StaticResource TextBoxStyle}" HorizontalAlignment="Left" Margin="180,95,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="244" Height="24" FontSize="16" FontFamily="Yu Gothic UI Semibold">
+                <TextBox.Effect>
+                    <DropShadowEffect/>
+                </TextBox.Effect>
+            </TextBox>
+            <TextBox x:Name="commentTextBlock" Style="{StaticResource TextBoxStyle}" HorizontalAlignment="Left" Margin="27,167,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="397" Height="82" FontSize="16" FontFamily="Yu Gothic UI Semibold">
+                <TextBox.Effect>
+                    <DropShadowEffect/>
+                </TextBox.Effect>
+            </TextBox>
+            <TextBlock HorizontalAlignment="Left" Margin="27,141,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Foreground="White" FontFamily="Yu Gothic UI Semibold" Text="Комментарий по заявке:">
+                <TextBlock.Effect>
+                    <DropShadowEffect/>
+                </TextBlock.Effect>
+            </TextBlock>
+            <TextBlock x:Name="idAppeal" HorizontalAlignment="Left" Margin="251,21,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Foreground="White" FontFamily="Yu Gothic UI Semibold" Text="456123">
+                <TextBlock.Effect>
+                    <DropShadowEffect/>
+                </TextBlock.Effect>
+            </TextBlock>
+            <TabControl x:Name="menuAppealFolder" Margin="454,50,159,37" Background="{x:Null}" BorderBrush="{x:Null}">
+                <TabControl.Effect>
+                    <DropShadowEffect/>
+                </TabControl.Effect>
+                <TabItem x:Name="responsibleTabItem" Header="Согласования" BorderBrush="{x:Null}">
+                    <Grid Background="#FF3C3C3C">
+                        <TextBlock HorizontalAlignment="Left" Margin="16,15,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Foreground="White" FontFamily="Yu Gothic UI Semibold" Text="Отвественный за сетевую папку" Width="436">
+                            <TextBlock.Effect>
+                                <DropShadowEffect/>
+                            </TextBlock.Effect>
+                        </TextBlock>
+                        <TextBlock x:Name="responsibleFolder" HorizontalAlignment="Left" Margin="16,44,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Foreground="White" FontFamily="Yu Gothic UI Semibold" Text="Ерахтин Артем Максимович">
+                            <TextBlock.Effect>
+                                <DropShadowEffect/>
+                            </TextBlock.Effect>
+                        </TextBlock>
+                        <Button x:Name="acceptOibResponsible" Style="{StaticResource ButtonMenuStyle}" HorizontalAlignment="Left" Margin="241,72,0,0" VerticalAlignment="Top" Height="25" Width="121" Cursor="Hand">
+                            <Button.Effect>
+                                <DropShadowEffect/>
+                            </Button.Effect>
+                            <TextBlock TextWrapping="Wrap" TextAlignment="Center" Text="Сохранить"/>
+                        </Button>
+                        <ComboBox x:Name="oibStatusResponsble" HorizontalAlignment="Left" Margin="18,72,0,0" VerticalAlignment="Top" Width="218" IsSynchronizedWithCurrentItem="False" Height="25" FontSize="14" SelectedIndex="0">
+                            <ComboBox.Effect>
+                                <DropShadowEffect/>
+                            </ComboBox.Effect>
+                            <ComboBoxItem Content="Не согласовано"/>
+                            <ComboBoxItem Content="Согласовано"/>
+                            <ComboBoxItem Content="Отказано"/>
+                        </ComboBox>
+                    </Grid>
+                </TabItem>
+                <TabItem x:Name="executeTabItem" Header="Исполнитель">
+                    <Grid Background="#FF3C3C3C">
+                        <TextBlock HorizontalAlignment="Left" Margin="12,19,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Foreground="White" FontFamily="Yu Gothic UI Semibold" Text="Исполнитель Отдела технической поддержки:">
+                            <TextBlock.Effect>
+                                <DropShadowEffect/>
+                            </TextBlock.Effect>
+                        </TextBlock>
+                        <TextBlock x:Name="executorFolder" HorizontalAlignment="Left" Margin="12,45,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Foreground="White" FontFamily="Yu Gothic UI Semibold" Text="Исполнитель не назначен:">
+                            <TextBlock.Effect>
+                                <DropShadowEffect/>
+                            </TextBlock.Effect>
+                        </TextBlock>
+                        <ComboBox x:Name="otpStatusResponsble" HorizontalAlignment="Left" Margin="12,72,0,0" VerticalAlignment="Top" Width="218" IsSynchronizedWithCurrentItem="False" Height="25" FontSize="14" SelectedIndex="0">
+                            <ComboBox.Effect>
+                                <DropShadowEffect/>
+                            </ComboBox.Effect>
+                            <ComboBoxItem Content="Не в работе"/>
+                            <ComboBoxItem Content="В работе"/>
+                            <ComboBoxItem Content="Выполнено"/>
+                            <ComboBoxItem Content="Отменено"/>
+                        </ComboBox>
+                        <Button x:Name="acceptOtpResponsible" Style="{StaticResource ButtonMenuStyle}" HorizontalAlignment="Left" Margin="235,72,0,0" VerticalAlignment="Top" Height="25" Width="121" Cursor="Hand">
+                            <Button.Effect>
+                                <DropShadowEffect/>
+                            </Button.Effect>
+                            <TextBlock TextWrapping="Wrap" TextAlignment="Center" Text="Сохранить"/>
+                        </Button>
+                        <Button x:Name="giveAppeal" Style="{StaticResource ButtonMenuStyle}" HorizontalAlignment="Left" Margin="12,102,0,0" VerticalAlignment="Top" Height="25" Width="121" Cursor="Hand">
+                            <Button.Effect>
+                                <DropShadowEffect/>
+                            </Button.Effect>
+                            <TextBlock TextWrapping="Wrap" TextAlignment="Center" Text="Взять в работу"/>
+                        </Button>
+                    </Grid>
+                </TabItem>
+                <TabItem x:Name="chatTabItem" Header="Переписка">
+                    <Grid Background="#FF3C3C3C" Height="319">
+                        <RichTextBox x:Name="messageRichtextbox" Margin="0,10,0,0" HorizontalAlignment="Center" Width="377" Height="188" VerticalAlignment="Top">
+                            <FlowDocument>
+                            </FlowDocument>
+                        </RichTextBox>
+                        <TextBox x:Name="messageTextBlock" HorizontalAlignment="Center" Margin="0,234,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="372" RenderTransformOrigin="0.5,0.5" Height="38">
+                            <TextBox.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform AngleX="-2.868"/>
+                                    <RotateTransform/>
+                                    <TranslateTransform X="-0.45"/>
+                                </TransformGroup>
+                            </TextBox.RenderTransform>
+                        </TextBox>
+                        <Button x:Name="sendMessageButton" Style="{StaticResource ButtonMenuStyle}" HorizontalAlignment="Center" Margin="0,280,0,0" VerticalAlignment="Top" Height="26" Width="377" Cursor="Hand">
+                            <Button.Effect>
+                                <DropShadowEffect/>
+                            </Button.Effect>
+                            <TextBlock TextWrapping="Wrap" TextAlignment="Center" Text="Отправить"/>
+                        </Button>
+                        <TextBlock Margin="10,212,0,0" TextWrapping="Wrap" FontSize="14" Foreground="White" FontFamily="Yu Gothic UI Semibold" Text="Сообщение:" Height="19" VerticalAlignment="Top" HorizontalAlignment="Left" Width="81">
+                            <TextBlock.Effect>
+                                <DropShadowEffect/>
+                            </TextBlock.Effect>
+                        </TextBlock>
+                    </Grid>
+                </TabItem>
+                <TabItem x:Name="historyTabItem" Header="История">
+                    <Grid Background="#FF3C3C3C"/>
+                </TabItem>
+            </TabControl>
+            <Button x:Name="selectResponsibleSpace" Style="{StaticResource ButtonMenuStyle}" HorizontalAlignment="Left" Margin="454,14,0,0" VerticalAlignment="Top" Height="25" Width="97" Cursor="Hand" Click="selectResponsibleSpace_Click">
+                <Button.Effect>
+                    <DropShadowEffect/>
+                </Button.Effect>
+                <TextBlock TextWrapping="Wrap" TextAlignment="Center" Text="Согласования"/>
+            </Button>
+            <Button x:Name="selectExecutorSpace" Style="{StaticResource ButtonMenuStyle}" HorizontalAlignment="Left" Margin="556,14,0,0" VerticalAlignment="Top" Height="25" Width="98" Cursor="Hand" Click="selectExecutorSpace_Click">
+                <Button.Effect>
+                    <DropShadowEffect/>
+                </Button.Effect>
+                <TextBlock TextWrapping="Wrap" TextAlignment="Center" Text="Исполнитель"/>
+            </Button>
+            <Button x:Name="selectChatSpace" Style="{StaticResource ButtonMenuStyle}" HorizontalAlignment="Left" Margin="743,14,0,0" VerticalAlignment="Top" Height="25" Width="57" Cursor="Hand" Click="selectChatSpace_Click">
+                <Button.Effect>
+                    <DropShadowEffect/>
+                </Button.Effect>
+                <TextBlock TextWrapping="Wrap" TextAlignment="Center" Text="Чат"/>
+            </Button>
+            <Button x:Name="selectHistorySpace" Style="{StaticResource ButtonMenuStyle}" HorizontalAlignment="Left" Margin="659,14,0,0" VerticalAlignment="Top" Height="25" Width="79" Cursor="Hand" Click="selectHistorySpace_Click">
+                <Button.Effect>
+                    <DropShadowEffect/>
+                </Button.Effect>
+                <TextBlock TextWrapping="Wrap" TextAlignment="Center" Text="История"/>
+            </Button>
+        </Grid>
+
+
     </Grid>
 </Window>

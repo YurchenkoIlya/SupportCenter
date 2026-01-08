@@ -69,20 +69,28 @@ namespace SupportCenter
 
         private void createProgramButton_Click(object sender, RoutedEventArgs e)
         {
-            RedactUserForm redactForm = new RedactUserForm();
-            Users? path = selectResponsibleDataGrid.SelectedItem as Users;
 
-            dbConnect db_connect = new dbConnect();
-            db_connect.openConnection();
-            NpgsqlDataAdapter adapter = new NpgsqlDataAdapter();
-            NpgsqlCommand command = new NpgsqlCommand("INSERT INTO main.program (name_program,responsible_program,way_program) VALUES (@nameFolder,@responsible_user,@way_folder)", db_connect.GetConnection());
-            command.Parameters.Add("@nameFolder", NpgsqlDbType.Text).Value = nameFolder.Text;
-            command.Parameters.Add("@responsible_user", NpgsqlDbType.Bigint).Value = path.Id;
-            command.Parameters.Add("@way_folder", NpgsqlDbType.Text).Value = wayFolder.Text;
-            adapter.SelectCommand = command;
-            command.ExecuteReader();
-            db_connect.closeConnection();
-            MessageBox.Show("Программа добавлена");
+            if (string.IsNullOrWhiteSpace(nameProgram.Text)) MessageBox.Show("Не заполнено наименование программы");
+            else if (string.IsNullOrWhiteSpace(wayProgram.Text)) MessageBox.Show("Не заполнен путь к программе");
+            else
+            {
+
+
+
+                RedactUserForm redactForm = new RedactUserForm();
+
+                dbConnect db_connect = new dbConnect();
+                db_connect.openConnection();
+                NpgsqlDataAdapter adapter = new NpgsqlDataAdapter();
+                NpgsqlCommand command = new NpgsqlCommand("INSERT INTO main.program (name_program,way_program) VALUES (@nameFolder,@way_folder)", db_connect.GetConnection());
+                command.Parameters.Add("@nameFolder", NpgsqlDbType.Text).Value = nameProgram.Text;
+                command.Parameters.Add("@way_folder", NpgsqlDbType.Text).Value = wayProgram.Text;
+                adapter.SelectCommand = command;
+                command.ExecuteReader();
+                db_connect.closeConnection();
+                MessageBox.Show("Программа добавлена");
+
+            }
         }
     }
 }

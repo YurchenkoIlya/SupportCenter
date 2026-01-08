@@ -23,9 +23,7 @@ using WebApplication1.Dto;
             await using var conn = new NpgsqlConnection(connStr);
             await conn.OpenAsync();
 
-        var cmd = new NpgsqlCommand("Select u.id_program,u.name_program,o.user_name,u.way_program " +
-       "from main.program u " +
-       "LEFT JOIN main.users o ON u.responsible_program = o.user_id", conn);
+        var cmd = new NpgsqlCommand("Select id_program,name_program,way_program from main.program", conn);
         await using var reader = await cmd.ExecuteReaderAsync();
 
             while (await reader.ReadAsync())
@@ -36,10 +34,10 @@ using WebApplication1.Dto;
                 {
                     id_program = reader.GetInt32(0),
                     name_program = reader.GetString(1),
-                    responsible_program = reader.GetString(2),
-                    way_program = reader.GetString(3)
+                    way_program = reader.GetString(2)
                 });
             }
+           
 
             return programs;
 
