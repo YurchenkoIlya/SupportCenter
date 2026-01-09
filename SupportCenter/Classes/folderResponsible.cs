@@ -8,7 +8,7 @@ namespace SupportCenter.Classes
 {
     public class folderResponsible
     {
-        
+  
         public int Id { get; set; }
         public string nameFolder { get; set; }
         public string responsibleUser { get; set; }

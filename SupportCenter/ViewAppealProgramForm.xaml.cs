@@ -1,6 +1,7 @@
 ﻿using Npgsql;
 using NpgsqlTypes;
 using SupportCenter.Classes;
+using System.Collections.Generic;
 using System.Data;
 using System.Windows;
 using System.Windows.Documents;
@@ -46,7 +47,8 @@ namespace SupportCenter
             chatTabItem.Visibility = Visibility.Collapsed;
             historyTabItem.Visibility = Visibility.Collapsed;
 
-
+           
+            logRead("Открыл обращение");
         }
         public void loadForm()
         {
@@ -163,31 +165,51 @@ namespace SupportCenter
 
                 if (Session.AuthorizationStatus != 1)
                 {
-
-                    if (Session.CurrentUserName != oitResponsible.Text)
+                    if (otpStatusResponsble.SelectedIndex == 0)
                     {
 
 
 
+
+                        if (Session.CurrentUserName != oitResponsible.Text)
+                        {
+                            oitStatusResponsble.IsEnabled = false;
+                            acceptOitResponsible.Visibility = Visibility.Hidden;
+
+
+                        }
+                        if (Session.CurrentUserName != oibResponsible.Text)
+                        {
+                            oitStatusResponsble.IsEnabled = false;
+                            acceptOitResponsible.Visibility = Visibility.Hidden;
+                        }
                     }
-                    if (Session.CurrentUserName != oibResponsible.Text)
+                    else
                     {
-                        oibStatusResponsble.IsEnabled = false;
-                        acceptOibResponsible.Visibility = Visibility.Hidden;
+                        oitStatusResponsble.IsEnabled = false;
+                        acceptOitResponsible.Visibility = Visibility.Hidden;
+                        oitStatusResponsble.IsEnabled = false;
+                        acceptOitResponsible.Visibility = Visibility.Hidden;
+                    }
+
+
+
+                    if (Session.CurrentUserName != executorProgram.Text || oibStatusResponsble.SelectedIndex != 1 || oitStatusResponsble.SelectedIndex != 1)
+                    {
+                        otpStatusResponsble.IsEnabled = false;
+                        acceptOtpResponsible.Visibility = Visibility.Hidden;
+
+
+
+                    }
+                    else
+                    {
+                        otpStatusResponsble.IsEnabled = true;
+                        acceptOtpResponsible.Visibility = Visibility.Visible;
+
                     }
 
                 }
-
-                if (Session.CurrentUserName != executorProgram.Text || oibStatusResponsble.SelectedIndex != 1 || oitStatusResponsble.SelectedIndex != 1)
-                {
-                    otpStatusResponsble.IsEnabled = false;
-                    acceptOtpResponsible.Visibility = Visibility.Hidden;
-
-
-
-                }
-
-
 
             }
             reader.Close();
@@ -225,6 +247,8 @@ namespace SupportCenter
             MessageBox.Show("Согласование установлено");
             command.ExecuteNonQuery();
             loadForm();
+            string action = "Сменил этап согласования ОИБ на : " + oibStatusResponsble.Text;
+            logRead(action);
         }
 
         private void acceptOitResponsible_Click(object sender, RoutedEventArgs e)
@@ -243,6 +267,8 @@ namespace SupportCenter
             command.Parameters.Add("@idAppeal", NpgsqlDbType.Integer).Value = Convert.ToInt32(idAppeal.Text);
 
             MessageBox.Show("Согласование установлено");
+            string action = "Сменил этап согласования ОИТ на : " + oitStatusResponsble.Text;
+            logRead(action);
             command.ExecuteNonQuery();
             loadForm();
         }
@@ -261,7 +287,14 @@ namespace SupportCenter
             command.Parameters.Add("@otpStatus", NpgsqlDbType.Integer).Value = otpStatus;
             command.Parameters.Add("@idAppeal", NpgsqlDbType.Integer).Value = Convert.ToInt32(idAppeal.Text);
 
+            
+            
+            
+            
+            
             MessageBox.Show("Этап выполнения изменен.");
+            string action = "Сменил этап выполнения обращения на: "+otpStatusResponsble.Text;
+            logRead(action);
             command.ExecuteNonQuery();
             loadForm();
         }
@@ -295,7 +328,36 @@ namespace SupportCenter
 
             MessageBox.Show("Взято в работу.");
             command.ExecuteNonQuery();
+
+
+
+            string action = "Взял обращение в исполнение";
+            logRead(action);
             loadForm();
+
+        }
+        public void logRead(string action)
+        {
+            DateTime currentDateTime = DateTime.Now;
+
+            dbConnect db_connect = new dbConnect();
+            db_connect.openConnection();
+            DataTable table = new DataTable();
+            NpgsqlDataAdapter adapter = new NpgsqlDataAdapter();
+            NpgsqlCommand command = new NpgsqlCommand("INSERT INTO main.log_appeal" +
+                "(date_log,id_appeal,action,appeal_type,id_user) " +
+                "values (date_trunc('second', @date),@idAppeal,@action,@appeal_type,(select user_id from main.users where login_user = @loginUser))", db_connect.GetConnection());
+            command.Parameters.Add("@date", NpgsqlDbType.Timestamp).Value = currentDateTime;
+            command.Parameters.Add("@loginUser", NpgsqlDbType.Text).Value = Session.CurrentUserLogin;
+            command.Parameters.Add("@idAppeal", NpgsqlDbType.Integer).Value = Convert.ToInt32(idAppeal.Text);
+            command.Parameters.Add("@action", NpgsqlDbType.Text).Value = action;
+            command.Parameters.Add("@appeal_type", NpgsqlDbType.Integer).Value = 1;
+
+
+            command.ExecuteNonQuery();
+
+            
+
         }
     }
 }
