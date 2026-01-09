@@ -81,12 +81,12 @@
                     <DropShadowEffect/>
                 </TextBlock.Effect>
             </TextBlock>
-            <TabControl x:Name="menuAppealProgram" Margin="454,50,159,47" Background="{x:Null}" BorderBrush="{x:Null}">
+            <TabControl x:Name="menuAppealProgram" Margin="454,50,10,47" Background="{x:Null}" BorderBrush="{x:Null}">
                 <TabControl.Effect>
                     <DropShadowEffect/>
                 </TabControl.Effect>
                 <TabItem x:Name="responsibleTabItem" Header="Согласования" BorderBrush="{x:Null}">
-                    <Grid Background="#FF3C3C3C">
+                    <Grid Background="#FF3C3C3C" Margin="0,0,155,0">
                         <TextBlock HorizontalAlignment="Left" Margin="16,15,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Foreground="White" FontFamily="Yu Gothic UI Semibold" Text="Отдел информационной безопасности:" Width="436">
                             <TextBlock.Effect>
                                 <DropShadowEffect/>
@@ -138,7 +138,7 @@
                     </Grid>
                 </TabItem>
                 <TabItem x:Name="executorTabItem" Header="Исполнитель">
-                    <Grid Background="#FF3C3C3C">
+                    <Grid Background="#FF3C3C3C" Margin="0,0,164,0">
                         <TextBlock HorizontalAlignment="Left" Margin="12,19,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Foreground="White" FontFamily="Yu Gothic UI Semibold" Text="Исполнитель Отдела технической поддержки:">
                             <TextBlock.Effect>
                                 <DropShadowEffect/>
@@ -173,13 +173,13 @@
                     </Grid>
                 </TabItem>
                 <TabItem x:Name="chatTabItem" Header="Переписка">
-                    <Grid Background="#FF3C3C3C">
+                    <Grid Background="#FF3C3C3C" Margin="0,0,148,0">
                         <RichTextBox x:Name="messageRichtextbox" Margin="0,10,0,111" HorizontalAlignment="Center" Width="392">
                             <FlowDocument>
 
                             </FlowDocument>
                         </RichTextBox>
-                        <TextBox x:Name="messageTextBlock" HorizontalAlignment="Center" Margin="0,234,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="392" RenderTransformOrigin="0.5,0.5" Height="38">
+                        <TextBox x:Name="messageTextBlock" HorizontalAlignment="Center" Margin="0,234,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="392" RenderTransformOrigin="0.5,0.5" Height="38">
                             <TextBox.RenderTransform>
                                 <TransformGroup>
                                     <ScaleTransform/>
@@ -203,7 +203,24 @@
                     </Grid>
                 </TabItem>
                 <TabItem x:Name="historyTabItem" Header="История">
-                    <Grid Background="#FF3C3C3C"/>
+                    <Grid Background="#FF3C3C3C">
+                        <DataGrid x:Name="historyAppealDataGrid" AutoGenerateColumns="False" 
+          CanUserAddRows="False" IsReadOnly="True">
+                            <DataGrid.Columns>
+                                <!-- Время -->
+                                <DataGridTextColumn Header="Время" Binding="{Binding dateLog}" 
+                           Width="100"/>
+
+                                <!-- Пользователь -->
+                                <DataGridTextColumn Header="Пользователь" Binding="{Binding userName}" 
+                           Width="150"/>
+
+                                <!-- Событие -->
+                                <DataGridTextColumn Header="Событие" Binding="{Binding action}" 
+                           Width="*"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Grid>
                 </TabItem>
             </TabControl>
             <Button x:Name="selectResponsibleSpace" Style="{StaticResource ButtonMenuStyle}" HorizontalAlignment="Left" Margin="454,14,0,0" VerticalAlignment="Top" Height="25" Width="97" Cursor="Hand" Click="selectResponsibleSpace_Click">

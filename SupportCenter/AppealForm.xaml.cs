@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -109,88 +110,19 @@ namespace SupportCenter
 
         }
 
-        public void loadAppealProgram()
+        public async void loadAppealProgram()
         {
 
-            dbConnect db_connect = new dbConnect();
-            DataTable table = new DataTable();
-            NpgsqlCommand command = new NpgsqlCommand(
-                        "SELECT u.id_appeal_program, " +
-                        "p.name_program, " +
-                        "u.pc_name, " +
-                        "u.ip_pc, " +
-                        "user_applicant.user_name AS applicant_user," +
-                        "oib_user.user_name AS oib_user_name, " +
-                        "u.oib_status_responsible, " +
-                        "oit_user.user_name AS oit_user_name, " +
-                        "u.oit_status_responsible, " +
-                        "otp_user.user_name AS otp_user_name, " +
-                        "u.otp_status_executor " +
-                        "FROM main.appealprogram u " +
-                        "LEFT JOIN main.users oib_user ON u.oib_responsible = oib_user.user_id " +
-                        "LEFT JOIN main.users oit_user ON u.oit_responsible = oit_user.user_id " +
-                        "LEFT JOIN main.users otp_user ON u.otp_executor = otp_user.user_id " +
-                        "LEFT JOIN main.users user_applicant ON u.applicant = user_applicant.user_id " +
-                        "LEFT JOIN main.program p ON u.id_program = p.id_program", db_connect.GetConnection());
-            db_connect.openConnection();
-            command.ExecuteNonQuery();
-            NpgsqlDataAdapter adapter = new NpgsqlDataAdapter(command);
-            NpgsqlDataReader reader = command.ExecuteReader();
-            List<appealProgram> result = new List<appealProgram>();
+            var api = new AppealProgramApi();
+            var appeals = await api.GetAppealProgramsAsync();
 
-            while (reader.Read())
-            {
-                string ?oibStatus = null;
-                string ?oitStatus = null;
-                string ?otpStatus = null;
-                string ?otpExecutor = null;
+            var queryResult = appeals.AsQueryable();
 
-               
-                switch (Convert.ToString(reader[6]))
-                {
-                    case "0": oibStatus = "Не согласовано"; break;
-                    case "1": oibStatus = "Согласовано"; break;
-                    case "2": oibStatus = "Отказано"; break;
+            
 
-                }
-                switch (Convert.ToString(reader[8]))
-                {
-                    case "0": oitStatus = "Не согласовано"; break;
-                    case "1": oitStatus = "Согласовано"; break;
-                    case "2": oitStatus = "Отказано"; break;
-
-                }
-                switch (Convert.ToString(reader[10]))
-                {
-                    case "0": otpStatus = "Не в работе"; break;
-                    case "1": otpStatus = "В работе"; break;
-                    case "2": otpStatus = "Выполнено"; break;
-                    case "3": otpStatus = "Отменено"; break;
-
-                }
+            appealProgramDataGrid.ItemsSource = queryResult;
 
 
-           /*     if (Convert.ToString(reader[10]) == "0")
-                {
-                    otpStatus = "Не в работе";
-                }*/
-                
-                if (Convert.ToString(reader[9]) == "")
-                {
-                    otpExecutor = "Нет исполнителя";
-                }
-                else otpExecutor = Convert.ToString(reader[9]);
-
-
-
-                    result.Add(new appealProgram(Convert.ToInt32(reader[0]), Convert.ToString(reader[1]), Convert.ToString(reader[2]), Convert.ToString(reader[3]), Convert.ToString(reader[4]),
-                        Convert.ToString(reader[5]), oibStatus, Convert.ToString(reader[7]), oitStatus, otpExecutor, otpStatus));
-
-            }
-            reader.Close();
-            appealProgramDataGrid.ItemsSource = result;
-
-           
 
         }
 
@@ -224,16 +156,16 @@ namespace SupportCenter
 
         private void appealProgramView_Click(object sender, RoutedEventArgs e)
         {
-            
-            
 
 
-            appealProgram? path = appealProgramDataGrid.SelectedItem as appealProgram;
+
+
+            AppealProgramDto? path = appealProgramDataGrid.SelectedItem as AppealProgramDto;
             if (path != null)
             {
                 ViewAppealProgramForm viewAppealProgramForm = new ViewAppealProgramForm();
 
-                viewAppealProgramForm.idAppeal.Text = Convert.ToString(path.idAppeal);
+                viewAppealProgramForm.idAppeal.Text = Convert.ToString(path.id_appeal_program);
 
                 viewAppealProgramForm.ShowDialog();
                 loadAppealProgram();

@@ -1,8 +1,8 @@
 ﻿using Npgsql;
 using NpgsqlTypes;
 using SupportCenter.Classes;
-using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Documents;
 
@@ -31,7 +31,45 @@ namespace SupportCenter
         private void selectHistorySpace_Click(object sender, RoutedEventArgs e)
         {
             menuAppealProgram.SelectedIndex = 3;
+
+            dbConnect db_connect = new dbConnect();
+            NpgsqlCommand command = new NpgsqlCommand(
+                "SELECT u.id_log, u.date_log, u.id_appeal, u.action, u.appeal_type, o.user_name " +
+                "FROM main.log_appeal u " +
+                "LEFT JOIN main.users o " +
+                "ON u.id_user = o.user_id " +
+                "WHERE u.id_appeal = @idAppeal AND u.appeal_type = 1",
+    db_connect.GetConnection());
+            command.Parameters.Add("@idAppeal", NpgsqlDbType.Integer).Value = Convert.ToInt32(idAppeal.Text);
+            db_connect.openConnection();
+            command.ExecuteNonQuery();
+            NpgsqlDataAdapter adapter = new NpgsqlDataAdapter(command);
+            List<HistoryAppealDto> result = new List<HistoryAppealDto>();
+
+            using (NpgsqlDataReader reader = command.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+
+                    DateTime date = reader.GetDateTime(1);
+                    string formattedDate = date.ToString("dd.MM.yyyy HH:mm");
+
+
+                    result.Add(new HistoryAppealDto(
+                        idLog: reader.GetInt32(0),
+                        dateLog: formattedDate,
+                        idAppeal: Convert.ToInt32(idAppeal.Text), 
+                        action: reader.GetString(3),
+                        appealType: 1, 
+                        userName: reader.GetString(5)
+                    ));
+                }
+            }
+
+            // Привязываем данные к DataGrid
+            historyAppealDataGrid.ItemsSource = result;
         }
+
 
         private void selectChatSpace_Click(object sender, RoutedEventArgs e)
         {
@@ -47,7 +85,7 @@ namespace SupportCenter
             chatTabItem.Visibility = Visibility.Collapsed;
             historyTabItem.Visibility = Visibility.Collapsed;
 
-           
+
             logRead("Открыл обращение");
         }
         public void loadForm()
@@ -247,7 +285,7 @@ namespace SupportCenter
             MessageBox.Show("Согласование установлено");
             command.ExecuteNonQuery();
             loadForm();
-            string action = "Сменил этап согласования ОИБ на : " + oibStatusResponsble.Text;
+            string action = "Изменено согласование ОИБ: " + oibStatusResponsble.Text;
             logRead(action);
         }
 
@@ -267,7 +305,7 @@ namespace SupportCenter
             command.Parameters.Add("@idAppeal", NpgsqlDbType.Integer).Value = Convert.ToInt32(idAppeal.Text);
 
             MessageBox.Show("Согласование установлено");
-            string action = "Сменил этап согласования ОИТ на : " + oitStatusResponsble.Text;
+            string action = "Сменил этап согласования ОИТ на: " + oitStatusResponsble.Text;
             logRead(action);
             command.ExecuteNonQuery();
             loadForm();
@@ -287,13 +325,13 @@ namespace SupportCenter
             command.Parameters.Add("@otpStatus", NpgsqlDbType.Integer).Value = otpStatus;
             command.Parameters.Add("@idAppeal", NpgsqlDbType.Integer).Value = Convert.ToInt32(idAppeal.Text);
 
-            
-            
-            
-            
-            
+
+
+
+
+
             MessageBox.Show("Этап выполнения изменен.");
-            string action = "Сменил этап выполнения обращения на: "+otpStatusResponsble.Text;
+            string action = "Изменен этап выолнения на: " + otpStatusResponsble.Text;
             logRead(action);
             command.ExecuteNonQuery();
             loadForm();
@@ -331,7 +369,7 @@ namespace SupportCenter
 
 
 
-            string action = "Взял обращение в исполнение";
+            string action = "Обращение взято на исполнение";
             logRead(action);
             loadForm();
 
@@ -356,7 +394,7 @@ namespace SupportCenter
 
             command.ExecuteNonQuery();
 
-            
+
 
         }
     }
