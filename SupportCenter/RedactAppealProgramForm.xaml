@@ -6,7 +6,59 @@
         xmlns:local="clr-namespace:SupportCenter"
         mc:Ignorable="d"
         Title="RedactAppealProgramForm" Height="450" Width="800">
+    <Window.Resources>
+        <ResourceDictionary Source="/Styles/Style.xaml"></ResourceDictionary>
+    </Window.Resources>
     <Grid>
-        
+        <Image Source="/Image/Main.jpg" StretchDirection="UpOnly" Stretch="Fill"/>
+        <Grid Background="#EF3C3636" Opacity="1">
+            <TextBlock Margin="197,10,0,552" TextWrapping="Wrap" FontSize="16" Foreground="White" FontFamily="Yu Gothic UI Semibold" Text="Создание обращения" HorizontalAlignment="Left" Width="167">
+                <TextBlock.Effect>
+                    <DropShadowEffect/>
+                </TextBlock.Effect>
+            </TextBlock>
+            <Button x:Name="createAppealProgram" Style="{StaticResource ButtonMenuStyle}" HorizontalAlignment="Left" Margin="27,211,0,0" VerticalAlignment="Top" Height="26" Width="493" Cursor="Hand">
+                <Button.Effect>
+                    <DropShadowEffect/>
+                </Button.Effect>
+                <TextBlock TextWrapping="Wrap" TextAlignment="Center" Text="Создать"/>
+            </Button>
+            <TextBlock HorizontalAlignment="Left" Margin="30,47,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Foreground="White" FontFamily="Yu Gothic UI Semibold" Text="Требуемая сетевая папка:">
+                <TextBlock.Effect>
+                    <DropShadowEffect/>
+                </TextBlock.Effect>
+            </TextBlock>
+            <TextBox x:Name="programAppeal" Style="{StaticResource TextBoxStyle}" HorizontalAlignment="Left" Margin="30,73,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="325" Height="24" FontSize="16" FontFamily="Yu Gothic UI Semibold">
+                <TextBox.Effect>
+                    <DropShadowEffect/>
+                </TextBox.Effect>
+            </TextBox>
+            <Button x:Name="selectProgram" Style="{StaticResource ButtonMenuStyle}" HorizontalAlignment="Left" Margin="364,73,0,0" VerticalAlignment="Top" Height="24" Width="156" Cursor="Hand">
+                <Button.Effect>
+                    <DropShadowEffect/>
+                </Button.Effect>
+                <TextBlock TextWrapping="Wrap" TextAlignment="Center" Text="Выбрать"/>
+            </Button>
+            <TextBox x:Name="commentAppeal" Style="{StaticResource TextBoxStyle}" HorizontalAlignment="Left" Margin="27,128,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="493" Height="75" FontSize="16" FontFamily="Yu Gothic UI Semibold">
+                <TextBox.Effect>
+                    <DropShadowEffect/>
+                </TextBox.Effect>
+            </TextBox>
+            <TextBlock HorizontalAlignment="Left" Margin="27,102,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Foreground="White" FontFamily="Yu Gothic UI Semibold" Text="Комментарий к обращению (обоснование, для чего требуется) : ">
+                <TextBlock.Effect>
+                    <DropShadowEffect/>
+                </TextBlock.Effect>
+            </TextBlock>
+            <DataGrid x:Name="programDataGrid" Margin="536,27,10,236"/>
+
+            <Button x:Name="selectProgramDg" Style="{StaticResource ButtonMenuStyle}" Margin="536,211,10,0" VerticalAlignment="Top" Height="26" Cursor="Hand">
+                <Button.Effect>
+                    <DropShadowEffect/>
+                </Button.Effect>
+                <TextBlock TextWrapping="Wrap" TextAlignment="Center" Text="Выбрать"/>
+            </Button>
+        </Grid>
+
+
     </Grid>
 </Window>

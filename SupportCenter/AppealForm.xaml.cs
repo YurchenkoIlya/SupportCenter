@@ -231,5 +231,11 @@ namespace SupportCenter
             appealFolderDataGrid.Columns[7].Header = "КОММЕНТАРИЙ";
             appealFolderDataGrid.Columns[0].Width = 35;
         }
+
+        private void appealFolderCreate_Click(object sender, RoutedEventArgs e)
+        {
+            CreateAppealFolderForm createAppealFolderForm = new CreateAppealFolderForm();
+            createAppealFolderForm.ShowDialog();
+        }
     }
 }

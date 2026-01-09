@@ -66,7 +66,7 @@ namespace SupportCenter
                 }
             }
 
-            // Привязываем данные к DataGrid
+
             historyAppealDataGrid.ItemsSource = result;
         }
 

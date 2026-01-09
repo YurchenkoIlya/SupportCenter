@@ -125,5 +125,27 @@ namespace SupportCenter
         {
             programDataGrid.Columns[0].Header = "НАИМЕНОВАНИЕ ПРОГРАММЫ";
         }
+
+        private async void selectFolder_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.MainWindow = this;
+            Application.Current.MainWindow.Width = 850;
+
+            try
+            {
+                var api = new FolderApiGet();
+                var program = await api.GetFolderAsync();
+
+                programDataGrid.ItemsSource = program;
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ошибка при получении данных: " + ex.Message);
+            }
+
+
+            programDataGrid.Columns[0].Width = new DataGridLength(1, DataGridLengthUnitType.Star);
+        }
     }
 }

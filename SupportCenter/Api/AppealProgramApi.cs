@@ -26,11 +26,13 @@ public class AppealProgramApi
 
         var json = await response.Content.ReadAsStringAsync();
 
-        return JsonSerializer.Deserialize<List<AppealProgramDto>>(
-            json,
-            new JsonSerializerOptions
-            {
-                PropertyNameCaseInsensitive = true
-            });
+        var result = JsonSerializer.Deserialize<List<AppealProgramDto>>(
+    json,
+    new JsonSerializerOptions
+    {
+        PropertyNameCaseInsensitive = true
+    });
+
+        return result ?? new List<AppealProgramDto>();
     }
 }
