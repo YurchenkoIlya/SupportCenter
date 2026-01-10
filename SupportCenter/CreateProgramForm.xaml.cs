@@ -52,6 +52,7 @@ namespace SupportCenter
                 command.ExecuteReader();
                 db_connect.closeConnection();
                 MessageBox.Show("Программа добавлена");
+                this.Close();
 
             }
         }

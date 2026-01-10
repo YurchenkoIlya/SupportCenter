@@ -4,8 +4,10 @@ using SupportCenter.Classes;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Configuration;
 using System.Data;
 using System.Data.Common;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -346,6 +348,26 @@ namespace SupportCenter
                 redactFolder.ShowDialog();
 
             }
+        }
+
+        private void redactProgram_Click(object sender, RoutedEventArgs e)
+        {
+            ProgramDto? path = programDataGrid.SelectedItem as ProgramDto;
+            int programId = 0;
+
+            if (path != null)
+            {
+                programId = path.id_program;
+                RedactProgramForm redactProgramForm = new RedactProgramForm(path);
+                redactProgramForm.ShowDialog();
+                loadProgram();
+            }
+            else
+            {
+                MessageBox.Show("Не выбрана программа из списка");
+            }
+
+            
         }
     }
 }

@@ -5,65 +5,69 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SupportCenter"
         mc:Ignorable="d"
-        Title="CreateAppealFolderForm" Height="450" Width="800">
+        Title="Создание обращения на предоставление доступа к папке" Height="287" Width="1049" Loaded="Window_Loaded">
     <Window.Resources>
         <ResourceDictionary Source="/Styles/Style.xaml"></ResourceDictionary>
     </Window.Resources>
     <Grid>
         <Image Source="/Image/Main.jpg" StretchDirection="UpOnly" Stretch="Fill"/>
-        <Grid Background="#EF3C3636" Opacity="1" HorizontalAlignment="Right">
+        <Grid Background="#EF3C3636" Opacity="1">
             <TextBlock Margin="197,10,0,552" TextWrapping="Wrap" FontSize="16" Foreground="White" FontFamily="Yu Gothic UI Semibold" Text="Создание обращения" HorizontalAlignment="Left" Width="167">
                 <TextBlock.Effect>
                     <DropShadowEffect/>
                 </TextBlock.Effect>
             </TextBlock>
-            <Button x:Name="createAppealProgram" Style="{StaticResource ButtonMenuStyle}" HorizontalAlignment="Left" Margin="27,211,0,0" VerticalAlignment="Top" Height="26" Width="493" Cursor="Hand" Click="createAppealProgram_Click">
+            <Button x:Name="createAppealFolder" Style="{StaticResource ButtonMenuStyle}" HorizontalAlignment="Left" Margin="27,197,0,0" VerticalAlignment="Top" Height="26" Width="493" Cursor="Hand" Click="createAppealFolder_Click">
                 <Button.Effect>
                     <DropShadowEffect/>
                 </Button.Effect>
                 <TextBlock TextWrapping="Wrap" TextAlignment="Center" Text="Создать"/>
             </Button>
-            <TextBlock HorizontalAlignment="Left" Margin="30,47,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Foreground="White" FontFamily="Yu Gothic UI Semibold" Text="Требуемая сетевая папка:">
+            <TextBlock HorizontalAlignment="Left" Margin="30,33,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Foreground="White" FontFamily="Yu Gothic UI Semibold" Text="Требуемая сетевая папка:">
                 <TextBlock.Effect>
                     <DropShadowEffect/>
                 </TextBlock.Effect>
             </TextBlock>
-            <TextBox x:Name="programAppeal" Style="{StaticResource TextBoxStyle}" HorizontalAlignment="Left" Margin="30,73,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="325" Height="24" FontSize="16" FontFamily="Yu Gothic UI Semibold">
+            <TextBox x:Name="folderAppeal" Style="{StaticResource TextBoxStyle}" HorizontalAlignment="Left" Margin="30,59,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="325" Height="24" FontSize="16" FontFamily="Yu Gothic UI Semibold">
                 <TextBox.Effect>
                     <DropShadowEffect/>
                 </TextBox.Effect>
             </TextBox>
-            <Button x:Name="selectProgram" Style="{StaticResource ButtonMenuStyle}" HorizontalAlignment="Left" Margin="364,73,0,0" VerticalAlignment="Top" Height="24" Width="156" Cursor="Hand" Click="selectProgram_Click">
+            <Button x:Name="selectFolder" Style="{StaticResource ButtonMenuStyle}" HorizontalAlignment="Left" Margin="364,59,0,0" VerticalAlignment="Top" Height="24" Width="156" Cursor="Hand" Click="selectFolder_Click">
                 <Button.Effect>
                     <DropShadowEffect/>
                 </Button.Effect>
                 <TextBlock TextWrapping="Wrap" TextAlignment="Center" Text="Выбрать"/>
             </Button>
-            <TextBox x:Name="commentAppeal" Style="{StaticResource TextBoxStyle}" HorizontalAlignment="Left" Margin="27,128,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="493" Height="75" FontSize="16" FontFamily="Yu Gothic UI Semibold">
+            <TextBox x:Name="commentAppeal" Style="{StaticResource TextBoxStyle}" HorizontalAlignment="Left" Margin="27,114,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="493" Height="75" FontSize="16" FontFamily="Yu Gothic UI Semibold">
                 <TextBox.Effect>
                     <DropShadowEffect/>
                 </TextBox.Effect>
             </TextBox>
-            <TextBlock HorizontalAlignment="Left" Margin="27,102,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Foreground="White" FontFamily="Yu Gothic UI Semibold" Text="Комментарий к обращению (обоснование, для чего требуется) : ">
+            <TextBlock HorizontalAlignment="Left" Margin="27,88,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Foreground="White" FontFamily="Yu Gothic UI Semibold" Text="Комментарий к обращению (обоснование, для чего требуется) : ">
                 <TextBlock.Effect>
                     <DropShadowEffect/>
                 </TextBlock.Effect>
             </TextBlock>
-            <DataGrid x:Name="programDataGrid"
+            <DataGrid x:Name="folderDataGrid"
  AutoGenerateColumns="False"
  SelectionMode="Single"
- SelectionUnit="FullRow" Margin="536,47,23,231">
+ SelectionUnit="FullRow" Margin="542,33,0,0" HorizontalAlignment="Left" Width="490" Height="156" VerticalAlignment="Top">
                 <DataGrid.Columns>
                     <DataGridTextColumn
-         Header="Наименование программы"
-         Binding="{Binding name_program}"
+         Header="НАИМЕНОВАНИЕ ПАПКИ"
+         Binding="{Binding nameFolder}"
          Width="*" />
+                    <DataGridTextColumn
+Header="ПУТЬ К ПАПКЕ"
+Binding="{Binding wayFolder}"
+Width="*" />
                 </DataGrid.Columns>
 
 
 
             </DataGrid>
-            <Button x:Name="selectProgramDg" Style="{StaticResource ButtonMenuStyle}" HorizontalAlignment="Left" Margin="536,211,0,0" VerticalAlignment="Top" Height="26" Width="241" Cursor="Hand" Click="selectProgramDg_Click">
+            <Button x:Name="selectаFolderDg" Style="{StaticResource ButtonMenuStyle}" HorizontalAlignment="Left" Margin="542,197,0,0" VerticalAlignment="Top" Height="26" Width="491" Cursor="Hand" Click="selectаFolderDg_Click">
                 <Button.Effect>
                     <DropShadowEffect/>
                 </Button.Effect>

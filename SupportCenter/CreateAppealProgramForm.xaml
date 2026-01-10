@@ -55,7 +55,8 @@
     SelectionUnit="FullRow" Margin="536,47,23,79">
                 <DataGrid.Columns>
                     <DataGridTextColumn
-            Header="Наименование программы"
+            Header="НАИМЕНОВАНИЕ ПРОГРАММЫ
+                        "
             Binding="{Binding name_program}"
             Width="*" />
                 </DataGrid.Columns>

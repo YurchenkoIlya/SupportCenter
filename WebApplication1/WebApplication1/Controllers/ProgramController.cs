@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Npgsql;
+using NpgsqlTypes;
 using WebApplication1.Dto;
   
     [ApiController]
@@ -41,5 +42,42 @@ using WebApplication1.Dto;
 
             return programs;
 
+
+
         }
+    [HttpPut("put")]
+    public async Task<IActionResult> UpdateProgram([FromBody] ProgramDto dto)
+    {
+
+        var connStr = _config.GetConnectionString("DefaultConnection");
+
+
+        await using var conn = new NpgsqlConnection(connStr);
+        await conn.OpenAsync();
+
+        const string sql = @"
+            UPDATE main.program
+            SET name_program = @name_program, 
+            way_program = @way_program
+            WHERE id_program = @id;
+        ";
+
+        await using var cmd = new NpgsqlCommand(sql, conn);
+
+        cmd.Parameters.Add("@id", NpgsqlDbType.Integer).Value = dto.id_program;
+        cmd.Parameters.Add("@name_program", NpgsqlDbType.Text).Value = dto.name_program;
+        cmd.Parameters.Add("@way_program", NpgsqlDbType.Text).Value = dto.way_program;
+       
+
+        int rows = await cmd.ExecuteNonQueryAsync();
+
+        if (rows == 0)
+            return NotFound("Программа с таким ID не найдена");
+        {
+            Console.WriteLine($"Программа отредактирована Наименование - {dto.name_program} Путь - {dto.way_program}");
+            return Ok("Программа отредактирована");
+            
+        }
+
     }
+}

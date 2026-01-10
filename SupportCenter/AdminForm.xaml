@@ -169,7 +169,7 @@
                                 <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="Добавить программу" VerticalAlignment="Center"/>
                             </Grid>
                         </Button>
-                        <Button x:Name="redactUserButton1_Копировать1" Style="{StaticResource ButtonMenuStyle}"  Cursor="Hand" Margin="166,44,0,0" Height="22" VerticalAlignment="Top" HorizontalAlignment="Left" Width="183" Click="redactUser_Click">
+                        <Button x:Name="redactProgram" Style="{StaticResource ButtonMenuStyle}"  Cursor="Hand" Margin="166,44,0,0" Height="22" VerticalAlignment="Top" HorizontalAlignment="Left" Width="183" Click="redactProgram_Click">
                             <Button.Effect>
                                 <DropShadowEffect/>
                             </Button.Effect>

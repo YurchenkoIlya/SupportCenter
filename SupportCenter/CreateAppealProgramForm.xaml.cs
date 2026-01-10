@@ -51,7 +51,7 @@ namespace SupportCenter
                 NpgsqlCommand command = new NpgsqlCommand("" +
                     "INSERT INTO main.appealprogram " +
                     "(id_program,pc_name,ip_pc,oib_responsible,oib_status_responsible,oit_responsible,oit_status_responsible,otp_executor,otp_status_executor,applicant,comment) " +
-                    "VALUES (@idProgram,@pcName,@ipPc,12,0,11,0,0,0,(select user_id from main.users where login_user=@applicantLogin),@comment)", db_connect.GetConnection());
+                    "VALUES (@idProgram,@pcName,@ipPc,12,0,11,0,null,0,(select user_id from main.users where login_user=@applicantLogin),@comment)", db_connect.GetConnection());
                 command.Parameters.Add("@idProgram", NpgsqlDbType.Integer).Value = path.id_program;
                 command.Parameters.Add("@pcName", NpgsqlDbType.Text).Value = Session.CurrentPcName;
                 command.Parameters.Add("@ipPc", NpgsqlDbType.Text).Value = Session.CurrentIp;
