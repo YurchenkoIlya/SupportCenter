@@ -9,6 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Image\iconLogo.png" />
     <None Remove="Image\icons8-copy-50.png" />
     <None Remove="Image\icons8-copy-64.png" />
     <None Remove="Image\icons8-folder-50.png" />
@@ -18,6 +19,7 @@
     <None Remove="Image\icons8-program-50.png" />
     <None Remove="Image\icons8-report-50.png" />
     <None Remove="Image\icons8-user-50.png" />
+    <None Remove="Image\Logo.png" />
     <None Remove="Image\Main.jpg" />
   </ItemGroup>
 
@@ -29,6 +31,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Image\iconLogo.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Image\icons8-copy-50.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
@@ -54,6 +59,9 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Image\icons8-user-50.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\logo.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Image\Main.jpg">

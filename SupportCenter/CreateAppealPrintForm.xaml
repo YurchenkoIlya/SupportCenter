@@ -5,8 +5,68 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SupportCenter"
         mc:Ignorable="d"
-        Title="CreateAppealPrintForm" Height="450" Width="800">
+        Title="CreateAppealPrintForm" Height="279" Width="568">
+    <Window.Resources>
+        <ResourceDictionary Source="/Styles/Style.xaml"></ResourceDictionary>
+    </Window.Resources>
     <Grid>
-        
+        <Image Source="/Image/Main.jpg" StretchDirection="UpOnly" Stretch="Fill"/>
+        <Grid Background="#EF3C3636" Opacity="1">
+            <TextBlock Margin="197,10,0,552" TextWrapping="Wrap" FontSize="16" Foreground="White" FontFamily="Yu Gothic UI Semibold" Text="Создание обращения" HorizontalAlignment="Left" Width="167">
+                <TextBlock.Effect>
+                    <DropShadowEffect/>
+                </TextBlock.Effect>
+            </TextBlock>
+            <TextBlock HorizontalAlignment="Left" Margin="43,33,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Foreground="White" FontFamily="Yu Gothic UI Semibold" Text="Модель принтера">
+                <TextBlock.Effect>
+                    <DropShadowEffect/>
+                </TextBlock.Effect>
+            </TextBlock>
+            <TextBox x:Name="modelPrinter" Style="{StaticResource TextBoxStyle}" HorizontalAlignment="Left" Margin="184,32,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="326" Height="24" FontSize="16" FontFamily="Yu Gothic UI Semibold">
+                <TextBox.Effect>
+                    <DropShadowEffect/>
+                </TextBox.Effect>
+            </TextBox>
+            <Button x:Name="selectProgram" Style="{StaticResource ButtonMenuStyle}" HorizontalAlignment="Left" Margin="31,207,0,0" VerticalAlignment="Top" Height="24" Width="479" Cursor="Hand" Click="selectProgram_Click">
+                <Button.Effect>
+                    <DropShadowEffect/>
+                </Button.Effect>
+                <TextBlock TextWrapping="Wrap" TextAlignment="Center" Text="Создать обращение"/>
+            </Button>
+            <TextBlock HorizontalAlignment="Left" Margin="30,62,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Foreground="White" FontFamily="Yu Gothic UI Semibold" Text="ИП адрес принтера">
+                <TextBlock.Effect>
+                    <DropShadowEffect/>
+                </TextBlock.Effect>
+            </TextBlock>
+            <TextBox x:Name="ipPrinter" Style="{StaticResource TextBoxStyle}" HorizontalAlignment="Left" Margin="184,61,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="326" Height="24" FontSize="16" FontFamily="Yu Gothic UI Semibold">
+                <TextBox.Effect>
+                    <DropShadowEffect/>
+                </TextBox.Effect>
+            </TextBox>
+            <TextBlock HorizontalAlignment="Left" Margin="31,109,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Foreground="White" FontFamily="Yu Gothic UI Semibold" Text="Комментарий по обращению:">
+                <TextBlock.Effect>
+                    <DropShadowEffect/>
+                </TextBlock.Effect>
+            </TextBlock>
+            <TextBox x:Name="comment" Style="{StaticResource TextBoxStyle}" HorizontalAlignment="Left" Margin="31,135,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="479" Height="67" FontSize="16" FontFamily="Yu Gothic UI Semibold">
+                <TextBox.Effect>
+                    <DropShadowEffect/>
+                </TextBox.Effect>
+            </TextBox>
+            <Button x:Name="modelInfoPrinter" Style="{StaticResource ButtonMenuStyle}" HorizontalAlignment="Left" Margin="515,32,0,0" VerticalAlignment="Top" Height="24" Width="23" Cursor="Hand" Click="selectProgram_Click">
+                <Button.Effect>
+                    <DropShadowEffect/>
+                </Button.Effect>
+                <TextBlock TextWrapping="Wrap" TextAlignment="Center" Text="?"/>
+            </Button>
+            <Button x:Name="ipInfoPrinter" Style="{StaticResource ButtonMenuStyle}" HorizontalAlignment="Left" Margin="515,61,0,0" VerticalAlignment="Top" Height="24" Width="23" Cursor="Hand" Click="selectProgram_Click">
+                <Button.Effect>
+                    <DropShadowEffect/>
+                </Button.Effect>
+                <TextBlock TextWrapping="Wrap" TextAlignment="Center" Text="?"/>
+            </Button>
+        </Grid>
+
+
     </Grid>
 </Window>

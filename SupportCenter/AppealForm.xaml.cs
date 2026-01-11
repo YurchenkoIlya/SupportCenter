@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Net.Http;
+using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -184,6 +185,71 @@ namespace SupportCenter
         private void buttonPrinter_Click(object sender, RoutedEventArgs e)
         {
             workAreaControl.SelectedIndex = 2;
+            loadPrinter();
+        }
+        public void loadPrinter()
+        {
+
+            dbConnect db_connect = new dbConnect();
+            NpgsqlCommand command = new NpgsqlCommand(
+                        @"SELECT u.id_appeal, u.ip_pc, u.name_pc, u.model_printer, u.ip_printer,
+                        executor.user_name AS executor_username,
+                        u.status_execute,
+                        u.comment,
+                        applicant.user_name AS applicant_username
+                        FROM main.appealprinter u
+                        LEFT JOIN main.users executor ON u.executor = executor.user_id
+                        LEFT JOIN main.users applicant ON u.applicant = applicant.user_id" , db_connect.GetConnection());
+
+            db_connect.openConnection();
+            NpgsqlDataAdapter adapter = new NpgsqlDataAdapter(command);
+            NpgsqlDataReader reader = command.ExecuteReader();
+            List<AppealPrinter> result = new List<AppealPrinter>();
+
+            while (reader.Read())
+            {
+                string? executeStatus = null;
+                
+
+
+
+
+                switch (Convert.ToString(reader[6]))
+                {
+                    case "0": executeStatus = "Не в работе"; break;
+                    case "1": executeStatus = "В работе"; break;
+                    case "2": executeStatus = "Выполнено"; break;
+                    case "3": executeStatus = "Отменено"; break;
+
+                }
+                string executorName = reader.IsDBNull(5) ? "Не назначен" : reader.GetString(5);
+
+
+
+                result.Add(new AppealPrinter
+                {
+                    id_appeal = reader.GetInt32(0),
+                    ip_pc = reader.GetString(1),
+                    name_pc = reader.GetString(2),
+                    model_printer = reader.GetString(3),
+                    ip_printer = reader.GetString(4),
+                    executor = executorName,
+                    status_execute = executeStatus,
+                    comment = reader.GetString(7),
+                    applicant = reader.GetString(8) 
+                });
+
+            }
+            reader.Close();
+            printerDataGrid.ItemsSource = result;
+           
+
+
+
+
+
+
+
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -236,6 +302,29 @@ namespace SupportCenter
         {
             CreateAppealFolderForm createAppealFolderForm = new CreateAppealFolderForm();
             createAppealFolderForm.ShowDialog();
+        }
+
+        private void printerAppealView_Click(object sender, RoutedEventArgs e)
+        {
+            AppealPrinter? path = printerDataGrid.SelectedItem as AppealPrinter;
+
+            if (path != null)
+            {
+                ViewAppealPrintForm viewAppealPrintForm = new ViewAppealPrintForm(path.id_appeal);
+                viewAppealPrintForm.ShowDialog();
+                loadPrinter();
+            }
+            else
+            {
+                MessageBox.Show("Не выбрана папка из списка");
+            }
+
+        }
+
+        private void appealPrinterCreate_Click(object sender, RoutedEventArgs e)
+        {
+            CreateAppealPrintForm createAppealPrint = new CreateAppealPrintForm();
+            createAppealPrint.ShowDialog(); 
         }
     }
 }

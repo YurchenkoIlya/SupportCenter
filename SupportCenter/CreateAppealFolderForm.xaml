@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SupportCenter"
         mc:Ignorable="d"
-        Title="Создание обращения на предоставление доступа к папке" Height="287" Width="1049" Loaded="Window_Loaded">
+        Title="Создание обращения на предоставление доступа к папке" Height="287" Width="1049" Loaded="Window_Loaded" Icon="/Image/iconLogo.png">
     <Window.Resources>
         <ResourceDictionary Source="/Styles/Style.xaml"></ResourceDictionary>
     </Window.Resources>

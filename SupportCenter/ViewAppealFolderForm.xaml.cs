@@ -132,11 +132,93 @@ namespace SupportCenter
         private void selectHistorySpace_Click(object sender, RoutedEventArgs e)
         {
             menuAppealFolder.SelectedIndex = 3;
+
+
+            dbConnect db_connect = new dbConnect();
+            NpgsqlCommand command = new NpgsqlCommand(
+                "SELECT u.id_log, u.date_log, u.id_appeal, u.action, u.appeal_type, o.user_name " +
+                "FROM main.log_appeal u " +
+                "LEFT JOIN main.users o " +
+                "ON u.id_user = o.user_id " +
+                "WHERE u.id_appeal = @idAppeal AND u.appeal_type = 2",
+    db_connect.GetConnection());
+            command.Parameters.Add("@idAppeal", NpgsqlDbType.Integer).Value = Convert.ToInt32(idAppeal.Text);
+            db_connect.openConnection();
+            command.ExecuteNonQuery();
+            NpgsqlDataAdapter adapter = new NpgsqlDataAdapter(command);
+            List<HistoryAppealDto> result = new List<HistoryAppealDto>();
+
+            using (NpgsqlDataReader reader = command.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+
+                    DateTime date = reader.GetDateTime(1);
+                    string formattedDate = date.ToString("dd.MM.yyyy HH:mm");
+
+
+                    result.Add(new HistoryAppealDto(
+                        idLog: reader.GetInt32(0),
+                        dateLog: formattedDate,
+                        idAppeal: Convert.ToInt32(idAppeal.Text),
+                        action: reader.GetString(3),
+                        appealType: 2,
+                        userName: reader.GetString(5)
+                    ));
+                }
+
+                historyAppealDataGrid.ItemsSource = result;
+            }
         }
 
         private void selectChatSpace_Click(object sender, RoutedEventArgs e)
         {
             menuAppealFolder.SelectedIndex = 2;
+        }
+        public void logRead(string action)
+        {
+            DateTime currentDateTime = DateTime.Now;
+
+            dbConnect db_connect = new dbConnect();
+            db_connect.openConnection();
+            DataTable table = new DataTable();
+            NpgsqlDataAdapter adapter = new NpgsqlDataAdapter();
+            NpgsqlCommand command = new NpgsqlCommand("INSERT INTO main.log_appeal" +
+                "(date_log,id_appeal,action,appeal_type,id_user) " +
+                "values (date_trunc('second', @date),@idAppeal,@action,@appeal_type,(select user_id from main.users where login_user = @loginUser))", db_connect.GetConnection());
+            command.Parameters.Add("@date", NpgsqlDbType.Timestamp).Value = currentDateTime;
+            command.Parameters.Add("@loginUser", NpgsqlDbType.Text).Value = Session.CurrentUserLogin;
+            command.Parameters.Add("@idAppeal", NpgsqlDbType.Integer).Value = Convert.ToInt32(idAppeal.Text);
+            command.Parameters.Add("@action", NpgsqlDbType.Text).Value = action;
+            command.Parameters.Add("@appeal_type", NpgsqlDbType.Integer).Value = 2;
+
+
+            command.ExecuteNonQuery();
+
+
+
+        }
+
+        private void acceptOibResponsible_Click(object sender, RoutedEventArgs e)
+        {
+            int oibStatus = Convert.ToInt32(oibStatusResponsble.SelectedIndex);
+
+
+
+
+            dbConnect db_connect = new dbConnect();
+            db_connect.openConnection();
+            DataTable table = new DataTable();
+            NpgsqlDataAdapter adapter = new NpgsqlDataAdapter();
+            NpgsqlCommand command = new NpgsqlCommand("UPDATE main.appealfolder SET status_responsible = @oibStatus WHERE id_appeal = @idAppeal", db_connect.GetConnection());
+            command.Parameters.Add("@oibStatus", NpgsqlDbType.Integer).Value = oibStatus;
+            command.Parameters.Add("@idAppeal", NpgsqlDbType.Integer).Value = Convert.ToInt32(idAppeal.Text);
+
+            MessageBox.Show("Согласование установлено");
+            command.ExecuteNonQuery();
+            loadForm();
+            string action = "Изменено согласование ответственного: " + oibStatusResponsble.Text;
+            logRead(action);
         }
     }
 }

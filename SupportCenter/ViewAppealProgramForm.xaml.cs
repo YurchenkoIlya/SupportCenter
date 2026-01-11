@@ -5,6 +5,8 @@ using System.Data;
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Documents;
+using System.Windows.Media;
+using System.Xml.Linq;
 
 namespace SupportCenter
 {
@@ -74,6 +76,7 @@ namespace SupportCenter
         private void selectChatSpace_Click(object sender, RoutedEventArgs e)
         {
             menuAppealProgram.SelectedIndex = 2;
+            loadChat();
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -339,7 +342,7 @@ namespace SupportCenter
 
         private void sendMessageButton_Click(object sender, RoutedEventArgs e)
         {
-            FlowDocument flowDoc = messageRichtextbox.Document;
+         /*   FlowDocument flowDoc = messageRichtextbox.Document;
 
             // Создаём новый параграф с текстом
             Paragraph paragraph = new Paragraph(new Run("Yurchenkoiv: " + messageTextBlock.Text));
@@ -349,7 +352,85 @@ namespace SupportCenter
             flowDoc.Blocks.Add(paragraph);
 
             // Прокручиваем к концу
+            messageRichtextbox.ScrollToEnd();*/
+
+            if (string.IsNullOrWhiteSpace(messageTextBlock.Text)) MessageBox.Show("Сообщение пустое");
+            {
+                DateTime currentDateTime = DateTime.Now;
+
+                dbConnect db_connect = new dbConnect();
+                db_connect.openConnection();
+                NpgsqlDataAdapter adapter = new NpgsqlDataAdapter();
+                NpgsqlCommand command = new NpgsqlCommand("" +
+                    "INSERT INTO main.chat_request " +
+                    "(id_appeal,type_appeal,id_user,message,date)" +
+                    "VALUES (@idAppeal,@typeAppeal,(select user_id from main.users where login_user = @applicantLogin),@messageText,NOW())", db_connect.GetConnection());
+                command.Parameters.Add("@idAppeal", NpgsqlDbType.Integer).Value = Convert.ToInt32(idAppeal.Text);
+                command.Parameters.Add("@applicantLogin", NpgsqlDbType.Text).Value = Session.CurrentUserLogin;
+                command.Parameters.Add("@date", NpgsqlDbType.Timestamp).Value = currentDateTime;
+                command.Parameters.Add("@typeAppeal", NpgsqlDbType.Integer).Value = 1;
+                command.Parameters.Add("@messageText", NpgsqlDbType.Text).Value = messageTextBlock.Text;
+                adapter.SelectCommand = command;
+                command.ExecuteNonQuery();
+                db_connect.closeConnection();
+                messageTextBlock.Clear();
+                loadChat();
+
+            }
+        }
+        public void loadChat()
+        {
+            messageRichtextbox.Document.Blocks.Clear();
+
+            dbConnect db_connect = new dbConnect();
+            db_connect.openConnection();
+
+            using var command = new NpgsqlCommand(
+                @"SELECT u.login_user, c.message, c.date
+          FROM main.chat_request c
+          JOIN main.users u ON c.id_user = u.user_id
+          WHERE c.id_appeal = @idAppeal
+          ORDER BY c.date",
+                db_connect.GetConnection()
+            );
+
+            command.Parameters.AddWithValue("@idAppeal", Convert.ToInt32(idAppeal.Text));
+
+            using var reader = command.ExecuteReader();
+
+            while (reader.Read())
+            {
+                string login = reader.GetString(0);
+                string message = reader.GetString(1);
+                DateTime time = reader.GetDateTime(2);
+
+                Paragraph paragraph = new Paragraph
+                {
+                    Margin = new Thickness(0),
+                    Inlines =
+            {
+                new Run($"{login}: ")
+                {
+                    FontWeight = FontWeights.Bold
+                },
+                new Run(message),
+                new LineBreak(),
+                new Run(time.ToString("dd.MM.yyyy HH:mm"))
+                {
+                    FontSize = 10,
+                    Foreground = Brushes.Gray
+                }
+            }
+                };
+
+                messageRichtextbox.Document.Blocks.Add(paragraph);
+            }
+
             messageRichtextbox.ScrollToEnd();
+
+
+
+
         }
 
         private void giveAppeal_Click(object sender, RoutedEventArgs e)

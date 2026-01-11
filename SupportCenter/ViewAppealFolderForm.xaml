@@ -55,12 +55,12 @@
                     <DropShadowEffect/>
                 </TextBlock.Effect>
             </TextBlock>
-            <TabControl x:Name="menuAppealFolder" Margin="454,50,159,37" Background="{x:Null}" BorderBrush="{x:Null}">
+            <TabControl x:Name="menuAppealFolder" Margin="454,50,10,37" Background="{x:Null}" BorderBrush="{x:Null}">
                 <TabControl.Effect>
                     <DropShadowEffect/>
                 </TabControl.Effect>
                 <TabItem x:Name="responsibleTabItem" Header="Согласования" BorderBrush="{x:Null}">
-                    <Grid Background="#FF3C3C3C">
+                    <Grid Background="#FF3C3C3C" Margin="0,0,162,0">
                         <TextBlock HorizontalAlignment="Left" Margin="16,15,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Foreground="White" FontFamily="Yu Gothic UI Semibold" Text="Отвественный за сетевую папку" Width="436">
                             <TextBlock.Effect>
                                 <DropShadowEffect/>
@@ -71,7 +71,7 @@
                                 <DropShadowEffect/>
                             </TextBlock.Effect>
                         </TextBlock>
-                        <Button x:Name="acceptOibResponsible" Style="{StaticResource ButtonMenuStyle}" HorizontalAlignment="Left" Margin="241,72,0,0" VerticalAlignment="Top" Height="25" Width="121" Cursor="Hand">
+                        <Button x:Name="acceptOibResponsible" Style="{StaticResource ButtonMenuStyle}" HorizontalAlignment="Left" Margin="241,72,0,0" VerticalAlignment="Top" Height="25" Width="121" Cursor="Hand" Click="acceptOibResponsible_Click">
                             <Button.Effect>
                                 <DropShadowEffect/>
                             </Button.Effect>
@@ -88,7 +88,7 @@
                     </Grid>
                 </TabItem>
                 <TabItem x:Name="executeTabItem" Header="Исполнитель">
-                    <Grid Background="#FF3C3C3C">
+                    <Grid Background="#FF3C3C3C" Margin="0,0,145,0">
                         <TextBlock HorizontalAlignment="Left" Margin="12,19,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Foreground="White" FontFamily="Yu Gothic UI Semibold" Text="Исполнитель Отдела технической поддержки:">
                             <TextBlock.Effect>
                                 <DropShadowEffect/>
@@ -123,7 +123,7 @@
                     </Grid>
                 </TabItem>
                 <TabItem x:Name="chatTabItem" Header="Переписка">
-                    <Grid Background="#FF3C3C3C" Height="319">
+                    <Grid Background="#FF3C3C3C" Height="319" Margin="0,0,142,0">
                         <RichTextBox x:Name="messageRichtextbox" Margin="0,10,0,0" HorizontalAlignment="Center" Width="377" Height="188" VerticalAlignment="Top">
                             <FlowDocument>
                             </FlowDocument>
@@ -152,7 +152,24 @@
                     </Grid>
                 </TabItem>
                 <TabItem x:Name="historyTabItem" Header="История">
-                    <Grid Background="#FF3C3C3C"/>
+                    <Grid Background="#FF3C3C3C">
+                        <DataGrid x:Name="historyAppealDataGrid" AutoGenerateColumns="False" 
+                            CanUserAddRows="False" IsReadOnly="True" Margin="0,0,0,3">
+                            <DataGrid.Columns>
+                                <!-- Время -->
+                                <DataGridTextColumn Header="Время" Binding="{Binding dateLog}" 
+                                    Width="100"/>
+
+                                <!-- Пользователь -->
+                                <DataGridTextColumn Header="Пользователь" Binding="{Binding userName}" 
+                                    Width="150"/>
+
+                                <!-- Событие -->
+                                <DataGridTextColumn Header="Событие" Binding="{Binding action}" 
+                                    Width="*"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Grid>
                 </TabItem>
             </TabControl>
             <Button x:Name="selectResponsibleSpace" Style="{StaticResource ButtonMenuStyle}" HorizontalAlignment="Left" Margin="454,14,0,0" VerticalAlignment="Top" Height="25" Width="97" Cursor="Hand" Click="selectResponsibleSpace_Click">
