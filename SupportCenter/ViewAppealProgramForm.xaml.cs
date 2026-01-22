@@ -1,5 +1,6 @@
 ﻿using Npgsql;
 using NpgsqlTypes;
+using SupportCenter.Api;
 using SupportCenter.Classes;
 using System.Data;
 using System.Diagnostics;
@@ -206,8 +207,7 @@ namespace SupportCenter
 
                 if (Session.AuthorizationStatus != 1)
                 {
-                    if (otpStatusResponsble.SelectedIndex == 0)
-                    {
+                    
 
 
 
@@ -250,7 +250,7 @@ namespace SupportCenter
 
                     }
 
-                }
+                
 
             }
             reader.Close();
@@ -340,89 +340,54 @@ namespace SupportCenter
             loadForm();
         }
 
-        private void sendMessageButton_Click(object sender, RoutedEventArgs e)
+        private async void sendMessageButton_Click(object sender, RoutedEventArgs e)
         {
-         /*   FlowDocument flowDoc = messageRichtextbox.Document;
-
-            // Создаём новый параграф с текстом
-            Paragraph paragraph = new Paragraph(new Run("Yurchenkoiv: " + messageTextBlock.Text));
-            paragraph.Margin = new Thickness(0); // Убираем отступы между строками
-
-            // Добавляем параграф в документ
-            flowDoc.Blocks.Add(paragraph);
-
-            // Прокручиваем к концу
-            messageRichtextbox.ScrollToEnd();*/
-
-            if (string.IsNullOrWhiteSpace(messageTextBlock.Text)) MessageBox.Show("Сообщение пустое");
+            var api = new ChatService();
+            if (string.IsNullOrWhiteSpace(messageTextBlock.Text))
             {
-                DateTime currentDateTime = DateTime.Now;
-
-                dbConnect db_connect = new dbConnect();
-                db_connect.openConnection();
-                NpgsqlDataAdapter adapter = new NpgsqlDataAdapter();
-                NpgsqlCommand command = new NpgsqlCommand("" +
-                    "INSERT INTO main.chat_request " +
-                    "(id_appeal,type_appeal,id_user,message,date)" +
-                    "VALUES (@idAppeal,@typeAppeal,(select user_id from main.users where login_user = @applicantLogin),@messageText,NOW())", db_connect.GetConnection());
-                command.Parameters.Add("@idAppeal", NpgsqlDbType.Integer).Value = Convert.ToInt32(idAppeal.Text);
-                command.Parameters.Add("@applicantLogin", NpgsqlDbType.Text).Value = Session.CurrentUserLogin;
-                command.Parameters.Add("@date", NpgsqlDbType.Timestamp).Value = currentDateTime;
-                command.Parameters.Add("@typeAppeal", NpgsqlDbType.Integer).Value = 1;
-                command.Parameters.Add("@messageText", NpgsqlDbType.Text).Value = messageTextBlock.Text;
-                adapter.SelectCommand = command;
-                command.ExecuteNonQuery();
-                db_connect.closeConnection();
-                messageTextBlock.Clear();
-                loadChat();
-
+                MessageBox.Show("Сообщение пустое");
+                return;
             }
-        }
-        public void loadChat()
-        {
-            messageRichtextbox.Document.Blocks.Clear();
 
-            dbConnect db_connect = new dbConnect();
-            db_connect.openConnection();
-
-            using var command = new NpgsqlCommand(
-                @"SELECT u.login_user, c.message, c.date
-          FROM main.chat_request c
-          JOIN main.users u ON c.id_user = u.user_id
-          WHERE c.id_appeal = @idAppeal
-          ORDER BY c.date",
-                db_connect.GetConnection()
-            );
-
-            command.Parameters.AddWithValue("@idAppeal", Convert.ToInt32(idAppeal.Text));
-
-            using var reader = command.ExecuteReader();
-
-            while (reader.Read())
+            var dto = new CreateChatMessageDto
             {
-                string login = reader.GetString(0);
-                string message = reader.GetString(1);
-                DateTime time = reader.GetDateTime(2);
+                AppealId = Convert.ToInt32(idAppeal.Text),
+                TypeAppeal = 1,
+                Message = messageTextBlock.Text,
+                Login = Session.CurrentUserLogin 
+            };
 
-                Paragraph paragraph = new Paragraph
+            await api.SendMessageAsync(dto);
+
+            messageTextBlock.Clear();
+            await loadChat(); 
+        }
+        public async Task loadChat()
+        {
+
+          
+
+            messageRichtextbox.Document.Blocks.Clear();
+            var api = new ChatService();
+            var messages = await api.GetMessagesAsync(1, int.Parse(idAppeal.Text));
+
+            foreach (var msg in messages)
+            {
+                var paragraph = new Paragraph
                 {
                     Margin = new Thickness(0),
                     Inlines =
             {
-                new Run($"{login}: ")
-                {
-                    FontWeight = FontWeights.Bold
-                },
-                new Run(message),
+                new Run($"{msg.Login}: ") { FontWeight = FontWeights.Bold },
+                new Run(msg.Message),
                 new LineBreak(),
-                new Run(time.ToString("dd.MM.yyyy HH:mm"))
+                new Run(msg.Date.ToString("dd.MM.yyyy HH:mm"))
                 {
                     FontSize = 10,
                     Foreground = Brushes.Gray
                 }
             }
                 };
-
                 messageRichtextbox.Document.Blocks.Add(paragraph);
             }
 

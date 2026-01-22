@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SupportCenter"
         mc:Ignorable="d"
-        Title="Центр поддержки пользователя" Height="298" Width="706" Loaded="Window_Loaded" ResizeMode="NoResize" Closing="Window_Closing" Icon="/Image/iconLogo.png">
+        Title="Центр поддержки пользователя" Height="298" Width="706" Loaded="Window_Loaded" ResizeMode="NoResize" Closing="Window_Closing" Icon="/Image/iconLogo.png" Closed="Window_Closed">
     <Window.Resources>
         <ResourceDictionary Source="/Styles/Style.xaml"></ResourceDictionary>
     </Window.Resources>
@@ -33,7 +33,7 @@
                 </TextBlock.Effect>
             </TextBlock>
             <Grid Margin="174,0,0,175" Background="#FF292929" Height="31" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="315">
-                <TextBlock x:Name="namePcTextBlock" HorizontalAlignment="Left" TextWrapping="Wrap" Text="123562-6543" VerticalAlignment="Center" Width="270" FontSize="18" FontFamily="Yu Gothic UI Semibold" Foreground="White" Margin="10,0,0,0"/>
+                <TextBlock x:Name="namePcTextBlock" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Center" Width="270" FontSize="18" FontFamily="Yu Gothic UI Semibold" Foreground="White" Margin="10,0,0,0"/>
                 <Button x:Name="copyNamePcButton" Style="{StaticResource ButtonCopyStyle}" HorizontalAlignment="Left" Margin="285,0,0,0" VerticalAlignment="Center" Height="30" Width="30" Cursor="Hand" Click="copyNamePcButton_Click">
                     <Image Height="20" Source="/Image/icons8-copy-50.png" Stretch="Fill" Width="20"/>
                 </Button>
@@ -45,7 +45,7 @@
                 <Grid.Effect>
                     <DropShadowEffect/>
                 </Grid.Effect>
-                <TextBlock x:Name="ipAdressTextBlock" HorizontalAlignment="Left" TextWrapping="Wrap" Text="192.168.1.1" VerticalAlignment="Center" Width="270" FontSize="18" FontFamily="Yu Gothic UI Semibold" Foreground="White" Margin="10,0,0,0"/>
+                <TextBlock x:Name="ipAdressTextBlock" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Center" Width="270" FontSize="18" FontFamily="Yu Gothic UI Semibold" Foreground="White" Margin="10,0,0,0"/>
                 <Button x:Name="copyIpPcButton" Style="{StaticResource ButtonCopyStyle}" HorizontalAlignment="Left" Margin="285,0,0,0" VerticalAlignment="Center" Height="30" Width="30" Cursor="Hand" Click="copyIpPcButton_Click">
                     <Image Height="20" Source="/Image/icons8-copy-50.png" Stretch="Fill" Width="20"/>
                 </Button>
@@ -54,7 +54,7 @@
                 <Grid.Effect>
                     <DropShadowEffect/>
                 </Grid.Effect>
-                <TextBlock x:Name="userNameAdTextBlock" HorizontalAlignment="Left" TextWrapping="Wrap" Text="YurchenkoIV" VerticalAlignment="Center" Width="270" FontSize="18" FontFamily="Yu Gothic UI Semibold" Foreground="White" Margin="10,0,0,0"/>
+                <TextBlock x:Name="userNameAdTextBlock" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Center" Width="270" FontSize="18" FontFamily="Yu Gothic UI Semibold" Foreground="White" Margin="10,0,0,0"/>
                 <Button x:Name="copyNameAdButton" Style="{StaticResource ButtonCopyStyle}" HorizontalAlignment="Left" Margin="285,0,0,0" VerticalAlignment="Center" Height="30" Width="30" Cursor="Hand" Click="copyNameAdButton_Click">
                     <Image Height="20" Source="/Image/icons8-copy-50.png" Stretch="Fill" Width="20"/>
                 </Button>
@@ -63,7 +63,7 @@
                 <Grid.Effect>
                     <DropShadowEffect/>
                 </Grid.Effect>
-                <TextBlock x:Name="nameAdTextBlock" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Юрченко Илья Вадимович" VerticalAlignment="Center" Width="270" FontSize="18" FontFamily="Yu Gothic UI Semibold" Foreground="White" Margin="10,0,0,0"/>
+                <TextBlock x:Name="nameAdTextBlock" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Center" Width="270" FontSize="18" FontFamily="Yu Gothic UI Semibold" Foreground="White" Margin="10,0,0,0"/>
                 <Button x:Name="copyFioButton" Style="{StaticResource ButtonCopyStyle}" HorizontalAlignment="Left" Margin="285,0,0,0" VerticalAlignment="Center" Height="30" Width="30" Cursor="Hand" Click="copyFioButton_Click">
                     <Image Height="20" Source="/Image/icons8-copy-50.png" Stretch="Fill" Width="20"/>
                 </Button>
@@ -81,13 +81,13 @@
                 </Button.Effect>
                 <TextBlock TextWrapping="Wrap" TextAlignment="Center" Text="Панель администратора"/>
             </Button>
-            <Button Style="{StaticResource ButtonMenuStyle}" HorizontalAlignment="Left" Margin="497,112,0,0" VerticalAlignment="Top" Height="40" Width="182" Cursor="Hand">
+            <Button x:Name="instrumentButton" Style="{StaticResource ButtonMenuStyle}" HorizontalAlignment="Left" Margin="497,112,0,0" VerticalAlignment="Top" Height="40" Width="182" Cursor="Hand" Click="instrumentButton_Click">
                 <Button.Effect>
                     <DropShadowEffect/>
                 </Button.Effect>
                 <TextBlock TextWrapping="Wrap" TextAlignment="Center" Text="Инструменты для решения частых проблем"/>
             </Button>
-            <Button Style="{StaticResource ButtonMenuStyle}" HorizontalAlignment="Left" Margin="497,0,0,83" VerticalAlignment="Bottom" Height="42" Width="182" Cursor="Hand">
+            <Button x:Name="regulations" Style="{StaticResource ButtonMenuStyle}" HorizontalAlignment="Left" Margin="497,0,0,83" VerticalAlignment="Bottom" Height="42" Width="182" Cursor="Hand" Click="regulations_Click">
                 <Button.Effect>
                     <DropShadowEffect/>
                 </Button.Effect>
@@ -103,7 +103,7 @@
                     <DropShadowEffect/>
                 </TextBlock.Effect>
             </TextBlock>
-            <Button Content="Button" HorizontalAlignment="Left" Margin="139,234,0,0" VerticalAlignment="Top" Click="Button_Click"/>
+            <Button Visibility="Hidden" Content="Button" HorizontalAlignment="Left" Margin="139,234,0,0" VerticalAlignment="Top" Click="Button_Click"/>
 
         </Grid>
     </Grid>

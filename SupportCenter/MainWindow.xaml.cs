@@ -7,59 +7,118 @@ using System.DirectoryServices.AccountManagement;
 using System.Management;
 using System.Net;
 using System.Security.Principal;
-using System.Text;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System.Xml.Linq;
+using SupportCenter.Api;
+using System.Windows.Threading;
 
 namespace SupportCenter
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
+    
     public partial class MainWindow : Window
     {
         public MainWindow()
         {
+
             InitializeComponent();
+            _ = UpdateConnectionStatusAsync();
+            InitializeConnectionChecker();
         }
-        public void loadForm()
+        private void InitializeConnectionChecker()
+        {
+            connectionTimer = new DispatcherTimer();
+            connectionTimer.Interval = TimeSpan.FromSeconds(5); // проверка каждые 5 секунд
+            connectionTimer.Tick += ConnectionTimer_Tick;
+            connectionTimer.Start();
+        }
+        private DispatcherTimer connectionTimer;
+        private async void ConnectionTimer_Tick(object sender, EventArgs e)
+        {
+            bool isConnected = await CheckDbConnectionAsync();
+
+            if (isConnected)
+            {
+                connectStatusText.Text = "Сетевое соединение исправно";
+                connectStatusGrid.Background = Brushes.Green;
+            }
+            else
+            {
+                connectStatusText.Text = "Сетевое соединение отсутствует, позвоните на 5005";
+                connectStatusGrid.Background = Brushes.Red;
+            }
+            
+        }
+        private async Task<bool> CheckDbConnectionAsync()
+        {
+            try
+            {
+                dbConnect db_connect = new dbConnect();
+                db_connect.openConnection();
+                // Можно выполнить простую команду, чтобы убедиться в доступности
+                using var cmd = new Npgsql.NpgsqlCommand("SELECT 1", db_connect.GetConnection());
+                await cmd.ExecuteScalarAsync();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+        private async Task UpdateConnectionStatusAsync()
+        {
+            bool isConnected = await CheckDbConnectionAsync();
+
+            if (isConnected)
+            {
+                connectStatusText.Text = "Сетевое соединение исправно";
+                connectStatusGrid.Background = Brushes.Green;
+            }
+            else
+            {
+                connectStatusText.Text = "Сетевое соединение отсутствует, позвоните на 5005";
+                connectStatusGrid.Background = Brushes.Red;
+
+                appealButton.Background = (SolidColorBrush)(new BrushConverter().ConvertFrom("#FFB15507"));             
+                adminButton.Background = (SolidColorBrush)(new BrushConverter().ConvertFrom("#FFB15507"));
+                appealButton.IsEnabled = false;
+                adminButton.IsEnabled = false;
+            }
+        }
+        public async Task loadForm()
         {
 
-
+            string displayName=null;
+            string userAd =null;
+            string computerName=null;
+            string localIP = null;
+            
             // Получаем доменный логин
-            string userAd = WindowsIdentity.GetCurrent().Name;
-            userAd = userAd.Replace(@"ZAVOD\", "");
-             userNameAdTextBlock.Text = userAd;
-            userNameAdTextBlock.Text = "YurchenkoIV";
+
+
+            userAd = WindowsIdentity.GetCurrent().Name;
+            userAd = userAd.Replace(@"ZAVOD\", "");           
             // Полкчаем доменное ФИО
             try
             {
                 PrincipalContext ctx = new PrincipalContext(ContextType.Domain);
                 UserPrincipal user = UserPrincipal.Current;
-                string displayName = user.DisplayName;
-                nameAdTextBlock.Text = displayName;
+                displayName = user.DisplayName;
+                
             }
             catch
             {
-               // nameAdTextBlock.Text = "Юрченко Илья Вадимович"; // заглушка
+                nameAdTextBlock.Text = "Юрченко Илья Вадимович"; // заглушка
             }
             // Получаем оменное имя ПК
             ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT Name FROM Win32_ComputerSystem");
             ManagementObjectCollection collection = searcher.Get();
-            string computerName = (string)collection.Cast<ManagementBaseObject>().First()["Name"];
-            namePcTextBlock.Text = computerName;
+            computerName = (string)collection.Cast<ManagementBaseObject>().First()["Name"];
 
             // Получаем ИП адрес компьютера
             IPHostEntry host;
-            string localIP = "?";
             host = Dns.GetHostEntry(Dns.GetHostName());
             foreach (IPAddress ip in host.AddressList)
             {
@@ -68,53 +127,45 @@ namespace SupportCenter
                     localIP = ip.ToString();
                 }
             }
-            ipAdressTextBlock.Text = Convert.ToString(localIP);
 
-            dbConnect db_connect = new dbConnect();
-            db_connect.openConnection();
-            try
-            {
+         /*   Session.CurrentUserLogin = userAd;
+            Session.CurrentUserName = displayName;
+            Session.CurrentIp = localIP;
+            Session.CurrentPcName = computerName;*/
 
-
-                connectStatusText.Text = "Сетевое соединение исправно";
-                connectStatusGrid.Background = Brushes.Green;
-              
-                checkUser();
+            Session.CurrentUserLogin = "YurchenkoIV";
+            Session.CurrentUserName = "Юрченко Илья Вадимович";
+            Session.CurrentIp = "192.168.1.1";
+            Session.CurrentPcName = "111111-1111";
 
 
 
-            }
-            catch (Exception ex)
-            {
-                connectStatusText.Text = "Сетевое соединение отсутствует";
-                connectStatusGrid.Background = Brushes.Red;
 
-            }
 
+            
+            
+            
             if (Session.AuthorizationStatus == 0)
             {
-                readLog();
+                await readLog();
                 Session.AuthorizationStatus = 1;
 
             }
 
-            sessionWrite();
 
+            namePcTextBlock.Text = Session.CurrentPcName;
+            ipAdressTextBlock.Text = Session.CurrentIp;
+            userNameAdTextBlock.Text = Session.CurrentUserLogin;
+            nameAdTextBlock.Text = Session.CurrentUserName;
 
-
+            checkRole();
 
         }
-        public void sessionWrite()
+        public void checkRole()
         {
             
-            Session.CurrentUserLogin = userNameAdTextBlock.Text;
-            Session.CurrentUserName = nameAdTextBlock.Text;
-            Session.CurrentIp = ipAdressTextBlock.Text;
-            Session.CurrentPcName = namePcTextBlock.Text;
-
-        /*    Session.CurrentUserName = "Ерахтин Артем Максимович";
-            Session.CurrentUserName = "Пасынков Сергей Андреевич";*/
-
+            
+         
             dbConnect db_connect = new dbConnect();
             db_connect.openConnection();
             DataTable table = new DataTable();
@@ -128,37 +179,20 @@ namespace SupportCenter
 
 
         }
-        public void readLog()
+        public async Task readLog()
         {
-          /*  DateTime currentDateTime = DateTime.Now;
+            if (!string.IsNullOrEmpty(Session.CurrentUserLogin))
+            {
+                var logService = new LogServiceApi();
 
-
-
-            dbConnect db_connect = new dbConnect();
-            db_connect.openConnection();
-            NpgsqlDataAdapter adapter = new NpgsqlDataAdapter();
-            NpgsqlCommand command = new NpgsqlCommand("INSERT INTO main.logs " +
-                "(date,action,object_action,name_pc,ip_pc,id_user) " +
-                "VALUES (date_trunc('second', @date),@action,@object_action,@name_pc,@ip_pc," +
-                "(Select user_id from main.users where login_user =@login_user))", db_connect.GetConnection());
-            
-            
-            command.Parameters.Add("@date", NpgsqlDbType.Timestamp).Value = currentDateTime;
-            command.Parameters.Add("@action", NpgsqlDbType.Text).Value = "Вход в программу";
-            command.Parameters.Add("@object_action", NpgsqlDbType.Text).Value = "Программа";
-            command.Parameters.Add("@name_pc", NpgsqlDbType.Text).Value = namePcTextBlock.Text;
-            command.Parameters.Add("@ip_pc", NpgsqlDbType.Text).Value = ipAdressTextBlock.Text;
-            command.Parameters.Add("@login_user", NpgsqlDbType.Text).Value = userNameAdTextBlock.Text;
-
-
-
-
-            adapter.SelectCommand = command;
-            command.ExecuteReader();
-            db_connect.closeConnection();
-
-
-            */
+                await logService.SendLogAsync(
+                    action: "Вход в программу",
+                    objectAction: "Программа",
+                    namePc: Session.CurrentPcName,
+                    ipPc: Session.CurrentIp,
+                    loginUser: Session.CurrentUserLogin
+                );
+            }
 
         }
         
@@ -285,7 +319,7 @@ namespace SupportCenter
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            string role = null;
+            string role;
 
             if (Session.Role == 1) role = "Администратор";
             else role = "Пользователь";
@@ -299,6 +333,27 @@ namespace SupportCenter
     MessageBoxButton.OK,
     MessageBoxImage.Information
 );
+        } 
+        private void regulations_Click(object sender, RoutedEventArgs e)
+        {
+            RegulationsForm regulationsForm = new RegulationsForm();
+            regulationsForm.Show();
+            this.Close();
         }
+
+        private void instrumentButton_Click(object sender, RoutedEventArgs e)
+        {
+            ToolsForm toolsForm = new ToolsForm();
+            toolsForm.Show();
+            this.Close();
+        }
+
+        private void Window_Closed(object sender, EventArgs e)
+        {
+        
+            connectionTimer?.Stop();
+            connectionTimer = null;
+        
+    }
     }
 }

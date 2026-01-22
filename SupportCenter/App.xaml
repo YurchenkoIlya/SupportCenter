@@ -2,9 +2,11 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:SupportCenter"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
              StartupUri="MainWindow.xaml">
+
     <Application.Resources>
-        
+        <sys:String x:Key="ApiBaseAddress">http://localhost:5179</sys:String>
     </Application.Resources>
     
 </Application>

@@ -64,6 +64,12 @@ namespace SupportCenter
 
             }
         }
+
+        private void modelInfoPrinter_Click(object sender, RoutedEventArgs e)
+        {
+            InfoPrinterForm infoPrinterForm = new InfoPrinterForm();
+            infoPrinterForm.ShowDialog();
+        }
     }
     
 }

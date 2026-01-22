@@ -170,10 +170,47 @@ namespace SupportCenter
                 historyAppealDataGrid.ItemsSource = result;
             }
         }
+        public async Task loadChat()
+        {
 
-        private void selectChatSpace_Click(object sender, RoutedEventArgs e)
+
+
+            messageRichtextbox.Document.Blocks.Clear();
+            var api = new ChatService();
+            var messages = await api.GetMessagesAsync(2, int.Parse(idAppeal.Text));
+
+            foreach (var msg in messages)
+            {
+                var paragraph = new Paragraph
+                {
+                    Margin = new Thickness(0),
+                    Inlines =
+            {
+                new Run($"{msg.Login}: ") { FontWeight = FontWeights.Bold },
+                new Run(msg.Message),
+                new LineBreak(),
+                new Run(msg.Date.ToString("dd.MM.yyyy HH:mm"))
+                {
+                    FontSize = 10,
+                    Foreground = Brushes.Gray
+                }
+            }
+                };
+                messageRichtextbox.Document.Blocks.Add(paragraph);
+            }
+
+            messageRichtextbox.ScrollToEnd();
+
+
+
+
+        }
+
+        private async void selectChatSpace_Click(object sender, RoutedEventArgs e)
         {
             menuAppealFolder.SelectedIndex = 2;
+            loadChat();
+
         }
         public void logRead(string action)
         {
@@ -219,6 +256,34 @@ namespace SupportCenter
             loadForm();
             string action = "Изменено согласование ответственного: " + oibStatusResponsble.Text;
             logRead(action);
+        }
+
+        private async void sendMessageButton_Click(object sender, RoutedEventArgs e)
+        {
+            var api = new ChatService();
+            if (string.IsNullOrWhiteSpace(messageTextBlock.Text))
+            {
+                MessageBox.Show("Сообщение пустое");
+                return;
+            }
+
+            var dto = new CreateChatMessageDto
+            {
+                AppealId = Convert.ToInt32(idAppeal.Text),
+                TypeAppeal = 2,
+                Message = messageTextBlock.Text,
+                Login = Session.CurrentUserLogin
+            };
+
+            await api.SendMessageAsync(dto);
+
+            messageTextBlock.Clear();
+            loadChat();
+        }
+
+        private void Window_Closed(object sender, EventArgs e)
+        {
+
         }
     }
 }

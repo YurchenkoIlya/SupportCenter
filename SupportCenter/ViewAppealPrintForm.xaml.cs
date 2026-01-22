@@ -67,7 +67,7 @@ namespace SupportCenter
 
             using var reader = command.ExecuteReader();
 
-            if (reader.Read()) // одно обращение
+            if (reader.Read()) 
             {
                 idAppeal.Text = reader.GetInt32(0).ToString();
                 ipPc.Text = reader.GetString(1);
@@ -99,6 +99,41 @@ namespace SupportCenter
         private void selectExecutorSpace_Click(object sender, RoutedEventArgs e)
         {
             menuAppealFolder.SelectedIndex = 0;
+
+        }
+        public async Task loadChat()
+        {
+
+
+
+            messageRichtextbox.Document.Blocks.Clear();
+            var api = new ChatService();
+            var messages = await api.GetMessagesAsync(3, int.Parse(idAppeal.Text));
+
+            foreach (var msg in messages)
+            {
+                var paragraph = new Paragraph
+                {
+                    Margin = new Thickness(0),
+                    Inlines =
+            {
+                new Run($"{msg.Login}: ") { FontWeight = FontWeights.Bold },
+                new Run(msg.Message),
+                new LineBreak(),
+                new Run(msg.Date.ToString("dd.MM.yyyy HH:mm"))
+                {
+                    FontSize = 10,
+                    Foreground = Brushes.Gray
+                }
+            }
+                };
+                messageRichtextbox.Document.Blocks.Add(paragraph);
+            }
+
+            messageRichtextbox.ScrollToEnd();
+
+
+
 
         }
 
@@ -144,9 +179,10 @@ namespace SupportCenter
             historyAppealDataGrid.ItemsSource = result;
         }
 
-        private void selectChatSpace_Click(object sender, RoutedEventArgs e)
+        private async void selectChatSpace_Click(object sender, RoutedEventArgs e)
         {
             menuAppealFolder.SelectedIndex = 1;
+            await loadChat();
         }
         public void logRead(string action)
         {
@@ -195,5 +231,30 @@ namespace SupportCenter
             loadForm();
 
         }
+
+        private async void sendMessageButton_Click(object sender, RoutedEventArgs e)
+        {
+            
+            var api = new ChatService();
+            if (string.IsNullOrWhiteSpace(messageTextBlock.Text))
+            {
+                MessageBox.Show("Сообщение пустое");
+                return;
+            }
+
+            var dto = new CreateChatMessageDto
+            {
+                AppealId = Convert.ToInt32(idAppeal.Text),
+                TypeAppeal = 3,
+                Message = messageTextBlock.Text,
+                Login = Session.CurrentUserLogin
+            };
+
+            await api.SendMessageAsync(dto);
+
+            messageTextBlock.Clear();
+            loadChat();
+        
+    }
     }
 }

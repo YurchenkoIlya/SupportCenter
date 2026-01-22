@@ -53,13 +53,7 @@
                     <DropShadowEffect/>
                 </TextBox.Effect>
             </TextBox>
-            <Button x:Name="modelInfoPrinter" Style="{StaticResource ButtonMenuStyle}" HorizontalAlignment="Left" Margin="515,32,0,0" VerticalAlignment="Top" Height="24" Width="23" Cursor="Hand" Click="selectProgram_Click">
-                <Button.Effect>
-                    <DropShadowEffect/>
-                </Button.Effect>
-                <TextBlock TextWrapping="Wrap" TextAlignment="Center" Text="?"/>
-            </Button>
-            <Button x:Name="ipInfoPrinter" Style="{StaticResource ButtonMenuStyle}" HorizontalAlignment="Left" Margin="515,61,0,0" VerticalAlignment="Top" Height="24" Width="23" Cursor="Hand" Click="selectProgram_Click">
+            <Button x:Name="modelInfoPrinter" Style="{StaticResource ButtonMenuStyle}" HorizontalAlignment="Left" Margin="515,32,0,0" VerticalAlignment="Top" Height="51" Width="23" Cursor="Hand" Click="modelInfoPrinter_Click">
                 <Button.Effect>
                     <DropShadowEffect/>
                 </Button.Effect>

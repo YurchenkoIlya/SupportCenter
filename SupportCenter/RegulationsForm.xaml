@@ -5,8 +5,98 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SupportCenter"
         mc:Ignorable="d"
-        Title="RegulationsForm" Height="450" Width="800">
-    <Grid>
-        
+        Title="RegulationsForm" Height="638" Width="650" Loaded="Window_Loaded">
+    <Window.Resources>
+        <ResourceDictionary Source="/Styles/Style.xaml"></ResourceDictionary>
+    </Window.Resources>
+    <Grid HorizontalAlignment="Left" VerticalAlignment="Center" >
+        <Image Source="/Image/Main.jpg" Stretch="Fill"/>
+        <Grid Background="#EF3C3636" Opacity="1" VerticalAlignment="Center" HorizontalAlignment="Center" Width="650" Height="622" >
+            <StackPanel Background="#C53C3636" Orientation="Vertical" Opacity="1" Cursor="" Margin="5,26,430,26">
+                <Button x:Name="cancelButton" Style="{StaticResource ButtonMenuStyle}" Margin="0,5,0,0" Height="36"  Cursor="Hand" Click="cancelButton_Click">
+                    <Button.Effect>
+                        <DropShadowEffect/>
+                    </Button.Effect>
+                    <Grid Width="215">
+                        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Главная" Margin="25,7,0,12" FontSize="14"/>
+
+                    </Grid>
+                </Button>
+                <Button x:Name="infoButton" Style="{StaticResource ButtonMenuStyle}"  Margin="0,5,0,0"  Cursor="Hand" Click="infoButton_Click">
+                    <Button.Effect>
+                        <DropShadowEffect/>
+                    </Button.Effect>
+                    <Grid Width="215">
+                        <TextBlock TextWrapping="Wrap" Text="Информация" Margin="25,9,25,10" FontSize="14"/>
+
+                    </Grid>
+                </Button>
+                <Button x:Name="programButton" Style="{StaticResource ButtonMenuStyle}"  Height="36" Margin="0,5,0,0"  Cursor="Hand" Click="programButton_Click">
+                    <Button.Effect>
+                        <DropShadowEffect/>
+                    </Button.Effect>
+                    <Grid Width="215">
+                        <TextBlock TextWrapping="Wrap" Text="Установка ПО" Margin="25,9,25,10" FontSize="14"/>
+
+                    </Grid>
+                </Button>
+                <Button x:Name="folderButton" Style="{StaticResource ButtonMenuStyle}" Margin="0,5,0,0"  Height="36"  Cursor="Hand" Click="folderButton_Click">
+                    <Button.Effect>
+                        <DropShadowEffect/>
+                    </Button.Effect>
+                    <Grid Width="215">
+                        <TextBlock TextWrapping="Wrap" Text="Доступ к сетевым папкам" Margin="25,9,25,10" FontSize="14"/>
+
+                    </Grid>
+                </Button>
+                <Button x:Name="printerButton" Style="{StaticResource ButtonMenuStyle}"  Margin="0,5,0,0"  Cursor="Hand" Click="printerButton_Click">
+                    <Button.Effect>
+                        <DropShadowEffect/>
+                    </Button.Effect>
+                    <Grid Width="215">
+                        <TextBlock TextWrapping="Wrap" Text="Настройка принтера" Margin="25,9,25,10" FontSize="14"/>
+
+                    </Grid>
+                </Button>
+
+                <Button x:Name="othersButton" Style="{StaticResource ButtonMenuStyle}" Margin="0,5,0,0"  Height="36"  Cursor="Hand" Click="othersButton_Click">
+                    <Button.Effect>
+                        <DropShadowEffect/>
+                    </Button.Effect>
+                    <Grid Width="215">
+                        <TextBlock TextWrapping="Wrap" Text="Прочие виды обращений" Margin="25,9,10,10" FontSize="14"/>
+
+                    </Grid>
+                </Button>
+            </StackPanel>
+            <TabControl x:Name="regulationsTabControl" Margin="220,10,10,10" BorderBrush="{x:Null}" Background="{x:Null}">
+                <TabItem x:Name="infoTabItem" Header="Инфо" BorderBrush="{x:Null}" Background="{x:Null}">
+                    <Grid Margin="0,0,4,0" Background="#C53C3636">
+                        <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Top" Height="450" Width="390" Foreground="White" Margin="0,10,0,0"><Run Language="ru-ru" Text=" Данное окно предназначено для ознакомления с установленными отделом технической поддержки правилами. Можно получить информацию по предоставлению технической поддержки и требования, которые должны быть исполнены для ее оказания."/></TextBlock>
+                    </Grid>
+                </TabItem>
+                <TabItem x:Name="programTabItem" Header="ПО" BorderBrush="{x:Null}" Background="{x:Null}">
+                    <Grid  Margin="0,0,4,0" Background="#C53C3636">
+                        <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Top" Height="450" Width="390" Foreground="White" Margin="0,10,0,0"><Run Text="Установка программного обеспечения, создание обращения через почту :"/><LineBreak/><Run/><LineBreak/><Run Text="Производится путем составления обращения на 911"/><Run Text="@chkpz.ru "/><Run Text=", в обращении должно быть прикреплено согласование."/><LineBreak/><Run Text="1. Отдела Информационной безопасности (ОИБ)"/><LineBreak/><Run Text="2. Отдела информационных технологий (ОИТ)"/><LineBreak/><Run/><LineBreak/><Run Text="Установка производится только при наличии двух согласований, если в обращении будет отсутствовать согласование, то обращение отклоняется до получения согласования, если обращение было отклонено, то требуется создать новое уже с приложенными согласованиями"/><LineBreak/><Run/><LineBreak/><Run Text="Установка программного обеспечения, создание обращения через цент"/><Run Language="ru-ru" Text="р"/><Run Text=" поддержки пользователя:"/><LineBreak/><Run/><LineBreak/><Run Text="В случае создания обращения через Центр поддержки пользователя нажать на кнопку обращения -"/><Run Text="&gt; "/><Run Text="перейти во вкладку заявки на установку ПО -"/><Run Text="&gt; "/><Run Text="нажать кнопку создать. Заполнить необходимые поля, нажать кнопку создать, в этом случае обращение согласовывается в автоматическом режиме ответственными лицами, после согласования с вами свяжется специалист технической поддержки. Отследить свое обращение можно в общем списке по заявка на установку ПО, дополнительную информацию по согласованию и отказам можно посмотреть во вкладке &quot;Чат&quot;."/></TextBlock>
+                    </Grid>
+                </TabItem>
+                <TabItem x:Name="foldersTabItem" Header="Папки" BorderBrush="{x:Null}" Background="{x:Null}" Margin="-2,-2,-2,0">
+                    <Grid Margin="0,0,4,0" Background="#C53C3636">
+                        <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Center" Height="553" Width="390" Foreground="White"><Run Text="Предоставление доступа в сетевую папку"/><Run Text=", создание обращения через почту :"/><LineBreak/><Run/><LineBreak/><Run Text="Взависимости от типа папки, доступ предоставляется по разному:"/><LineBreak/><Run/><LineBreak/><Run Text="1. Обмен - доступ имеют все сотрудники, предназначен для обмена файлами большого объема, те что невозможно отправить по почте, чистка папок происходит каждый день, хранить долгосрочно файлы в этой папке нельзя, очищаются ежедневно."/><LineBreak/><Run Text="2. Папки подразделений - папки относящиеся к подразделению, владельцам и согласующим лицом является текущий руководитель данного подразделения, для предоставления доступа согласовывать с руководителем подразделения, к которому относится данная папка."/><LineBreak/><Run Text="3. Совместная работа - папки, созданные по запросу сотрудников, не относятся к подразделению, созданы для удобной работы и хранения файлов, часто для взаимодействия обмена и хранения файлов нескольких подразделений служб, ответственным лицом является заявитель, по просьбе которого была создана папка, для предоставления доступа нужно согласовывать с ним."/><LineBreak/><Run/><LineBreak/><Run Text="После того как получено согласование ответственного за папку, необходимо отправить обращение на 911"/><Run Text="@chkpz.ru "/><Run Text="с прикрепленным согласованием ответственного за данную папку, если не будет прикреплено согласование, заявка будет отклонена."/><LineBreak/><Run/><LineBreak/><Run Text="Предоставление доступа в сетевую папку"/><Run Text=", создание "/><Run Text="через центр поддержки пользователя"/><Run Text=" :"/><LineBreak/><Run/><LineBreak/><Run Language="ru-ru" Text="Для создания в главной форме нажать обращения -"/><Run Text="&gt; "/><Run Language="ru-ru" Text="перейти в заявки по предоставлению доступа к папке -"/><Run Text="&gt; "/><Run Language="ru-ru" Text="создать обращение "/><Run Text="-&gt; "/><Run Language="ru-ru" Text="выбрать требуемую папку. В данном случае согласование пройдет автоматически, после согласования ответственным специалист технической поддержи предоставит доступ и оставит комментарий."/><LineBreak/><Run/><LineBreak/><Run/><LineBreak/><Run/><LineBreak/><Run/><LineBreak/><Run/><LineBreak/></TextBlock>
+                    </Grid>
+                </TabItem>
+                <TabItem x:Name="printerTabItem" Header="Принтер" BorderBrush="{x:Null}" Background="{x:Null}" Margin="-2,-2,-2,0">
+                    <Grid Margin="0,0,4,0" Background="#C53C3636">
+                        <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Top" Height="450" Width="390" Foreground="White" Margin="0,10,0,0"><Run Text="Настройка принтера"/><Run Text=", создание обращения через почту :"/><LineBreak/><Run/><LineBreak/><Run Text="Требуется оставить обращение на "/><Run Text="911@chkpz.ru "/><Run Text="с указанием имени или ип адреса компьютера, а так-же ип адрес принтера, без указания этих данных настройка будет невозможна, в таком случае создается дополнительное обращение для специалистов отдела ОТО для физического выполнения, выяснения модели и ип адреса принтера."/><LineBreak/><Run/><LineBreak/><Run Text="Настройка принтера"/><Run Text=", создание обращения через "/><Run Text="центр поддержки пользователя"/><Run Text=" :"/><LineBreak/><Run/><LineBreak/><Run Text="Для создания обращения в главной форме нажать обращени"/><Run Language="ru-ru" Text="я -"/><Run Text="&gt; "/><Run Language="ru-ru" Text="заявки на настройку принтера -"/><Run Text="&gt; "/><Run Language="ru-ru" Text="создать. Заполнить все необходимые поля, для более оперативного решения обязательны поля заполнения адреса и названия принтера, инструкция по определению модели ип адреса принтера открывается при нажатии на кнопку со знаком &quot;?&quot;. После создания обращения, с вам удаленно свяжется специалист Отдела технического обеспечения для настройки и подключения принтера к компьютеру."/></TextBlock>
+                    </Grid>
+                </TabItem>
+                <TabItem x:Name="othersTabItem" Header="Прочее" BorderBrush="{x:Null}" Background="{x:Null}" Margin="-2,-2,-2,0" Foreground="Black">
+                    <Grid Margin="0,0,4,0" Background="#C53C3636">
+                        <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Top" Height="450" Width="390" Foreground="White" Margin="0,10,0,0"><Run Language="ru-ru" Text="Прочие обращения отправляются на почту "/><Run Text="911@chkpz.ru"/><Run Language="ru-ru" Text=", либо через телефонный звонок на номер 5005, по проблемам, которые решает отдел технической поддержки, решаются в онлайн режиме, если обращение долгосрочное регистрируется в системе заявок, по его решению вы получаете обратную связь. Обращения, которые не относятся к отделу технической поддержки, регистрируются и перенаправляются в отделы, которые относятся к данной зоне ответственности."/></TextBlock>
+                    </Grid>
+                </TabItem>
+            </TabControl>
+        </Grid>
+
     </Grid>
 </Window>

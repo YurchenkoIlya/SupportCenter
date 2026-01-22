@@ -9,6 +9,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="ImagePrinter\HP 428 Model.png" />
+    <None Remove="ImagePrinter\HP426IP.png" />
+    <None Remove="ImagePrinter\HP426Model.png" />
+    <None Remove="ImagePrinter\HP428 IP.png" />
     <None Remove="Image\iconLogo.png" />
     <None Remove="Image\icons8-copy-50.png" />
     <None Remove="Image\icons8-copy-64.png" />
@@ -31,6 +35,24 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="ImagePrinter\HP 428 Model.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="ImagePrinter\HP 430 Model.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="ImagePrinter\HP426IP.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="ImagePrinter\HP426Model.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="ImagePrinter\HP428 IP.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="ImagePrinter\HP430 IP.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Image\iconLogo.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>

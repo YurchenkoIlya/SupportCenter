@@ -25,9 +25,9 @@ namespace SupportCenter.Classes
                     db_connect.Open();
 
                 }
-                catch (Exception ex)
+                catch 
                 {
-                    MessageBox.Show("Нестабильное сетевое соединение.");
+                   
                  
                 }
             }

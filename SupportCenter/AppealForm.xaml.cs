@@ -103,7 +103,24 @@ namespace SupportCenter
 
             }
             reader.Close();
-            appealFolderDataGrid.ItemsSource = result;
+
+
+            if (Session.Role == 1 || Session.CurrentUserName == "Ерахтин Артем Максимович" || Session.CurrentUserName == "Пасынков Сергей Андреевич")
+                myAppealsFolder.IsEnabled = true;
+
+            var queryResult = result.AsQueryable();
+
+            if (myAppealsFolder.IsChecked == true)
+                queryResult = queryResult.Where(u => u.idApplicant == Session.CurrentUserName);
+            if (!string.IsNullOrWhiteSpace(applicantFolderTextBlock?.Text))
+                queryResult = queryResult.Where(u =>
+             (u.idApplicant != null && u.idApplicant.IndexOf(applicantFolderTextBlock.Text, StringComparison.OrdinalIgnoreCase) >= 0));
+            if (responsibleStatusFolder?.IsChecked == true)
+                queryResult = queryResult.Where(u => u.statusResponsible == "Согласовано");
+
+
+
+            appealFolderDataGrid.ItemsSource = queryResult;
 
 
 
@@ -119,7 +136,28 @@ namespace SupportCenter
 
             var queryResult = appeals.AsQueryable();
 
-            
+            if(Session.Role == 1 /*|| Session.CurrentUserName == "Ерахтин Артем Максимович" || Session.CurrentUserName == "Пасынков Сергей Андреевич"*/)
+                activityCheckBox.IsEnabled = true;
+
+
+            if (activityCheckBox.IsChecked == true)
+                queryResult = queryResult.Where(u => u.applicant_user == Session.CurrentUserName);
+            if (applicantTextBox.Text != "")
+                queryResult = queryResult.Where(u =>
+             (u.applicant_user != null && u.applicant_user.IndexOf(applicantTextBox.Text, StringComparison.OrdinalIgnoreCase) >= 0));
+            if (searchIdAppeal.Text != "")
+                queryResult = queryResult.Where(u => u.id_appeal_program == Convert.ToInt32(searchIdAppeal.Text));
+            if (executeTextBox.Text != "")
+                queryResult = queryResult.Where(u =>
+             (u.otp_executor!= null && u.otp_executor.IndexOf(executeTextBox.Text, StringComparison.OrdinalIgnoreCase) >= 0));
+            if (statusOitCheckBox.IsChecked == true)
+                queryResult = queryResult.Where(u => u.oit_status == "Согласовано");
+            if (statusOibCheckBox.IsChecked == true)
+                queryResult = queryResult.Where(u => u.oib_status == "Согласовано");
+
+
+
+
 
             appealProgramDataGrid.ItemsSource = queryResult;
 
@@ -325,6 +363,80 @@ namespace SupportCenter
         {
             CreateAppealPrintForm createAppealPrint = new CreateAppealPrintForm();
             createAppealPrint.ShowDialog(); 
+        }
+
+       
+
+        
+
+        private void applicantTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            loadAppealProgram();
+        }
+
+        private void activityCheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            loadAppealProgram();
+        }
+
+        private void activityCheckBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            loadAppealProgram();
+        }
+
+        private void searchIdAppeal_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            loadAppealProgram();
+        }
+
+        private void executeTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            loadAppealProgram();
+        }
+
+        private void statusOitCheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            loadAppealProgram();
+        }
+
+        private void statusOitCheckBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            loadAppealProgram();
+        }
+
+        private void statusOibCheckBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            loadAppealProgram();
+        }
+
+        private void statusOibCheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            loadAppealProgram();
+        }
+
+        private void applicantFolderTextBlock_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            loadFolder();
+        }
+
+        private void myAppealsFolder_Checked(object sender, RoutedEventArgs e)
+        {
+            loadFolder();
+        }
+
+        private void myAppealsFolder_Unchecked(object sender, RoutedEventArgs e)
+        {
+            loadFolder();
+        }
+
+        private void responsibleStatusFolder_Checked(object sender, RoutedEventArgs e)
+        {
+            loadFolder();
+        }
+
+        private void responsibleStatusFolder_Unchecked(object sender, RoutedEventArgs e)
+        {
+            loadFolder();
         }
     }
 }

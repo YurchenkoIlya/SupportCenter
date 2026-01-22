@@ -5,8 +5,50 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SupportCenter"
         mc:Ignorable="d"
-        Title="ToolsForm" Height="450" Width="800">
-    <Grid>
-        
+        Title="Инструменты" Height="404" Width="678">
+    <Window.Resources>
+        <ResourceDictionary Source="/Styles/Style.xaml"></ResourceDictionary>
+    </Window.Resources>
+    <Grid HorizontalAlignment="Left" VerticalAlignment="Center" >
+        <Image Source="/Image/Main.jpg" Stretch="Fill"/>
+        <Grid Background="#EF3C3636" Opacity="1" >
+            <Button x:Name="cancelButton" Style="{StaticResource ButtonMenuStyle}"  Cursor="Hand" Margin="19,85,0,0" HorizontalAlignment="Left" Width="228" Height="36" VerticalAlignment="Top">
+                <Button.Effect>
+                    <DropShadowEffect/>
+                </Button.Effect>
+                <Grid Width="156">
+                    <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Очистка кэша 1С" Margin="25,7,0,12" FontSize="14"/>
+
+                </Grid>
+            </Button>
+            <TextBlock HorizontalAlignment="Left" Margin="270,85,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="White" Height="50" Width="373"><Run Text="Использовать если возникла проблема с 1С, такие как: сломался интерфейс, пропали кнопки, выходит ошибка Неверный формат хранилища данных 1С"/><Run Language="ru-ru" Text="."/></TextBlock>
+            <Button x:Name="cancelButton_Копировать" Style="{StaticResource ButtonMenuStyle}"  Cursor="Hand" Margin="19,197,0,0" HorizontalAlignment="Left" Width="228" Height="36" VerticalAlignment="Top">
+                <Button.Effect>
+                    <DropShadowEffect/>
+                </Button.Effect>
+                <Grid Width="228">
+                    <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="Очистка кэша браузера"  FontSize="14"/>
+
+                </Grid>
+            </Button>
+            <TextBlock Margin="270,197,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="White" Height="36" HorizontalAlignment="Left" Width="373"><Run Text="Использовать если возникла проблема с "/><Run Language="ru-ru" Text="диалог, бесконечная загрузка, не корректное отображение чатов и другие проблемы"/></TextBlock>
+            <Button x:Name="cancelButton_Копировать1" Style="{StaticResource ButtonMenuStyle}"  Cursor="Hand" Margin="19,141,0,0" HorizontalAlignment="Left" Width="228" Height="36" VerticalAlignment="Top">
+                <Button.Effect>
+                    <DropShadowEffect/>
+                </Button.Effect>
+                <Grid Width="228">
+                    <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Очистка кэша 1С на терминале" Margin="10,7,0,12" FontSize="14" Width="218"/>
+
+                </Grid>
+            </Button>
+            <TextBlock HorizontalAlignment="Left" Margin="270,141,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="White" Height="36" Width="373"><Run Language="ru-ru" Text="Использовать если находитесь в удаленном офисе, очистка выше работает только на локальной 1С."/></TextBlock>
+            <Button x:Name="cancelButton_Копировать2" Style="{StaticResource ButtonMenuStyle}" Cursor="Hand" Click="cancelButton_Click" Margin="19,27,0,0" HorizontalAlignment="Left" Width="44" Height="40" VerticalAlignment="Top">
+                <Button.Effect>
+                    <DropShadowEffect/>
+                </Button.Effect>
+                <Image Height="30"  Source="/Image/icons8-home-50.png" Stretch="Fill" Width="30"/>
+            </Button>
+        </Grid>
+
     </Grid>
 </Window>

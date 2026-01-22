@@ -96,4 +96,6 @@ public class AppealProgramController : ControllerBase
             3 => "Отменено",
             _ => "Неизвестно"
         };
+
+    /*https://localhost:5179/api/AppealProgram/get */
 }
