@@ -1,56 +1,46 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Npgsql;
+using NpgsqlTypes;
 using WebApplication1.Dto;
 
-namespace WebApplication1.Controllers
+[ApiController]
+[Route("api/logs")]
+public class LogsController : ControllerBase
 {
-    [ApiController]
-    [Route("api/[controller]")]
-    public class WorkstationsController : ControllerBase
+    private readonly string _connectionString;
+
+    public LogsController(IConfiguration configuration)
     {
-        private readonly IConfiguration _config;
+        _connectionString = configuration.GetConnectionString("DefaultConnection");
+    }
 
-        public WorkstationsController(IConfiguration config)
-        {
-            _config = config;
-        }
+    [HttpPost]
+    public async Task<IActionResult> CreateLog([FromBody] LogCreateDto dto)
+    {
+        await using var connection = new NpgsqlConnection(_connectionString);
+        await connection.OpenAsync();
 
-        // GET: api/workstations/last-logins
-        [HttpGet("last-logins")]
-        public async Task<IEnumerable<LastLoginDto>> GetLastLogins()
-        {
-            var connStr = _config.GetConnectionString("DefaultConnection");
-            var list = new List<LastLoginDto>();
+        var command = new NpgsqlCommand(
+            @"INSERT INTO main.logs 
+              (date, action, object_action, name_pc, ip_pc, id_user)
+              VALUES (
+                  date_trunc('second', @date),
+                  @action,
+                  @object_action,
+                  @name_pc,
+                  @ip_pc,
+                  (SELECT user_id FROM main.users WHERE login_user = @login_user)
+              )", connection);
 
-            await using var conn = new NpgsqlConnection(connStr);
-            await conn.OpenAsync();
+        command.Parameters.Add("@date", NpgsqlDbType.Timestamp).Value = dto.Date;
+        command.Parameters.Add("@action", NpgsqlDbType.Text).Value = dto.Action;
+        command.Parameters.Add("@object_action", NpgsqlDbType.Text).Value = dto.ObjectAction;
+        command.Parameters.Add("@name_pc", NpgsqlDbType.Text).Value = dto.NamePc;
+        command.Parameters.Add("@ip_pc", NpgsqlDbType.Text).Value = dto.IpPc;
+        command.Parameters.Add("@login_user", NpgsqlDbType.Text).Value = dto.LoginUser;
 
-            // Последняя авторизация каждого пользователя
-            var cmd = new NpgsqlCommand(@"
-            SELECT u.user_name AS full_name,
-            l.name_pc,
-            l.ip_pc,
-            l.date
-            FROM main.logs l
-            LEFT JOIN main.users u ON u.user_id = l.id_user
-                WHERE l.date = (
-                    SELECT MAX(date)
-                    FROM main.logs
-                    WHERE id_user = u.user_id) ORDER BY u.user_name;", conn);
+        await command.ExecuteNonQueryAsync();
 
-            await using var reader = await cmd.ExecuteReaderAsync();
-            while (await reader.ReadAsync())
-            {
-                list.Add(new LastLoginDto
-                {
-                    FullName = reader.IsDBNull(0) ? "" : reader.GetString(0),
-                    NamePc = reader.IsDBNull(1) ? "" : reader.GetString(1),
-                    IpPc = reader.IsDBNull(2) ? "" : reader.GetString(2),
-                    Date = reader.IsDBNull(3) ? DateTime.MinValue : reader.GetDateTime(3)
-                });
-            }
-
-            return list;
-        }
+        return Ok();
     }
 }
