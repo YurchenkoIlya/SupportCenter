@@ -23,8 +23,8 @@ namespace SupportCenter.Api
 
         public async Task<ReportProgramDto> GetProgramReportAsync()
         {
-            return await _client.GetFromJsonAsync<ReportProgramDto>(
-                "api/ProgramReport/get");
+            return await _client.GetFromJsonAsync<ReportProgramDto>("api/ProgramReport/get-program");
         }
+        
     }
 }

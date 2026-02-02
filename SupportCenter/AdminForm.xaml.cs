@@ -5,6 +5,7 @@ using System.Data;
 using System.Windows;
 using System.Windows.Controls;
 using WebApplication1.Dto;
+using WpfApp.Services;
 
 
 
@@ -31,10 +32,6 @@ namespace SupportCenter
         {
             loadUserDataGrid();
             
-
-            
-            
-
         }
         private async void loadUserDataGrid()
         {
@@ -413,6 +410,18 @@ namespace SupportCenter
         private void statisticsUserButton_Click(object sender, RoutedEventArgs e)
         {
             reportTabItem.SelectedIndex = 1;
+            LoadStatistics();
+        }
+
+        private async void LoadStatistics()
+        {
+            var api = new AppealStatisticsApi();
+
+            
+            List<UserAppealStatDto> stats = await api.GetUserAppealStatisticsAsync();
+
+       
+            dataGridStats.ItemsSource = stats;
         }
 
         private void giveInstallButton_Click(object sender, RoutedEventArgs e)
@@ -432,6 +441,47 @@ namespace SupportCenter
                 programApproved.Text = dto.Approved.ToString();
                 propgramNotDone.Text = dto.NotDone.ToString();
                 programNotWork.Text = dto.ApprovedNotInWork.ToString();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    $"Ошибка получения отчёта:\n{ex.Message}",
+                    "Ошибка",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Error);
+            }
+            try
+            {
+                var api = new FolderReportApiGet();
+                ReportFoldersDto dto = await api.GetFolderReportAsync();
+
+                folderTotal.Text = dto.Total.ToString();
+                folderInWork.Text = dto.InWork.ToString();
+                folderDone.Text = dto.Done.ToString();
+                folderApproved.Text = dto.Approved.ToString();
+                folderNotDone.Text = dto.NotDone.ToString();
+                folderNotWork.Text = dto.ApprovedNotInWork.ToString();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    $"Ошибка получения отчёта:\n{ex.Message}",
+                    "Ошибка",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Error);
+            }
+            try
+            {
+                var api = new PrinterReportApiGet();
+                ReportPrinterDto dto = await api.GetPrinterReportAsync();
+
+                printerTotal.Text = dto.Total.ToString();
+                printerInWork.Text = dto.InWork.ToString();
+                printerDone.Text = dto.Done.ToString();
+                printerNotDone.Text = dto.NotDone.ToString();
+
             }
             catch (Exception ex)
             {

@@ -28,10 +28,7 @@ namespace SupportCenter
             InitializeComponent();
         }
 
-        private void adminButton_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
+      
 
         private async void acceptRedactButton_Click(object sender, RoutedEventArgs e)
         {

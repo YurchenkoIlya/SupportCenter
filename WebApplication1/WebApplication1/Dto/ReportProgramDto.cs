@@ -3,7 +3,6 @@
     public class ReportProgramDto
     {
   
-            public string Name { get; set; }
             public int Total { get; set; }
             public int InWork { get; set; }
             public int Done { get; set; }

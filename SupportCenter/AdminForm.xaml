@@ -287,11 +287,21 @@
                                             <Grid.Effect>
                                                 <DropShadowEffect/>
                                             </Grid.Effect>
+                                            <TextBlock x:Name="folderTotal" HorizontalAlignment="Center" TextWrapping="Wrap" Text="1" VerticalAlignment="Center" FontSize="16" Foreground="White" FontFamily="Yu Gothic UI Semibold">
+                                                <TextBlock.Effect>
+                                                    <DropShadowEffect/>
+                                                </TextBlock.Effect>
+                                            </TextBlock>
                                         </Grid>
                                         <Grid Margin="183,154,0,0" Background="#FF3F3F3F" Height="21" VerticalAlignment="Top" HorizontalAlignment="Left" Width="50">
                                             <Grid.Effect>
                                                 <DropShadowEffect/>
                                             </Grid.Effect>
+                                            <TextBlock x:Name="printerTotal" HorizontalAlignment="Center" TextWrapping="Wrap" Text="1" VerticalAlignment="Center" FontSize="16" Foreground="White" FontFamily="Yu Gothic UI Semibold">
+                                                <TextBlock.Effect>
+                                                    <DropShadowEffect/>
+                                                </TextBlock.Effect>
+                                            </TextBlock>
                                         </Grid>
                                         <Grid Margin="256,102,0,0" Background="#FF3F3F3F" HorizontalAlignment="Left" Width="50" Height="21" VerticalAlignment="Top">
                                             <Grid.Effect>
@@ -307,11 +317,21 @@
                                             <Grid.Effect>
                                                 <DropShadowEffect/>
                                             </Grid.Effect>
+                                            <TextBlock x:Name="folderInWork" HorizontalAlignment="Center" TextWrapping="Wrap" Text="1" VerticalAlignment="Center" FontSize="16" Foreground="White" FontFamily="Yu Gothic UI Semibold">
+                                                <TextBlock.Effect>
+                                                    <DropShadowEffect/>
+                                                </TextBlock.Effect>
+                                            </TextBlock>
                                         </Grid>
                                         <Grid Margin="256,154,0,0" Background="#FF3F3F3F" HorizontalAlignment="Left" Width="50" Height="21" VerticalAlignment="Top">
                                             <Grid.Effect>
                                                 <DropShadowEffect/>
                                             </Grid.Effect>
+                                            <TextBlock x:Name="printerInWork" HorizontalAlignment="Center" TextWrapping="Wrap" Text="1" VerticalAlignment="Center" FontSize="16" Foreground="White" FontFamily="Yu Gothic UI Semibold">
+                                                <TextBlock.Effect>
+                                                    <DropShadowEffect/>
+                                                </TextBlock.Effect>
+                                            </TextBlock>
                                         </Grid>
                                         <Grid Margin="347,102,0,0" Background="#FF3F3F3F" HorizontalAlignment="Left" Width="50" Height="21" VerticalAlignment="Top">
                                             <Grid.Effect>
@@ -327,18 +347,28 @@
                                             <Grid.Effect>
                                                 <DropShadowEffect/>
                                             </Grid.Effect>
+                                            <TextBlock x:Name="folderDone" HorizontalAlignment="Center" TextWrapping="Wrap" Text="1" VerticalAlignment="Center" FontSize="16" Foreground="White" FontFamily="Yu Gothic UI Semibold">
+                                                <TextBlock.Effect>
+                                                    <DropShadowEffect/>
+                                                </TextBlock.Effect>
+                                            </TextBlock>
                                         </Grid>
                                         <Grid Margin="347,154,0,0" Background="#FF3F3F3F" Height="21" VerticalAlignment="Top" HorizontalAlignment="Left" Width="50">
                                             <Grid.Effect>
                                                 <DropShadowEffect/>
                                             </Grid.Effect>
+                                            <TextBlock x:Name="printerDone" HorizontalAlignment="Center" TextWrapping="Wrap" Text="1" VerticalAlignment="Center" FontSize="16" Foreground="White" FontFamily="Yu Gothic UI Semibold">
+                                                <TextBlock.Effect>
+                                                    <DropShadowEffect/>
+                                                </TextBlock.Effect>
+                                            </TextBlock>
                                         </Grid>
-                                        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Согласовано" VerticalAlignment="Top" FontSize="16" Margin="433,69,0,0" Foreground="White" FontFamily="Yu Gothic UI Semibold">
+                                        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Согласовано" VerticalAlignment="Top" FontSize="16" Margin="685,75,0,0" Foreground="White" FontFamily="Yu Gothic UI Semibold">
                                             <TextBlock.Effect>
                                                 <DropShadowEffect/>
                                             </TextBlock.Effect>
                                         </TextBlock>
-                                        <Grid Margin="454,102,0,0" Background="#FF3F3F3F" HorizontalAlignment="Left" Width="50" Height="21" VerticalAlignment="Top">
+                                        <Grid Margin="706,104,0,0" Background="#FF3F3F3F" HorizontalAlignment="Left" Width="50" Height="21" VerticalAlignment="Top">
                                             <Grid.Effect>
                                                 <DropShadowEffect/>
                                             </Grid.Effect>
@@ -348,22 +378,22 @@
                                                 </TextBlock.Effect>
                                             </TextBlock>
                                         </Grid>
-                                        <Grid Margin="454,128,0,0" Background="#FF3F3F3F" HorizontalAlignment="Left" Width="50" Height="21" VerticalAlignment="Top">
+                                        <Grid Margin="706,130,0,0" Background="#FF3F3F3F" HorizontalAlignment="Left" Width="50" Height="21" VerticalAlignment="Top">
                                             <Grid.Effect>
                                                 <DropShadowEffect/>
                                             </Grid.Effect>
+                                            <TextBlock x:Name="folderApproved" HorizontalAlignment="Center" TextWrapping="Wrap" Text="1" VerticalAlignment="Center" FontSize="16" Foreground="White" FontFamily="Yu Gothic UI Semibold">
+                                                <TextBlock.Effect>
+                                                    <DropShadowEffect/>
+                                                </TextBlock.Effect>
+                                            </TextBlock>
                                         </Grid>
-                                        <Grid Margin="454,154,0,0" Background="#FF3F3F3F" Height="21" VerticalAlignment="Top" HorizontalAlignment="Left" Width="50">
-                                            <Grid.Effect>
-                                                <DropShadowEffect/>
-                                            </Grid.Effect>
-                                        </Grid>
-                                        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Не выполнено" VerticalAlignment="Top" FontSize="16" Margin="549,69,0,0" Foreground="White" FontFamily="Yu Gothic UI Semibold">
+                                        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Не выполнено" VerticalAlignment="Top" FontSize="16" Margin="430,71,0,0" Foreground="White" FontFamily="Yu Gothic UI Semibold">
                                             <TextBlock.Effect>
                                                 <DropShadowEffect/>
                                             </TextBlock.Effect>
                                         </TextBlock>
-                                        <Grid Margin="579,102,0,0" Background="#FF3F3F3F" HorizontalAlignment="Left" Width="50" Height="21" VerticalAlignment="Top">
+                                        <Grid Margin="460,104,0,0" Background="#FF3F3F3F" HorizontalAlignment="Left" Width="50" Height="21" VerticalAlignment="Top">
                                             <Grid.Effect>
                                                 <DropShadowEffect/>
                                             </Grid.Effect>
@@ -373,21 +403,31 @@
                                                 </TextBlock.Effect>
                                             </TextBlock>
                                         </Grid>
-                                        <Grid Margin="579,128,0,0" Background="#FF3F3F3F" HorizontalAlignment="Left" Width="50" Height="21" VerticalAlignment="Top">
+                                        <Grid Margin="460,130,0,0" Background="#FF3F3F3F" HorizontalAlignment="Left" Width="50" Height="21" VerticalAlignment="Top">
                                             <Grid.Effect>
                                                 <DropShadowEffect/>
                                             </Grid.Effect>
+                                            <TextBlock x:Name="folderNotDone" HorizontalAlignment="Center" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" FontSize="16" Foreground="White" FontFamily="Yu Gothic UI Semibold">
+                                                <TextBlock.Effect>
+                                                    <DropShadowEffect/>
+                                                </TextBlock.Effect>
+                                            </TextBlock>
                                         </Grid>
-                                        <Grid Margin="579,154,0,0" Background="#FF3F3F3F" Height="21" VerticalAlignment="Top" HorizontalAlignment="Left" Width="50">
+                                        <Grid Margin="460,156,0,0" Background="#FF3F3F3F" Height="21" VerticalAlignment="Top" HorizontalAlignment="Left" Width="50">
                                             <Grid.Effect>
                                                 <DropShadowEffect/>
                                             </Grid.Effect>
+                                            <TextBlock x:Name="printerNotDone" HorizontalAlignment="Center" TextWrapping="Wrap" Text="1" VerticalAlignment="Center" FontSize="16" Foreground="White" FontFamily="Yu Gothic UI Semibold">
+                                                <TextBlock.Effect>
+                                                    <DropShadowEffect/>
+                                                </TextBlock.Effect>
+                                            </TextBlock>
                                         </Grid>
-                                        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" TextAlignment="Center" FontSize="16" Margin="676,48,0,0" Foreground="White" FontFamily="Yu Gothic UI Semibold" Text=" Согласовано и &#xD;&#xA;не в работе">
+                                        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" TextAlignment="Center" FontSize="16" Margin="549,52,0,0" Foreground="White" FontFamily="Yu Gothic UI Semibold" Text=" Согласовано и &#xD;&#xA;не в работе">
                                             <TextBlock.Effect>
                                                 <DropShadowEffect/>
                                             </TextBlock.Effect></TextBlock>
-                                        <Grid Margin="711,102,0,0" Background="#FF3F3F3F" HorizontalAlignment="Left" Width="50" Height="21" VerticalAlignment="Top">
+                                        <Grid Margin="584,104,0,0" Background="#FF3F3F3F" HorizontalAlignment="Left" Width="50" Height="21" VerticalAlignment="Top">
                                             <Grid.Effect>
                                                 <DropShadowEffect/>
                                             </Grid.Effect>
@@ -397,15 +437,15 @@
                                                 </TextBlock.Effect>
                                             </TextBlock>
                                         </Grid>
-                                        <Grid Margin="711,128,0,0" Background="#FF3F3F3F" HorizontalAlignment="Left" Width="50" Height="21" VerticalAlignment="Top">
+                                        <Grid Margin="584,130,0,0" Background="#FF3F3F3F" HorizontalAlignment="Left" Width="50" Height="21" VerticalAlignment="Top">
                                             <Grid.Effect>
                                                 <DropShadowEffect/>
                                             </Grid.Effect>
-                                        </Grid>
-                                        <Grid Margin="711,154,0,0" Background="#FF3F3F3F" Height="21" VerticalAlignment="Top" HorizontalAlignment="Left" Width="50">
-                                            <Grid.Effect>
-                                                <DropShadowEffect/>
-                                            </Grid.Effect>
+                                            <TextBlock x:Name="folderNotWork" HorizontalAlignment="Center" TextWrapping="Wrap" Text="1" VerticalAlignment="Center" FontSize="16" Foreground="White" FontFamily="Yu Gothic UI Semibold">
+                                                <TextBlock.Effect>
+                                                    <DropShadowEffect/>
+                                                </TextBlock.Effect>
+                                            </TextBlock>
                                         </Grid>
                                     </Grid>
                                 </Grid>
@@ -418,7 +458,13 @@
                                                 <DropShadowEffect/>
                                             </TextBlock.Effect>
                                         </TextBlock>
-                                        <DataGrid d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,36,0,10"/>
+                                        <DataGrid x:Name="dataGridStats" AutoGenerateColumns="False" Margin="10,36,10,10">
+                                            <DataGrid.Columns>
+                                                <DataGridTextColumn Header="Пользователь" Binding="{Binding UserName}" />
+                                                <DataGridTextColumn Header="Выполнено" Binding="{Binding DoneCount}" />
+                                                <DataGridTextColumn Header="В работе" Binding="{Binding InWorkCount}" />
+                                            </DataGrid.Columns>
+                                        </DataGrid>
                                     </Grid>
                                 </Grid>
                             </TabItem>
