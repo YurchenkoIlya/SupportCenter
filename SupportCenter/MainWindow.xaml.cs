@@ -86,6 +86,7 @@ namespace SupportCenter
                 appealButton.IsEnabled = false;
                 adminButton.IsEnabled = false;
             }
+           
         }
         public async Task loadForm()
         {
